@@ -1,0 +1,236 @@
+.container-course {
+font-family: 'MICRADI';
+font-weight: medium;
+color: yellow;
+align-items:baseline;
+}
+.content-slider{
+  margin-top: 40px;
+  width:454px;
+}
+.content{
+  padding-top: 22px;
+  margin: auto;
+  width:1140px;
+}
+.course-name{
+	font-size: 16px;
+  padding:0px;
+  margin:10px 0px 5px 0px;
+	color: #F5F5F5;
+}
+.course-duration{
+	font-size: 12px;
+  padding:0px;
+  margin:5px 0px 10px 0px;
+	color: #7bb4d7;
+}
+.buttonBuy{
+	padding-top: 20px;
+	margin-left: 160px;
+  width:326px;
+  height:64px;
+  background-image: url(../../../images/buttonBuy.png);
+}
+.buttonBuy:hover{
+	padding-top: 20px;
+	margin-left: 160px;
+  width:326px;
+  height:64px;
+  background-image: url(../../../images/buttonBuyAct.png);
+}
+.buttonBuy:active{
+	padding-top: 20px;
+	margin-left: 160px;
+  width:326px;
+  height:64px;
+  background-image: url(../../../images/buttonBuyAct.png);
+}
+.lessonButton{
+  padding:3px;
+  margin:0px;
+  width:454px;
+  height:38px;
+  background-image: url(../../../images/lessonButton.png);
+}
+.lessonButton:hover{
+  padding:3px;
+  margin:0px;
+  width:454px;
+  height:38px;
+  background-image: url(../../../images/lessonButtonAct.png);
+}
+.slick-list{
+	height: 168px !important;
+}
+.descriptionBlock {
+  margin:45px 0px 0px 5px;
+	padding:20px;
+	width:650px;
+	height:235px;
+	text-align: left;
+  background-image: url(../../../images/descriptionBlock.jpg);
+}
+.sliderButtonPrev {
+  padding-top:20px;
+	width:454px;
+	height:38px;
+  background-image: url(../../../images/sliderButtonPrev.png);
+}
+.sliderButtonNext {
+	width:454px;
+	height:38px;
+  background-image: url(../../../images/sliderButtonNext.png);
+}
+.player{
+  padding-left:5px;
+  padding-top:5px;
+  margin:0;
+	width:1140px;
+	height:640px;
+  background-image: url(../../../images/player.png);
+}
+.videoButton{
+	border-width: 0px;
+  padding:0px;
+  margin:0px;
+  width:1140px;
+  height:70px;
+  background-image: url(../../../images/videoButton.jpg);
+}
+.сontrols{
+  margin:auto;
+  width:1125px;
+  height:30px;
+  background-color: #000;
+}
+.play{
+  margin:0;
+  width:21px;
+  height:21px;
+  padding:10px 10px 0px 10px;
+  background-image: url(../../../images/play.png);
+  float: left;
+}
+.pause{
+  margin:0;
+  width:21px;
+  height:21px;
+  padding:10px;
+  background-image: url(../../../images/pause.png);
+  float: left;
+}
+.fullscreen{
+  margin:3px 0px 3px 10px;
+  width:21px;
+  height:21px;
+  padding:0px;
+  background-image: url(../../../images/fullscreen.png);
+  float: left;
+}
+.time{
+  float: left;
+  padding:3px 12px 3px 12px;
+  color: white;
+}
+input[type=range] {
+  float: left;
+  margin-top:10px;
+  width: 850px;
+  height: 3px;
+  -webkit-appearance: none;
+  border: 0 none;
+  background:blue;
+  color: #0069b4 ;
+  overflow: visible;
+}
+input[type=range].volume{
+  float: left;
+  margin-top:10px;
+  padding:0px 10px 0px 10px;
+  width: 60px;
+  height: 3px;
+  -webkit-appearance: none;
+  border: 0 none;
+  background: #0069b4;
+  color: #0069b4;
+  overflow: visible;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 10px;
+  border-radius: 3px;
+  background: blue;
+  cursor: pointer;
+  // margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+.comment-avatar{
+  width:99px;
+  height:96px;
+  padding:0;
+}
+.scroll{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.comments-name{
+  float: left;
+  font-size: 16px;
+  padding-left: 15px;
+  text-align: left;
+}
+.comments-text{
+  padding-left: 15px;
+  color: #7bb4d7;
+  text-align: left;
+  float: left;
+}
+.reply-name{
+  padding-left: 25px;
+  text-align: left;
+  float: left;
+}
+.reply-text{
+  padding-left: 25px;
+  color: white;
+  text-align: left;
+  float: left;
+}
+.comment{
+  margin-top: 10px;
+}
+.scroll::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #000000;
+}
+.scroll::-webkit-scrollbar
+{
+  width: 23px;
+  background-color: red;
+}
+.scroll::-webkit-scrollbar-thumb
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #1a1a1a;
+}
+.scroll::-webkit-scrollbar-button:vertical:increment {
+  width:23px;
+  height:22px;
+  background-image: url(../../../images/down.jpg);
+}
+.scroll::-webkit-scrollbar-button:vertical:decrement {
+  width:23px;
+  height:22px;
+  background-image: url(../../../images/up.jpg);
+}
+.about{
+  font-size: 12px;
+  padding-top: 22px;
+  margin: auto;
+  width:800px;
+  color: white;
+}

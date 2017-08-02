@@ -1,0 +1,20 @@
+{
+  "rules": {
+    ".write": "auth != null",
+    "users": {
+      ".read": "auth != null"
+    },
+    "courses": {
+      ".read": true
+    },
+    "tests": {
+      ".read": true
+    },
+    "forumSections": {
+      ".read": true
+    },
+    "statistic": {
+      ".read": true
+    }
+  }
+}

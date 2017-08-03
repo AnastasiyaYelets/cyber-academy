@@ -17,6 +17,6 @@ export default (store) => ({
       cb(null, MainView)
 
       /* Webpack named bundle   */
-    }, 'accounts/:courseId')
+    }, 'accounts')
   }
 })

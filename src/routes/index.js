@@ -21,7 +21,7 @@ import Coaches from './Coaches'
 import Faculties from './Faculties'
 import Accounts from './Accounts'
 import SiteInfo from './SiteInfo'
-
+import Lesson from './Lesson'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -66,6 +66,7 @@ export const createRoutes = (store) => ([{
     About(store),
     BecomeACoach(store),
     Faq(store),
+    Lesson(store),
     Support(store),
     Terms(store),
     Coaches(store),

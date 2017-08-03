@@ -20,6 +20,6 @@ export default (store) => ({
       cb(null, MainView)
 
     /* Webpack named bundle   */
-    }, 'faculty/(:discipline)(/course/:courseId)')
+  }, 'facultyCourse')
   }
 })

@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router'
 import backend from '../../../apis'
 import VideoPlayer from './VideoPlayer'
 import Slider from 'react-slick'
-import './MainView.scss'
+import './course.scss'
 
 class MainView extends Component {
   constructor (props) {

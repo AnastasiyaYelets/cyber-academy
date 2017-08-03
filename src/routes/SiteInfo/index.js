@@ -26,6 +26,6 @@ export default (store) => ({
       cb(null, SiteInfo)
 
     /* Webpack named bundle   */
-    }, 'admin/siteInfo(/:page)')
+  }, 'admin/siteInfo')
   }
 })

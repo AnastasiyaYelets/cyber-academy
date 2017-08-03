@@ -18,6 +18,6 @@ export const LessonRoute = (store) => ({
       cb(null, MainView)
 
     /* Webpack named bundle   */
-    }, 'lesson/:lessonId')
+    }, 'lesson')
   }
 })

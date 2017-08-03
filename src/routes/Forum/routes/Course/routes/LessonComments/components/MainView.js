@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import firebase from 'firebase'
-import CommentList from '../containers/CommentListContainer'
+import CommentList from './CommentList'
 import { show, hide } from 'redux-modal'
 import { connect } from 'react-redux'
 
@@ -33,6 +33,7 @@ class MainView extends Component {
   render () {
     const { forumSection } = this.state
     const { lessonId, courseId } = this.props.params
+    const { user } = this.props.auth
     return (
       <div className='col-xs-12 col-md-12'>
         <div className='col-xs-12 col-md-8'>
@@ -42,6 +43,7 @@ class MainView extends Component {
               <CommentList
                 courseId={courseId}
                 lessonId={lessonId}
+                user={user}
               />
             </ul>
           </div>
@@ -53,7 +55,8 @@ class MainView extends Component {
 
 MainView.propTypes = {
   params: PropTypes.object,
-  lessonId: React.PropTypes.string
+  lessonId: React.PropTypes.string,
+  auth: React.PropTypes.object
 }
 
 export default MainView

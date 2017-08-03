@@ -69,7 +69,7 @@ class MainView extends Component {
     const { lessons } = this.state
     return (lessons.map((item, i) =>
       <div key={i}>
-        <Link to={{ pathname: `${location.pathname}/lesson/${item.id}` }}>{item.name}</Link>
+        <Link to={{ pathname: `${this.props.location.pathname}/lesson/${item.id}` }}>{item.name}</Link>
       </div>
     )
     )
@@ -86,7 +86,7 @@ class MainView extends Component {
               Course comments:
             </label>
             <div>
-              <Link to={{ pathname: `${location.pathname}/generalComments` }}>General comments</Link>
+              <Link to={{ pathname: `${this.props.location.pathname}/generalComments` }}>General comments</Link>
             </div>
             <label className='control-label col-xs-2 col-md-12 text-left' style={{ padding: '15px' }}>
               Lesson comments:

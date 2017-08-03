@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { browserHistory } from 'react-router'
 import firebase from 'firebase'
 import toastr from 'toastr'
-import './MainView.scss'
+import './siteInfo.scss'
 
 class Course extends Component {
   constructor (props) {

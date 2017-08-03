@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './MainView.scss'
+import './about.scss'
 class MainView extends Component {
   constructor (props) {
     super(props)

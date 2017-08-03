@@ -1,7 +1,6 @@
 // import { injectReducer } from '../../../store/reducers'
 import { GeneralCommentsRoute } from './routes/GeneralComments'
 import { LessonCommentsRoute } from './routes/LessonComments'
-
 export const CourseRoute = (store) => ({
   path : 'section/:courseId',
   /*  Async getComponent is only invoked when route matches   */
@@ -21,7 +20,7 @@ export const CourseRoute = (store) => ({
         cb(null, MainView)
 
         /* Webpack named bundle   */
-      }, 'section/:courseId')
+      }, 'sectionCourse')
     }
   },
   childRoutes: [

@@ -89,7 +89,7 @@ class CommentList extends Component {
   }
 
   saveComment = (comment, isRespond, item) => {
-    const { user } = this.props.auth
+    const { user } = this.props
     const { lessonId, courseId } = this.props
     this.setState({
       comments: []
@@ -136,9 +136,9 @@ class CommentList extends Component {
           avatar: user.avatar
         }
         const newArray = [
-          ...comments.slice(0, indexItemToRemove),
+          ...comments.slice(0, indexItem),
           newComment,
-          ...comments.slice(indexItemToRemove + 1)
+          ...comments.slice(indexItem + 1)
         ]
         this.setState({ comments: newArray })
       }

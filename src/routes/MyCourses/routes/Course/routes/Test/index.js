@@ -18,6 +18,6 @@ export const TestRoute = (store) => ({
       cb(null, MainView)
 
     /* Webpack named bundle   */
-    }, 'test/:testId')
+    }, 'test')
   }
 })

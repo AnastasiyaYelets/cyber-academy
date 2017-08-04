@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import screenfull from 'screenfull'
 import ReactPlayer from 'react-player'
-import './MainView.scss'
+import './lessonMyCourses.scss'
 
 class VideoPlayer extends Component {
   constructor (props) {

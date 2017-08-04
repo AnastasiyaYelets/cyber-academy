@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import StripeComponent from '../../../components/StripeComponent'
 import firebase from 'firebase'
 import { connect } from 'react-redux'
-import './MainView.scss'
+import './faq.scss'
 import { browserHistory } from 'react-router'
 
 class MainView extends Component {

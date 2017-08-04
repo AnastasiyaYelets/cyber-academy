@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import VideoPlayer from './VideoPlayer'
-import './MainView.scss'
+import './lessonMyCourses.scss'
 import CommentToForum from '../containers/CommentToForumContainer'
 import QuestionsToCoach from '../containers/QuestionsToCoachContainer'
 import { Link, browserHistory } from 'react-router'

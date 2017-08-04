@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import toastr from 'toastr'
-import './MainView.scss'
+import './lessonMyCourses.scss'
 
 class CommentToForum extends Component {
   constructor (props) {

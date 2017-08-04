@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import { browserHistory } from 'react-router'
-import './MainView.scss'
-
+import './faculties.scss'
 class MainView extends Component {
   constructor (props) {
     super(props)

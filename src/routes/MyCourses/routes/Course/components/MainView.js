@@ -4,7 +4,7 @@ import CommentToForum from '../containers/CommentToForumContainer'
 import QuestionsToCoach from '../containers/QuestionsToCoachContainer'
 import { Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux'
-import './MainView.scss'
+import './myCourse.scss'
 
 class MainView extends Component {
   constructor (props) {

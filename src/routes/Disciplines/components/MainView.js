@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import { browserHistory } from 'react-router'
-import './MainView.scss'
+import './disciplines.scss'
 import _ from 'lodash'
 
 class MainView extends Component {
@@ -145,7 +145,11 @@ class MainView extends Component {
           </div>
           {this.rederCourses()}
           <div className='col-sm-4 col-md-4'>
-            <div className='avatar'>
+            <div className='avatar' style={{
+              width:'359px',
+              height:'120px',
+              backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/avatar.jpg?alt=media&token=88a9e8ab-1bed-4599-b50e-069990d9f787)'}}
+            >
             </div>
           </div>
           <div className='col-sm-8 col-md-8'>

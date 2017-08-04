@@ -3,7 +3,7 @@ import firebase from 'firebase'
 import toastr from 'toastr'
 import Infinite from 'react-infinite'
 import moment from 'moment'
-import './MainView.scss'
+import './lessonMyCourses.scss'
 
 class QuestionsToCoach extends Component {
   constructor (props) {

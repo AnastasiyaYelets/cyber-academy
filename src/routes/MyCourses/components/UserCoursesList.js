@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import { browserHistory } from 'react-router'
-import './MainView.scss'
+import './myCourses.scss'
 
 class UserCoursesList extends Component {
   constructor (props) {

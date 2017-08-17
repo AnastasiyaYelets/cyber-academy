@@ -1,63 +1,59 @@
-@font-face {
-	font-family: 'MICRADI';
-	src: url('/src/fonts/MICRADI_.eot');
-	src: local('☺'),
-  url('/src/fonts/MICRADI_.woff') format('woff'),
-  url('/src/fonts/MICRADI_.ttf') format('truetype'),
-  url('/src/fonts/MICRADI_.svg') format('svg');
-	font-weight: medium;
-	font-style: normal;
-}
+// @font-face {
+// 	font-family: 'MICRADI';
+// 	src: url('/src/fonts/MICRADI_.eot');
+// 	src: local('☺'),
+//   url('/src/fonts/MICRADI_.woff') format('woff'),
+//   url('/src/fonts/MICRADI_.ttf') format('truetype'),
+//   url('/src/fonts/MICRADI_.svg') format('svg');
+// 	font-weight: medium;
+// 	font-style: normal;
+// }
 .container {
-font-family: 'MICRADI';
-font-size: 14px;
+// font-family: 'MICRADI';
+// font-size: 14px;
 display: flex;
-color: #e5d800;
+// color: #e5d800;
 }
-.footer-block{
+.footer-block-footer{
   width:100%;
 	height:50px;
 	background-color: #000;
 }
-.block {
+.block-footer {
    padding:15px;
    margin:0px;
 	 color: #e5d800;
 }
-.block a:hover { color: blue}
-.social-media{
+.block-footer  a:hover { color: blue}
+.social-media-footer {
 	padding:30px;
 	margin:0px;
 	color: #e5d800;
 }
-.vk {
+.vk-footer  {
 	padding:10px;
 	margin:10px 10px 0px 10px;
 	width:31px;
 	height:30px;
 	float:left;
-	background-image: url(../../images/sm-vk.png);
 }
-.fb {
+.fb-footer  {
 	padding-left: 0px;
 	margin:10px 10px 0px 230px;
 	width:28px;
 	height:30px;
-	background-image: url(../../images/sm-fb.png);
 }
-.twitter {
+.twitter-footer  {
 	padding:10px;
 	margin:10px 10px 0px 10px;
 	width:28px;
 	height:30px;
 	float:left;
-	background-image: url(../../images/sm-twitter.png);
 }
-.viber {
+.viber-footer  {
 	padding:10px;
   margin:10px 10px 0px 10px;
 	width:28px;
 	height:30px;
 	float:left;
-	background-image: url(../../images/sm-viber.png);
 }

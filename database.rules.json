@@ -10,7 +10,7 @@
     "tests": {
       ".read": true
     },
-    "lesson": {
+    "lessons": {
       ".read": true
     },
     "forumSections": {
@@ -18,6 +18,12 @@
     },
     "statistic": {
       ".read": true
-    }
+    },
+   "chats": {
+     ".read": true
+   },
+    "siteInfo": {
+      ".read": true
+   }
   }
 }

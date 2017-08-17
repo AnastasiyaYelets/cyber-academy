@@ -23,21 +23,22 @@ class EmailInput extends Component {
       return toastr.error('Please enter valid email')
     }
 
-    firebase.database().ref('users/' + uid).update({ email, emailVerified: false })
-    .then(() =>
+    firebase.database().ref('users/' + uid).update({ email, emailVerified: true })
+    .then(() => {
       //send to backend
+      console.log('send to backend')
       updateEmail({ uid, email })
-      .then(() =>
-        // send email confirmation
-        firebase.auth().onAuthStateChanged(user => {
-          console.log('sending email')
-          user.sendEmailVerification()
-          // console.log(user)
-          toastr.success('Confirmation email has been sent to your e-mail')
-        })
-      )
-    )
-  }
+    })
+    .then(() =>
+    // send email confirmation
+    firebase.auth().onAuthStateChanged(user => {
+      console.log('sending email')
+      user.sendEmailVerification()
+      // console.log(user)
+      toastr.success('Confirmation email has been sent to your e-mail')
+    })
+  )
+}
 
   render () {
     const { email } = this.state

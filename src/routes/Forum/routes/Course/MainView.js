@@ -78,8 +78,8 @@ class MainView extends Component {
   render () {
     const { course = {} } = this.state
     return (
-      <div className='col-xs-12 col-md-12'>
-        <div className='col-xs-12 col-md-8'>
+      <div className='container'>
+        <div className='row'>
           <label className='control-label col-xs-2 col-md-12' style={{ padding: '15px' }}>{course.name}</label>
           <div className='col-xs-12 col-md-12' style={{ padding: '15px' }}>
             <label className='control-label col-xs-2 col-md-12 text-left' style={{ padding: '15px' }}>

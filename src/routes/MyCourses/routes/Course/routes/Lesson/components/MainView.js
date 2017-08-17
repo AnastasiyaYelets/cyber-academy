@@ -116,11 +116,14 @@ class MainView extends Component {
     const courseFromUser = userCourses.find(item => item.courseId === params.courseId)
     const { uniqueWatchedLessonsIds = [], passedTestIds = [] } = courseFromUser
     const array = (type === 'lesson') ? uniqueWatchedLessonsIds : passedTestIds
-    const passed = array.findIndex(item => item === id)
+    const passed = (type === 'lesson') ? array.findIndex(item => item === id)
+    : array.findIndex(item => item.testId === id)
+    // this.setState({ mark })
     if (passed === -1) {
-      return false
+      return [false, 0]
     } else {
-      return true
+      const mark = array[`${passed}`].mark ? array[`${passed}`].mark : 0
+      return [true, mark]
     }
   }
 
@@ -131,35 +134,31 @@ class MainView extends Component {
     }
     const newPath = `${location.pathname.substring(0, location.pathname.length - 20)}`
     return lessons.map((item, i) =>
-      <div key={i}
+    <div key={i}>
+      {!isBonusLesson(item) && <Link
+        className='link-mylesson' to={{ pathname: `${newPath}${item.id}`}}
         onClick={() => { this.fetchLesson(item.id) }}>
-        <Link to={{
-          pathname: `${newPath}${item.id}` }}>{item.name}
-        </Link>
-        <input
-          type='checkbox'
-          checked={this.isPassed(item.id, 'lesson')} />
-        {isBonusLesson(item) && <div> Bonus </div>}
-      </div>
+        {item.name} </Link>}
+      {isBonusLesson(item) && <Link
+        className='bonus-link-mylesson' to={{ pathname: `${newPath}${item.id}` }}
+        onClick={() => { this.fetchLesson(item.id) }}>
+        {item.name}</Link>}
+      {this.isPassed(item.id, 'lesson')[0] && <div className='checkbox-mylesson'> </div> }
+    </div>
   )
-  }
+}
 
   renderTestsList (tests = []) {
     const { location } = this.props
     return tests.map((item, i) =>
-      <div key={i}>
-        <Link to={{
-          pathname: `${location.pathname.substring(0, location.pathname.length - 27)}test/${item.id}` }}>{item.name}
-        </Link>
-        {/* <label className='checkbox checkbox-info checkbox-circle'> */}
-        <input
-          type='checkbox'
-          checked={this.isPassed(item.id, 'test')}
-        />
-        {/* </label> */}
-      </div>
+    <div key={i} >
+      <Link className='link-mylesson' to={{
+        pathname: `${location.pathname.substring(0, location.pathname.length - 27)}test/${item.id}` }}>{item.name}
+      </Link>
+      {this.isPassed(item.id, 'test')[0] && <div className='checkbox-mylesson'> </div> }
+    </div>
   )
-  }
+}
 
   renderSectionsList () {
     const { sections = [], set } = this.state
@@ -268,7 +267,7 @@ class MainView extends Component {
     return (
       <div>
         <div
-          className='comment-button'
+          className='comment-button-mylesson'
           onClick={() => this.buttonClick()}
           >{buttonName}
         </div>
@@ -287,7 +286,7 @@ class MainView extends Component {
     return (
       <div>
         <div
-          className='task-button'
+          className='task-button-mylesson'
           onClick={() => this.buttonClickTask()}
           >{buttonTaskName}
         </div>
@@ -301,7 +300,7 @@ class MainView extends Component {
     return (
       <div>
         <div
-          className='test-button'
+          className='test-button-mylesson'
           onClick={() => {
             browserHistory.push({
               pathname: `${location.pathname.substring(0, location.pathname.length - 27)}test/${testId}`
@@ -326,15 +325,17 @@ class MainView extends Component {
 
           <div className='col-xs-12 col-md-12'>
             <div className='col-xs-3 col-md-3'>
-              <div className='button-lesson-name'> {course.name}</div>
-              <div className='section-list'>
+              <div className='button-lesson-name-mylesson'> {course.name}</div>
+              <div className='section-list-mylesson'
+                   style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=f506d563-a013-4e53-950e-fcedf4f4aa69)'}}
+              >
                 <ul className='list-unstyled'>
                   {this.renderSectionsList()}
                   {this.renderSectionsList()}
                 </ul>
               </div>
-              <div className='button-lesson-name'> {course.name}</div>
-              <div className='button-coach-chat'>Чат с тренером</div>
+              <div className='button-lesson-name-mylesson'> {course.name}</div>
+              <div className='button-coach-chat-mylesson'>Чат с тренером</div>
               <QuestionsToCoach courseId={params.courseId} />
             </div>
 
@@ -342,12 +343,15 @@ class MainView extends Component {
               <div> {this.renderVideo()}</div>
               <button
                 type='button'
-                className='videoButton'
+                className='videoButton-mylesson'
+                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/videoButton.jpg?alt=media&token=2c68decc-51c3-47a0-b967-b4c84636d13b)'}}
                 onClick={() => { this.setState({ stopVideo: !stopVideo }) }}
                 >{lesson.name}
               </button>
 
-              <div className='questions'>
+              <div className='questions-mylesson'
+                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=f506d563-a013-4e53-950e-fcedf4f4aa69)'}}
+>
                 {this.renderShowCommentsButton()}
                 {showComments &&
                   <CommentToForum
@@ -355,7 +359,9 @@ class MainView extends Component {
                 />}
               </div>
 
-              <div className='task'>
+              <div className='task-mylesson'
+                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=f506d563-a013-4e53-950e-fcedf4f4aa69)'}}
+>
                 {this.renderShowTaskButton()}
                 {showTask && <div> Hello. I am your practice task: {practiceTask}
                 </div>}

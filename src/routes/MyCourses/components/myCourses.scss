@@ -1,61 +1,56 @@
-.ikon-dragon{
+.ikon-dragon-mycourses{
   padding:0px;
   margin:30px 0px 15px 0px;
   width:165px;
   height:157px;
- background-image: url(../../../images/ikonDragon.jpg);
 }
-.text-place{
+.text-place-mycourses{
   margin:30px 0px 15px 0px;
   padding:30px;
   color: #7bb4d7;
 }
-.text-frame{
+.text-frame-mycourses{
   padding:30px;
   margin:30px 0px 15px 0px;
   width:681px;
   height:157px;
   color: white;
-  background-image: url(../../../images/textFrameMyCourses.jpg);
 }
-.tab{
+.tab-mycourses{
   padding-top:40px;
   margin-bottom:20px;
   width:1140px;
   height:506px;
-  background-image: url(../../../images/tab.png);
 }
-.no-courses{
+.no-coursess{
   margin: 20px;
 }
-.vip-course{
+.vip-course-mycourse{
   color: yellow;
   margin:auto;
   height:15px;
 }
-.frame-course{
+.frame-course-mycourses{
   color:white;
   width:360px;
   height:417px;
   display:inline-block;
-  background-image: url(../../../images/frameLesson.jpg);
 }
-.progress{
+.progress-mycourses{
   margin:auto;
   width:307px;
   height:24px;
   background-color: transparent;
-  background-image: url(../../../images/progressBarFull.png);
   display:inline-block;
 }
-.progress-bar{
+.progress-bar-mycourses{
   margin:2px;
   width:307px;
   height:20px;
+  padding: 0px 10px;
   white-space: normal;
-  background-image: url(../../../images/progressBar.jpg);
 }
-.frame-name{
+.frame-name-mycourses{
   color:white;
   width:330px;
   height:35px;
@@ -64,7 +59,7 @@
   display:block;
   white-space: normal;
 }
-.frame-description{
+.frame-description-mycourses{
   color:#7bb4d7;
   height:80px;
   width:330px;
@@ -73,11 +68,18 @@
   display:block;
   white-space: normal;
 }
-.my-courses{
+.my-courses-mycourses{
   padding:10px 0px 0px 30px;
   font-size: 14px;
 }
-.button-details{
+.button-details-mycourses{
+  padding-top:20px;
+  margin:auto;
+  width:250px;
+  height:64px;
+  text-align: center;
+}
+.button-details-mycourses:hover{
   padding-top:20px;
   margin:auto;
   width:250px;
@@ -85,47 +87,39 @@
   text-align: center;
   background-image: url(../../../images/buttonDetailsAct.png);
 }
-.button-details:hover{
-  padding-top:20px;
-  margin:auto;
-  width:250px;
-  height:64px;
-  text-align: center;
-  background-image: url(../../../images/buttonDetailsAct.png);
-}
-.div-scroll{
+.div-scroll-mycourses{
   width:1140px;
   height:460px;
   overflow-x:auto;
   white-space: nowrap;
   overflow-y:hidden;
 }
-.scroll-horizontal::-webkit-scrollbar-track
+.scroll-horizontal-mycourses::-webkit-scrollbar-track
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   background-color: #000000;
 }
-.scroll-horizontal::-webkit-scrollbar
+.scroll-horizontal-mycourses::-webkit-scrollbar
 {
   width: 23px;
   background-color: black;
 }
-.scroll-horizontal::-webkit-scrollbar-thumb
+.scroll-horizontal-mycourses::-webkit-scrollbar-thumb
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: #1a1a1a;
 }
-.scroll-horizontal::-webkit-scrollbar-button:horizontal:increment {
+.scroll-horizontal-mycourse::-webkit-scrollbar-button:horizontal:increment {
   width:8px;
   height:17px;
   background-image: url(../../../images/right.png);
 }
-.scroll-horizontal::-webkit-scrollbar-button:horizontal:decrement {
+.scroll-horizontal-mycourses::-webkit-scrollbar-button:horizontal:decrement {
   width:8px;
   height:17px;
   background-image: url(../../../images/left.png);
 }
-.scroll-horizontal{
+.scroll-horizontal-mycourses{
   margin-left: 10px;
   width:1110px;
 }

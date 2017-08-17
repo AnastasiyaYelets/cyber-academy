@@ -4,15 +4,31 @@
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
+
+@font-face {
+  font-family: 'MICRADI';
+  src: url('../fonts/MICRADI/MICRADI_.eot');
+  src: local('☺'),
+  url('../fonts/MICRADI/MICRADI_.woff') format('font-woff'),
+  url('../fonts/MICRADI/MICRADI_.ttf') format('truetype'),
+  url('../fonts/MICRADI/MICRADI_.svg') format('svg');
+  font-weight: medium;
+  font-style: normal;
+}
+
 html {
   box-sizing: border-box;
 }
-
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: MICRADI, sans-serif;
+  font-size: 14px;
+  color: #e5d800;
+  font-weight: medium;
+
 }
 
 *,

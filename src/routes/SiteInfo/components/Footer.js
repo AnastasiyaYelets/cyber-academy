@@ -91,7 +91,7 @@ class Faculties extends Component {
               <input
                 value={about}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ about: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ about: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -99,7 +99,7 @@ class Faculties extends Component {
               <input
                 value={becomeACoach}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ becomeACoach: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ becomeACoach: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -107,7 +107,7 @@ class Faculties extends Component {
               <input
                 value={faq}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ faq: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ faq: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -115,7 +115,7 @@ class Faculties extends Component {
               <input
                 value={support}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ support: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ support: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -123,7 +123,7 @@ class Faculties extends Component {
               <input
                 value={terms}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ terms: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ terms: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -131,7 +131,7 @@ class Faculties extends Component {
               <input
                 value={coaches}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ coaches: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ coaches: e.target.value })} />
             </div>
           </form>
 

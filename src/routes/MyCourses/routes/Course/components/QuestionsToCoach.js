@@ -163,8 +163,10 @@ class QuestionsToCoach extends Component {
     const { disciplineLoaded, chatLoaded } = this.state
     return (
       <div>
-        <div className='chat-field'>
-          <Infinite containerHeight={225} elementHeight={20} className='scroll' >
+        <div className='chat-field-mycourse'
+          style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/chatField.jpg?alt=media&token=0a94429b-0fe2-4ed9-ab80-03678993e5f5)'}}
+        >
+          <Infinite containerHeight={225} elementHeight={20} className='scroll-mycourse' >
             <div>
             <ul className='list-unstyled'>
               {chatLoaded && disciplineLoaded && this.renderCommentList()}
@@ -176,7 +178,8 @@ class QuestionsToCoach extends Component {
           <div>
             ​<textarea
               type='textarea'
-              className='chat-input'
+              className='chat-input-mycourse'
+              style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/chatInput.jpg?alt=media&token=35f51e1b-e351-4e81-83d0-392256d47131)'}}
               value={this.state.message}
               cols='50'
               rows='3'
@@ -185,7 +188,7 @@ class QuestionsToCoach extends Component {
           </div>
         </div>
         <div
-          className='chat-button'
+          className='chat-button-mycourse'
           onClick={this.saveCommentClick}
           >Ask question
         </div>

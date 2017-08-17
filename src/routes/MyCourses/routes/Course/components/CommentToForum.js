@@ -116,7 +116,7 @@ class CommentToForum extends Component {
 
   renderLessonsNames () {
     const { lessons } = this.state
-    return lessons.map((item, i) => <option className='options-lessons' key={i} value={item.id}>{item.name}</option>)
+    return lessons.map((item, i) => <option className='options-lessons-mycourse' key={i} value={item.id}>{item.name}</option>)
   }
 
   saveCommentClick = () => {
@@ -138,18 +138,20 @@ class CommentToForum extends Component {
       <div>
         <form >
            <select
-             className='topic-options'
+             className='topic-options-mycourse'
+             style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/topicField.jpg?alt=media&token=84c643f6-3ee8-477f-be50-60e9cdc218da)'}}
              value={this.state.lessonId}
              onChange={(e) => this.setState({ lessonId: e.target.value })}>
              <option
                value=''
-               className='options-lessons'>Выбрать тему</option>
+               className='options-lessons-mycourse'>Выбрать тему</option>
                {this.renderLessonsNames()}
           </select>
         </form>
         <form>
           ​<textarea
-            className='question-input'
+            className='question-input-mycourse'
+            style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/questionInput.jpg?alt=media&token=652f453e-b5fc-4f37-950b-b8e9fd92c745)'}}
             cols='50'
             rows='4'
             value={this.state.comment}
@@ -157,7 +159,7 @@ class CommentToForum extends Component {
           >
           </textarea>
           <div
-            className='save-comment-button'
+            className='save-comment-button-mycourse'
             onClick={this.saveCommentClick}
             >Save comment
           </div>

@@ -118,9 +118,9 @@ class MainView extends Component {
 
     return lessons.map((item, i) =>
     <div key={i}>
-      {!isBonusLesson(item) && <Link className='link' to={{ pathname: `${location.pathname}/lesson/${item.id}`}}>{item.name}</Link>}
-      {isBonusLesson(item) && <Link className='bonus-link' to={{ pathname: `${location.pathname}/lesson/${item.id}`}}>{item.name}</Link>}
-      {this.isPassed(item.id, 'lesson')[0] && <div className='checkbox'> </div> }
+      {!isBonusLesson(item) && <Link className='link-mycourse' to={{ pathname: `${location.pathname}/lesson/${item.id}`}}>{item.name}</Link>}
+      {isBonusLesson(item) && <Link className='bonus-link-mycourse' to={{ pathname: `${location.pathname}/lesson/${item.id}`}}>{item.name}</Link>}
+      {this.isPassed(item.id, 'lesson')[0] && <div className='checkbox-mycourse'> </div> }
     </div>
   )
   }
@@ -129,7 +129,7 @@ class MainView extends Component {
     const { location } = this.props
     return tests.map((item, i) =>
     <div key={i} >
-        <Link className='link' to={{ pathname: `${location.pathname}/test/${item.id}`}}>{item.name}</Link>
+        <Link className='link-mycourse' to={{ pathname: `${location.pathname}/test/${item.id}`}}>{item.name}</Link>
         {this.isPassed(item.id, 'test')[0] && <div className='checkbox'> </div> }
       </div>
   )
@@ -239,7 +239,7 @@ class MainView extends Component {
 
     return (
       <div>
-      {!!watchLessonId && !isCorseWatched && <div className='button-continie-lesson'
+      {!!watchLessonId && !isCorseWatched && <div className='button-continie-lesson-mycourse'
         onClick={(e) => { browserHistory.push({ pathname: `${location.pathname}/lesson/${watchLessonId}` }) }}
         >{buttonName}
       </div>
@@ -258,18 +258,26 @@ class MainView extends Component {
     }
     return sections.map((item, i) =>
       <div key={i}>
-        {isCircle(i+1) && <div className='circle' style={{width:`${widthPercent}%`, padding:`0px ${padding}px`}}>
+        {isCircle(i+1) && <div className='circle-mycourse' style={{width:`${widthPercent}%`, padding:`0px ${padding}px`}}>
           {this.isPassed(item.testsIds[0], 'test')[1] > 70 && this.isPassed(item.testsIds[0], 'test')[1] < 85 &&
-            <div className='starFee'>{i+1}</div>
+            <div className='starFee-mycourse'
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFee.png?alt=media&token=8e02b85e-dcd5-4641-85ff-4bc7f0806d9b)'}}
+            >{i+1}</div>
           }
           {this.isPassed(item.testsIds[0], 'test')[1] >= 85 && this.isPassed(item.testsIds[0], 'test')[1] < 100 &&
-            <div className='starFee'>{i+1}</div>
+            <div className='starFfe-mycourse'
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFfe.png?alt=media&token=d61b5256-4db2-47a4-8fce-ae82e121ea50)'}}
+            >{i+1}</div>
           }
           {this.isPassed(item.testsIds[0], 'test')[1] === 100 &&
-            <div className='starFff'>{i+1}</div>
+            <div className='starFff-mycourse'
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFff.png?alt=media&token=03a86b77-b628-49de-b9a4-b4cbb6de5fa4)'}}
+            >{i+1}</div>
           }
           {!this.isPassed(item.testsIds[0], 'test')[0] &&
-            <div className='starEee'>{i+1}</div>
+            <div className='starEee-mycourse'
+              style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starEee.png?alt=media&token=8d5e9b72-0b2d-40d5-b134-d1063e022dc1)'}}
+            >{i+1}</div>
           }
           </div>
         }
@@ -284,8 +292,8 @@ class MainView extends Component {
     const toN = (newEtsections.length % 2 === 0) ? (newEtsections.length / 2) : Math.round(newEtsections.length/2)
     return (
       <div>
-        <div className='starRow' style={{ width:'100%' }}>{this.renderCircles(newEtsections, 1, toN)}</div>
-        <div className='starRow' style={{ width:'100%' }}>{this.renderCircles(newEtsections, toN + 1, newEtsections.length)}</div>
+        <div className='starRow-mycourse' style={{ width:'100%' }}>{this.renderCircles(newEtsections, 1, toN)}</div>
+        <div className='starRow-mycourse' style={{ width:'100%' }}>{this.renderCircles(newEtsections, toN + 1, newEtsections.length)}</div>
       </div>
     )
   }
@@ -297,32 +305,34 @@ class MainView extends Component {
       return (<div className='container'>Loading...</div>)
     }
     return (
-      <div className='container container-course'>
+      <div className='container container-mycourse'>
         <div className='row'>
           <div className='col-xs-3 col-md-3'>
-            <div className='button-lesson-name'> {course.name}</div>
-            <div className='section-list'>
+            <div className='button-lesson-name-mycourse'> {course.name}</div>
+            <div className='section-list-mycourse'
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=f506d563-a013-4e53-950e-fcedf4f4aa69)'}}
+            >
               <ul className='list-unstyled'>
-                {this.renderSectionsList()}
-                {this.renderSectionsList()}
                 {this.renderSectionsList()}
                 {this.renderSectionsList()}
               </ul>
             </div>
-            <div className='button-lesson-name'> {course.name}</div>
+            <div className='button-lesson-name-mycourse'> {course.name}</div>
             <div>{this.renderProgressBar()}</div>
-            <div className='button-coach-chat'>Чат с тренером</div>
+            <div className='button-coach-chat-mycourse'>Чат с тренером</div>
               <QuestionsToCoach
                 courseId={params.courseId}
               />
           </div>
           <div className='col-xs-9 col-md-9'>
-            <div className='hi-words'>
+            <div className='hi-words-mycourse'
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/hiWordFromCoach.png?alt=media&token=a0ed890e-53dc-4a66-8d1e-52f2acdd0dd2)'}}
+            >
               <p>Приветствие от коуча для вип студента</p>
               <p>Улучши свои навыки и контроль за игрой</p>
             </div>
-            <div className='progress-lesson'>{this.renderProgressLesson()}</div>
-            <div className='questions'>
+            <div className='progress-lesson-mycourse'>{this.renderProgressLesson()}</div>
+            <div className='questions-mycourse'>
               <CommentToForum courseId={params.courseId} />
             </div>
           </div>

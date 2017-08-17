@@ -9,7 +9,7 @@ class VideoPlayer extends Component {
     super(props)
     this.state = {
       playing: true,
-      volume: 0.0,
+      volume: 0.4,
       played: 0,
       loaded: 0,
       duration: 0,
@@ -92,7 +92,7 @@ class VideoPlayer extends Component {
           height={420}
           url={url}
           ref={player => { this.player = player }}
-          className='react-player'
+          className='react-player-mylesson'
           playing={playing}
           playbackRate={playbackRate}
           volume={volume}
@@ -116,16 +116,16 @@ class VideoPlayer extends Component {
     const { playing, volume, played, duration } = this.state
     const classType = playing ? 'pause' : 'play'
     return (
-      <div className='player'>
+      <div className='player-mylesson'>
         {this.renderVideo()}
-        <div className='сontrols'>
+        <div className='сontrols-mylesson'>
         <div
           onClick={this.playPause}
           className={classType}>
         </div>
           <time
             dateTime={`P${Math.round(duration * played)}S`}
-            className='time'>
+            className='time-mylesson'>
             {this.format(duration * played)}
           </time>
           <input
@@ -140,11 +140,11 @@ class VideoPlayer extends Component {
           />
           <time
             dateTime={`P${Math.round(duration * (1 - played))}S`}
-            className='time'>
+            className='time-mylesson'>
             {this.format(duration * (1 - played))}
           </time>
           <input
-            className='volume'
+            className='volume-mylesson'
             type='range'
             min={0}
             max={1}
@@ -153,7 +153,7 @@ class VideoPlayer extends Component {
             onChange={this.setVolume} />
           <div
             onClick={this.onClickFullscreen}
-            className='fullscreen'>
+            className='fullscreen-mylesson'>
           </div>
         </div>
       </div>

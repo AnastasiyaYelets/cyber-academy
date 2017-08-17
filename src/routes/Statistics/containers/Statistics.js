@@ -46,6 +46,8 @@ class Statistics extends Component {
     })
   }
   cutPoints (data, periodCount) {
+    console.log(data, Date.now())
+
     const { period } = this.state
     if (period === 'day') {
       return data
@@ -57,7 +59,10 @@ class Statistics extends Component {
           item.dayValue = item.value
         }
       })
+      console.log(data.length, set, Date.now())
+      if (data.length !== 0) {
       data[data.length - 1].dayValue = data[data.length - 1].value
+    } 
       console.log(data, set, Date.now())
       return data
     } else {
@@ -83,6 +88,7 @@ class Statistics extends Component {
       allTime: (10 * 12 * 30 * 24 * 60 * 60 * 1000)
     }
     const newData = data.filter(item => { return item.date > (Date.now() - timeAway[`${period}`]) })
+    console.log(period,newData )
     const newDataWithPoints = this.cutPoints(newData, periodCount)
     const dateFormatMonthAndAllTime = (time) => {
       return moment(time).format(periodCount[`${period}`])
@@ -95,7 +101,7 @@ class Statistics extends Component {
     }
     return (
       <div>
-        {userDataLoaded && !newData.length && <div> No data for this period</div>}
+        {userDataLoaded && !newData.length && <div> </div>}
         {!!newData.length && isDayChart && !isWeekChart &&
           <LineChart width={1100} height={400} data={newDataWithPoints}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }} >

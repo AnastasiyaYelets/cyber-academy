@@ -1,11 +1,11 @@
-.container-course {
+.container-mycourse {
   font-family: 'MICRADI';
   font-weight: medium;
   color: yellow;
   align-items:baseline;
   margin-top:20px;
 }
-.button-lesson-name {
+.button-lesson-name-mycourse {
   padding-top:8px;
   margin:0px;
   text-align: center;
@@ -14,22 +14,21 @@
   display: block;
   background-image: url(../../../../../images/buttonLessonName.png);
 }
-.section-list {
+.section-list-mycourse {
   padding:0px;
   margin:0px;
   text-align: center;
   width:263px;
   height:248px;
   color: white;
-  background-image: url(../../../../../images/list.png);
 }
-.bonus-link {
+.bonus-link-mycourse {
   color: #7bb4d7;
 }
-.link {
+.link-mycourse {
   color: yellow;
 }
-.checkbox {
+.checkbox-mycourse {
   padding:0px;
   margin:0px;
   width:13px;
@@ -37,7 +36,7 @@
   display: inline-block;
   background-image: url(../../../../../images/checkBox.png);
 }
-.button-continie-lesson {
+.button-continie-lesson-mycourse {
   padding:5px;
   margin:15px;
   width:241px;
@@ -46,7 +45,7 @@
   display: block;
   background-image: url(../../../../../images/buttonContLesson.jpg);
 }
-.button-continie-lesson:active {
+.button-continie-lesson-mycourse:active {
   padding:5px;
   margin:15px;
   width:241px;
@@ -55,7 +54,7 @@
   display: block;
   background-image: url(../../../../../images/buttonContLessonPress.jpg);
 }
-.button-coach-chat{
+.button-coach-chat-mycourse{
   padding-top:8px;
   margin:0px;
   text-align: center;
@@ -64,24 +63,22 @@
   display: block;
   background-image: url(../../../../../images/buttonLessonName.png);
 }
-.chat-field {
+.chat-field-mycourse {
   padding:0px;
   margin:0px;
   width:263px;
   height:293px;
   font-size: 10pt;
-  background-image: url(../../../../../images/chatField.jpg);
 }
-.chat-input {
+.chat-input-mycourse {
   padding: 0px;
   margin: 5px 10px;
   width:240px;
   height:61px;
   border: none;
   color: yellow;
-  background-image: url(../../../../../images/chatInput.jpg);
 }
-.chat-button {
+.chat-button-mycourse {
   padding:8px;
   margin-top:10px;
   width:267px;
@@ -90,66 +87,61 @@
   display: block;
   background-image: url(../../../../../images/chatButton.png);
 }
-.hi-words {
+.hi-words-mycourse {
   padding:20px;
   margin:0px;
   width:847px;
   height:221px;
   color: #7bb4d7;
-  background-image: url(../../../../../images/hiWordFromCoach.png);
 }
-.progress-lesson{
+.progress-lesson-mycourse{
   padding:15px;
   margin:0px;
   width:847px;
   height:280px;
 }
-.starRow {
+.starRow-mycourse {
   display: block;
   padding-top:10px;
   margin:auto;
   width:847px;
   height:130px;
 }
-.circle {
+.circle-mycourse {
   float: left;
 }
-.starFff{
+.starFff-mycourse{
   padding-top:60px;
   width:79px;
   height:104px;
   float:left;
   text-align: center;
-  background-image: url(../../../../../images/starFff.png);
 }
-.starEee{
+.starEee-mycourse{
   padding-top:60px;
   width:79px;
   height:104px;
   float:left;
   text-align: center;
-  background-image: url(../../../../../images/starEee.png);
 }
-.starFfe{
+.starFfe-mycourse{
   padding-top:60px;
   width:79px;
   height:104px;
   float:left;
   text-align: center;
-  background-image: url(../../../../../images/starFfe.png);
 }
-.starFee{
+.starFee-mycourse{
   padding-top:60px;
   width:79px;
   height:104px;
   float:left;
   text-align: center;
-  background-image: url(../../../../../images/starFee.png);
 }
-.questions {
+.questions-mycourse {
   display: block;
 }
-.question-field {
+.question-field-mycourse {
   padding:0px;
   margin:0px;
   width:847px;
@@ -158,7 +150,7 @@
   text-align: center;
   background-image: url(../../../../../images/questionField.jpg);
 }
-.question-button {
+.question-button-mycourse {
   padding-top:8px;
   margin-top:5px;
   width:267px;
@@ -166,7 +158,7 @@
   text-align: center;
   background-image: url(../../../../../images/questionButton.png);
 }
-.topic-options{
+.topic-options-mycourse{
   padding: 0px;
   margin:0px;
   font-family: 'MICRADI';
@@ -175,13 +167,12 @@
   width:847px;
   height:36px;
   border: none;
-  background-image: url(../../../../../images/topicField.jpg);
 }
-.options-lessons{
+.options-lessons-mycourse{
   border: none;
   background-color: black;
 }
-.question-input{
+.question-input-mycourse{
   padding: 0px;
   margin:0px;
   font-family: 'MICRADI';
@@ -190,9 +181,8 @@
   width:847px;
   height:193px;
   border: none;
-  background-image: url(../../../../../images/questionInput.jpg);
 }
-.save-comment-button {
+.save-comment-button-mycourse {
   padding-top:8px;
   margin:auto;
   width:267px;
@@ -200,31 +190,31 @@
   text-align: center;
   background-image: url(../../../../../images/questionButton.png);
 }
-.scroll::-webkit-scrollbar-track
+.scroll-mycourse::-webkit-scrollbar-track
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   background-color: #000000;
 }
-.scroll::-webkit-scrollbar
+.scroll-mycourse::-webkit-scrollbar
 {
   width: 23px;
   background-color: red;
 }
-.scroll::-webkit-scrollbar-thumb
+.scroll-mycourse::-webkit-scrollbar-thumb
 {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: #1a1a1a;
 }
-.scroll::-webkit-scrollbar-button:vertical:increment {
+.scroll-mycourse::-webkit-scrollbar-button:vertical:increment {
   width:23px;
   height:22px;
   background-image: url(../../../../../images/down.jpg);
 }
-.scroll::-webkit-scrollbar-button:vertical:decrement {
+.scroll-mycourse::-webkit-scrollbar-button:vertical:decrement {
   width:23px;
   height:22px;
   background-image: url(../../../../../images/up.jpg);
 }
-.scroll{
+.scroll-mycourse{
   margin: 0px;
 }

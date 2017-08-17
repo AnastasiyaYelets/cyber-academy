@@ -72,7 +72,7 @@ class HomePage extends Component {
               <input
                 value={quaterText1}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ quaterText1: e.target.value })} />
+                className='form-control s' onChange={(e) => this.setState({ quaterText1: e.target.value })} />
             </div>
 
               <div className='form-group'>
@@ -80,7 +80,7 @@ class HomePage extends Component {
                 <input
                   value={quaterText2}
                   type='text'
-                  className='form-control' onChange={(e) => this.setState({ quaterText2: e.target.value })} />
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText2: e.target.value })} />
               </div>
 
             <div className='form-group'>
@@ -88,7 +88,7 @@ class HomePage extends Component {
               <input
                 value={quaterText3}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ quaterText3: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText3: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -96,7 +96,7 @@ class HomePage extends Component {
               <input
                 value={quaterText4}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ quaterText4: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText4: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -104,7 +104,7 @@ class HomePage extends Component {
                 <input
                   value={linkVideoToParents}
                   type='text'
-                  className='form-control' onChange={(e) => this.setState({ linkVideoToParents: e.target.value })} />
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ linkVideoToParents: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -112,7 +112,7 @@ class HomePage extends Component {
                 <input
                   value={buttonText}
                   type='text'
-                  className='form-control' onChange={(e) => this.setState({ buttonText: e.target.value })} />
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ buttonText: e.target.value })} />
             </div>
           </form>
 

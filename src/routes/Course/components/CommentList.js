@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import Infinite from 'react-infinite'
+import './course.scss'
 
 class CommentList extends Component {
   constructor (props) {
@@ -42,11 +43,11 @@ class CommentList extends Component {
     return item.children.map((child, i) =>
       <div key={i}>
         <div className='col-xs-10 col-md-10'>
-          <div className='reply-name'>{item.displayName}</div>
+          <div className='reply-name-course'>{item.displayName}</div>
         </div>
         <div className='col-xs-10 col-md-10'>
         <div>
-          <div className='reply-text'>{child} </div>
+          <div className='reply-text-course'>{child} </div>
           </div>
         </div>
       </div>
@@ -57,14 +58,14 @@ class CommentList extends Component {
     const { generalQuestions = [] } = this.state
     return generalQuestions.map((item, i) =>
       <li key={i}>
-        <div className='col-xs-12 col-md-12 comment'>
-          <div className='col-xs-1 col-md-1 comment-avatar'>
-            <div><img style={{ borderRadius:'10%' }} className='comment-avatar' src={item.avatar} /></div>
+        <div className='col-xs-12 col-md-12 comment-course'>
+          <div className='col-xs-1 col-md-1 comment-avatar-course'>
+            <div><img style={{ borderRadius:'10%' }} className='comment-avatar-course' src={item.avatar} /></div>
           </div>
           <div className='col-xs-10 col-md-10'>
-            <div className='comments-name'>{item.displayName}</div>
+            <div className='comments-name-course'>{item.displayName}</div>
             <div className='col-xs-10 col-md-10'>
-              <div className='comments-text'>{item.text} </div>
+              <div className='comments-text-course'>{item.text} </div>
             </div>
             {item.children && <div> {this.renderChildrenList(item)} </div>}
           </div>
@@ -76,7 +77,7 @@ class CommentList extends Component {
   render () {
     return (
       <div>
-        <Infinite containerHeight={200} elementHeight={60} className='scroll'>
+        <Infinite containerHeight={200} elementHeight={60} className='scroll-course'>
           <ul className='list-unstyled'>
             {this.renderCommentList()}
           </ul>

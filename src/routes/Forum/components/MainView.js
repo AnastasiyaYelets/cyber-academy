@@ -94,15 +94,15 @@ class MainView extends Component {
 
   render () {
     return (
-      <div className='col-xs-12 col-md-12'>
-        <div className='col-xs-12 col-md-8'>
-          <label className='control-label col-xs-2 col-md-3' style={{ padding: '15px' }}>Sections</label>
-          <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>Dota 2</label>
-          {this.renderTable('Dota2')}
-          <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>CS:GO</label>
-          {this.renderTable('CS:GO')}
-          <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>League of Legends</label>
-          {this.renderTable('LoL')}
+      <div className='container'>
+        <div className='row'>
+            <label className='control-label col-xs-2 col-md-3' style={{ padding: '15px' }}>Sections</label>
+            <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>Dota 2</label>
+            {this.renderTable('Dota2')}
+            <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>CS:GO</label>
+            {this.renderTable('CS:GO')}
+            <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>League of Legends</label>
+            {this.renderTable('LoL')}
         </div>
       </div>
     )

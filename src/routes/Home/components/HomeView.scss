@@ -1,86 +1,86 @@
 
-.content{
-  padding-top: 22px;
+.content-home{
+  padding-top: 30px;
   margin: auto;
   width:1140px;
+  height: inherit;
+  font-family: 'MICRADI';
+  font-size: 14px;
+  color: #e5d800;
 }
-.sliderDota{
+.sliderDota-home{
   padding:0px;
   margin:0px;
   width:1140px;
   height:250px;
- background-image: url(../../../images/sliderDota.jpg);
 }
-.sliderCSGO{
+.sliderCSGO-home{
   padding:0px;
   margin:0px;
   width:1140px;
   height:250px;
- background-image: url(../../../images/sliderCSGO.jpg);
 }
-.quater1{
+.quater1-home{
+  padding:0px;
+  margin:0px 0px 0px 0px;
+  width:263px;
+  height:240px;
+  float:left;
+}
+.quater2-home{
+  padding:0px;
+  margin:0px 30px 0px 30px;
+  width:263px;
+  height:240px;
+  float:left;
+}
+.quater3-home{
   padding:0px;
   margin:0px;
   width:263px;
   height:240px;
-  background-image: url(../../../images/quater1.jpg);
+  float:left;
 }
-.quater2{
+.quater4-home{
   padding:0px;
-  margin:0px;
+  margin:0px 0px 0px 25px;
   width:263px;
   height:240px;
-  background-image: url(../../../images/quater2.jpg);
+  float:left;
 }
-.quater3{
-  padding:0px;
-  margin:0px;
-  width:263px;
-  height:240px;
-  background-image: url(../../../images/quater3.jpg);
-}
-.quater4{
-  padding:0px;
-  margin:0px;
-  width:263px;
-  height:240px;
-  background-image: url(../../../images/quater4.jpg);
-}
-.text {
+.text-home {
   width:263px;
   height:140px;
   color: #7bb4d7;
   text-align: center;
   padding-top: 155px;
 }
-.btnStart {
+.btnStart-home {
   padding-top: 22px;
   text-align: center;
-  margin: 0 auto;
+  margin: 10px auto;
   width:257px;
   height:60px;
-  background-image: url(../../../images/btnStartEduc.png);
 }
-.fourQuaters{
-    padding-top: 42px;
+.fourQuaters-home{
+  padding: 42px 0px 10px 0px;
 }
-.btnStart:active {
+.btnStart-home:active {
   padding-top: 22px;
   text-align: center;
-  margin: 0 auto;
+  margin: 10px auto;
   width:257px;
   height:60px;
   background-image: url(../../../images/btnActStartEduc.png);
 }
-.videoToParents{
+.videoToParents-home{
   border-width: 0px;
   padding:0px;
   margin:0px;
   width:1140px;
   height:70px;
-  background-image: url(../../../images/videoToParents.jpg);
 }
-.player{
+.player-home{
   padding-left:5px;
   padding-top:5px;
   margin:0;
@@ -88,13 +88,13 @@
   height:640px;
   background-image: url(../../../images/player.png);
 }
-.сontrols{
+.сontrols-home{
   margin:auto;
   width:1125px;
   height:30px;
   background-color: #000;
 }
-.play{
+.play-home{
   margin:0;
   width:21px;
   height:21px;
@@ -102,7 +102,7 @@
   background-image: url(../../../images/play.png);
   float: left;
 }
-.pause{
+.pause-home{
   margin:0;
   width:21px;
   height:21px;
@@ -110,7 +110,7 @@
   background-image: url(../../../images/pause.png);
   float: left;
 }
-.fullscreen{
+.fullscreen-home{
   margin:3px 0px 3px 10px;
   width:21px;
   height:21px;
@@ -118,7 +118,7 @@
   background-image: url(../../../images/fullscreen.png);
   float: left;
 }
-.time{
+.time-home{
   float: left;
   padding:3px 12px 3px 12px;
   color: white;
@@ -134,7 +134,7 @@ input[type=range] {
   color: #0069b4 ;
   overflow: visible;
 }
-input[type=range].volume{
+input[type=range].volume-home{
   float: left;
   margin-top:10px;
   padding:0px 10px 0px 10px;

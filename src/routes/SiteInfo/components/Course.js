@@ -58,7 +58,7 @@ class Course extends Component {
               <input
                 value={duration}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ duration: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ duration: e.target.value })} />
             </div>
           </form>
 

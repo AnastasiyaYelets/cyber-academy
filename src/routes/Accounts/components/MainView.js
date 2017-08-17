@@ -62,9 +62,13 @@ class MainView extends Component {
     return (
       <div className='container'>
         <div className='row'>
-          <div className='col-sm-12 col-md-12 vip-header'></div>
-          <div className='col-sm-6 col-md-6 frame'>
-            <div className='frame-text'>
+          <div className='col-sm-12 col-md-12 vip-header-account'
+               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/vipHeader.jpg?alt=media&token=a07d2f75-29a8-45dd-b4e4-090b5f429f8c)'}}
+        ></div>
+          <div className='col-sm-6 col-md-6 frame-account'
+               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/frame.jpg?alt=media&token=b83fd699-0290-4159-96ca-c3c50307285d)'}}
+          >
+            <div className='frame-text-account '>
               <p style={{ paddingBottom: '10px' }}>СТАНДАРТНЫЙ АККАУНТ</p>
               <p>- ВИДЕО УРОКИ</p>
               <p>- ПРАКТИЧЕСКИЕ ЗАДАНИЯ</p>
@@ -77,8 +81,10 @@ class MainView extends Component {
               <span style={{ fontSize: '18px' }}> {course.price}$</span>
             </p>
           </div>
-          <div className='col-sm-6 col-md-6 vip-frame'>
-            <div className='frame-text'>
+          <div className='col-sm-6 col-md-6 vip-frame-account'
+               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/vipFrame.jpg?alt=media&token=09b991ee-6581-499f-8e0a-31d0c380837f)'}}
+          >
+            <div className='frame-text-account '>
               <p style={{ paddingBottom: '10px' }}>VIP АККАУНТ</p>
               <p>- ВИДЕО УРОКИ</p>
               <p>- ПРАКТИЧЕСКИЕ ЗАДАНИЯ</p>
@@ -97,7 +103,7 @@ class MainView extends Component {
           </div>
           <div className='col-sm-6 col-md-6 ' style={{ paddingLeft: '50px' }}>
             {courseLoaded && course.name && !isBuyButtonShow() && !isBuyVipButtonShow() &&
-            <div className='standart-button'>
+            <div className='standart-button-account '>
               <StripeComponent
                 price={course.price}
                 amount={course.price * 100}
@@ -109,7 +115,7 @@ class MainView extends Component {
           </div>
           <div className='col-sm-6 col-md-6' style={{ paddingLeft: '280px' }}>
             {courseLoaded && course.name && !isBuyVipButtonShow() &&
-              <div className='vip-button'>
+              <div className='vip-button-account '>
                 <StripeComponent
                   price={course.vipPrice}
                   amount={course.vipPrice * 100}

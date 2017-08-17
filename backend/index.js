@@ -49,13 +49,14 @@ function createOrUpdateProfile (user) {
     const dotaId = toDotaId(user.steamId)
     getDotaStatistics(dotaId)
     .then(statistics => {
+      const newStatistics = (statistics !== {}) ? statistics : { prof: 'no profile' }
       if (snapshot.val() !== null) {
         // update
         updates = {
           avatar: user.profile._json.avatar,
           profileurl: user.profile._json.profileurl,
           displayName: user.profile.displayName,
-          statistics
+          statistics: newStatistics
         }
       } else {
         // create
@@ -67,7 +68,7 @@ function createOrUpdateProfile (user) {
           displayName: user.profile.displayName,
           timeRegistered: Math.floor(Date.now() / 1000),
           dotaId,
-          statistics
+          statistics: newStatistics
         }
       }
 
@@ -82,7 +83,7 @@ function generateToken (steamId) {
 }
 
 var job = new CronJob({
-  cronTime: '00 49 * * * 0-6',
+  cronTime: '00 59 * * * 0-6',
   onTick: function () {
     var time = Date.now()
     console.log('hello 31')
@@ -108,8 +109,8 @@ console.log(users)
       Promise.all(promisesUsers).then(usersData => {
         usersData.forEach(user => {
           const steamId = user.userId
-          const mmr = user.mmr.data.mmr_estimate.estimate
-          const mmrN = user.mmr.data.mmr_estimate.n
+          const mmr = user.mmr.data.mmr_estimate ? user.mmr.data.mmr_estimate.estimate : 0
+          const mmrN = user.mmr.data.mmr_estimate ? user.mmr.data.mmr_estimate.n : 0
           const data = user.totals.data
           const userData = {
             kda: {
@@ -126,23 +127,39 @@ console.log(users)
                 { date:1499295762407, value:2, n: 459},
                 { date:1499295762407, value:7, n: 460},
 
+                { date:1499335762407, value:4, n: 461},
+                { date:1499345762407, value:17, n: 462},
+                { date:1499355762407, value:6, n: 463},
 
-                { date:1499335762407, value:4, n: 462},
-                { date:1499345762407, value:17, n: 463},
-                { date:1499355762407, value:6, n: 464},
+                { date:1499335762407, value:4, n: 464},
+                { date:1499345762407, value:17, n: 465},
+                { date:1499355762407, value:6, n: 466},
+                { date:1499365762407, value:2, n: 467},
 
-                { date:1499335762407, value:4, n: 462},
-                { date:1499345762407, value:17, n: 463},
-                { date:1499355762407, value:6, n: 464},
-                { date:1499365762407, value:2, n: 465},
+                { date:1499375762407, value:7, n: 468},
+                { date:1499575762407, value:4, n: 469},
+                { date:1499875762407, value:17, n: 470},
 
-                { date:1499375762407, value:7, n: 466},
-                { date:1499575762407, value:4, n: 467},
-                { date:1499875762407, value:17, n: 468},
+                { date:1500384125882, value:7, n: 471},
+                { date:1500384225882, value:4, n: 472},
+                { date:1500385225882, value:17, n: 473},
 
-                { date:1500384125882, value:7, n: 469},
-                { date:1500384225882, value:4, n: 470},
-                { date:1500385225882, value:17, n: 471}
+                { date:1500491682932, value:7, n: 474},
+                { date:1500791682932, value:19, n: 475},
+                { date:1501091682932, value:5, n: 476},
+                { date:1501591682932, value:12, n: 477},
+
+                { date:1501591682932, value:4, n: 478},
+                { date:1501891682932, value:5, n: 479},
+                { date:1502192752932, value:16, n: 480},
+                { date:1502193782932, value:7, n: 481},
+
+                { date:1502591682932, value:4, n: 482},
+                { date:1502691682932, value:5, n: 483},
+                { date:1502792752932, value:16, n: 484},
+                { date:1502893782932, value:27, n: 485},
+                { date:1502952752932, value:16, n: 484},
+                { date:1502973782932, value:7, n: 485}
               ]
             },
             gpm: {
@@ -196,7 +213,7 @@ console.log(users)
 
           function pushPoint (item, field, fieldName) {
               if (item.field === field) {
-                if (item.n !== 0) {
+                if (item.n !== 0 && mmrN !== undefined) {
                 if (users[`${steamId}`].statistics.chartStatistic) {
                   if (newChartStatistic[`${fieldName}`].values[(newChartStatistic[`${fieldName}`].values.length - 1)].n !== item.n) {
                     newChartStatistic[`${fieldName}`].values.push({ value: Math.ceil(item.sum / item.n), date: Date.now(), n: item.n })
@@ -220,12 +237,12 @@ console.log(users)
             pushPoint(item, 'hero_damage', 'heroDamage')
             pushPoint(item, 'tower_damage', 'towerDamage')
           })
-          if (users[`${steamId}`].statistics.chartStatistic && (mmr !== null)) {
+          if (users[`${steamId}`].statistics.chartStatistic && (mmr !== null) && mmrN !== undefined) {
             if (newChartStatistic.mmr.values[(newChartStatistic.mmr.values.length - 1)].n !== mmrN) {
               newChartStatistic.mmr.values.push({ value: mmr, date: Date.now(), n: mmrN })
               console.log('rewrite mmr', mmr, 'n', mmrN, 'user', steamId, 'date', Date.now())
             }
-          } else if (mmr !== null){
+          } else if (mmr !== null && mmrN !== undefined) {
             newChartStatistic.mmr.values.push({ value: mmr, date: Date.now(), n: mmrN })
             console.log('rewrite mmr', mmr, 'n', mmrN, 'user', steamId, 'date', Date.now())
           }
@@ -249,7 +266,7 @@ console.log('rewrite winRate', winRate, 'winN', winN, 'loseN', loseN, 'user', st
           admin.database().ref('users/' + `${steamId}`).update({
             statistics: newStatistics
           })
-          // console.log('newStatistics', newStatistics)
+          console.log('newStatistics', newStatistics, Date.now())
         })
 
       })

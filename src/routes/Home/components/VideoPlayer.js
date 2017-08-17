@@ -111,16 +111,16 @@ class VideoPlayer extends Component {
     const { playing, volume, played, duration } = this.state
     const classType = playing ? 'pause' : 'play'
     return (
-      <div className='player'>
+      <div className='player-home'>
         {this.renderVideo()}
-        <div className='сontrols'>
+        <div className='сontrols-home'>
         <div
           onClick={this.playPause}
           className={classType}>
         </div>
           <time
             dateTime={`P${Math.round(duration * played)}S`}
-            className='time'>
+            className='time-home'>
             {this.format(duration * played)}
           </time>
           <input
@@ -135,11 +135,11 @@ class VideoPlayer extends Component {
           />
           <time
             dateTime={`P${Math.round(duration * (1 - played))}S`}
-            className='time'>
+            className='time-home'>
             {this.format(duration * (1 - played))}
           </time>
           <input
-            className='volume'
+            className='volume-home'
             type='range'
             min={0}
             max={1}
@@ -148,7 +148,7 @@ class VideoPlayer extends Component {
             onChange={this.setVolume} />
             <div
               onClick={this.onClickFullscreen}
-              className='fullscreen'>
+              className='fullscreen-home'>
             </div>
         </div>
       </div>

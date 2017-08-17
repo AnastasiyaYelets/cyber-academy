@@ -109,7 +109,7 @@ class Faculties extends Component {
               <input
                 value={DotaButton}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ DotaButton: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ DotaButton: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -117,7 +117,7 @@ class Faculties extends Component {
               <input
                 value={LoLButton}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ LoLButton: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ LoLButton: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -125,7 +125,7 @@ class Faculties extends Component {
               <input
                 value={CSGOButton}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ CSGOButton: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ CSGOButton: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -133,7 +133,7 @@ class Faculties extends Component {
               <input
                 value={DotaDescription}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ DotaDescription: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ DotaDescription: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -141,7 +141,7 @@ class Faculties extends Component {
               <input
                 value={LoLDescription}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ LoLDescription: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ LoLDescription: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -149,7 +149,7 @@ class Faculties extends Component {
               <input
                 value={CSGODescription}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ CSGODescription: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ CSGODescription: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -157,7 +157,7 @@ class Faculties extends Component {
               <input
                 value={DotaImg}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ DotaImg: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ DotaImg: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -165,7 +165,7 @@ class Faculties extends Component {
               <input
                 value={LoLImg}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ LoLImg: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ LoLImg: e.target.value })} />
             </div>
 
             <div className='form-group'>
@@ -173,7 +173,7 @@ class Faculties extends Component {
               <input
                 value={CSGOImg}
                 type='text'
-                className='form-control' onChange={(e) => this.setState({ CSGOImg: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ CSGOImg: e.target.value })} />
             </div>
 
           </form>

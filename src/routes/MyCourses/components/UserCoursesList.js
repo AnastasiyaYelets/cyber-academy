@@ -68,10 +68,10 @@ class UserCoursesList extends Component {
     return (
       <div>
         <div className='progress-mycourses' style={{ margin: '0px 0px 10px 10px',
-             backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/progressBarFull.png?alt=media&token=3f255608-768e-4e80-ac5f-cb44477f6301)' }}>
+             backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/progressBarFull.png?alt=media&token=e970a7a6-d1eb-4070-b95b-5c137e053147)' }}>
           <div className='progress-bar-mycourses' role='progressbar' aria-valuenow='40'
             aria-valuemin='0' aria-valuemax='100' style={{ width: `${percent}%`,
-            backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/progressBar.jpg?alt=media&token=9dea8add-ebfa-4ec0-bf9a-3f67d7654bed)' }}>
+            backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/progressBar.jpg?alt=media&token=9ffb5b28-8769-4498-a4e4-cde9ad64987e)' }}>
             {percent}%
           </div>
         </div>
@@ -97,7 +97,7 @@ class UserCoursesList extends Component {
     const newCourses = [].concat(courses).concat(courses)
       return newCourses.map((course, i) => (
         <div key={i} className='frame-course-mycourses' style={{ padding: '5px', margin: '15px 6px 10px 6px',
-             backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/frameLesson.jpg?alt=media&token=c44421b6-9655-476b-b373-f8ee89bdb0c8)' }}>
+             backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/frameLesson.jpg?alt=media&token=563e1028-8c78-40a7-a305-6a4767d2be1f)' }}>
           <img src={course.mainPhoto} width='352px' height='150px' alt='loading' />
           <div className='caption-mycourses' style={{ padding: '5px 10px 5px 10px' }}>
             <h5 className='frame-name-mycourses'>{course.name} </h5>
@@ -108,7 +108,7 @@ class UserCoursesList extends Component {
             {this.isVip(course)}
             <div
               className='button-details-mycourses'
-              style={{  color: 'yellow', backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/buttonDetails.png?alt=media&token=659dfd1a-03b0-4b54-83f6-a728cb1d1e94)'}}
+              style={{  color: 'yellow', backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/buttonDetails.png?alt=media&token=081aad23-ce5c-4e1e-b34e-ec205ffb8bf9)'}}
               onClick={() => { browserHistory.push({ pathname: `/myCourses/course/${course.id}` }) }}
               >More details
             </div>
@@ -129,15 +129,15 @@ class UserCoursesList extends Component {
       <div className='row'>
         <div className='col-xs-12 col-md-12' style={{ padding: '0px' }}>
           <div className='col-xs-2 col-md-2 ikon-dragon-mycourses'
-            style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/ikonDragon.jpg?alt=media&token=9c1ed67f-60ef-48f8-86d7-58b0d0f45ea8)'}}
+            style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/ikonDragon.jpg?alt=media&token=335de009-e821-41ba-8c22-eb766a15fa3c)'}}
           ></div>
           <div className='col-xs-3 col-md-3 text-place-mycourses'>Улучши свои навыки и контроль за игрой</div>
           <div className='col-xs-7 col-md-7 text-frame-mycourses'
-            style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/textFrameMyCourses.jpg?alt=media&token=fa0d0fdd-436f-4b94-9905-fd42878920c8)'}}
+            style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/textFrameMyCourses.jpg?alt=media&token=ad349358-7811-419b-b95b-b7c777d0b667)'}}
           > Изучи механизм игры и взаимодействие с командой</div>
         </div>
         <div className='col-xs-12 col-md-12 tab-mycourses' style={{ padding: '10px 0px 0px 0px',
-          backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/tab.png?alt=media&token=0d486288-bd6b-4503-80f3-3304e87b6470)' }}>
+          backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/tab.png?alt=media&token=8f2c7a2f-3cb8-4c9e-883e-eb720e85174a)' }}>
           <div>
             <span className='my-courses-mycourses'>Мои курсы</span>
             {!courses.length && <div className='no-courses-mycourses'> You havent any courses yet</div>}

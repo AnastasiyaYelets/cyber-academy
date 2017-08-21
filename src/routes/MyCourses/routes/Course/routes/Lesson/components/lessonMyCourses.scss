@@ -203,6 +203,28 @@
   font-weight: medium;
   background-image: url(../../../../../../../images/videoButton.jpg);
 }
+.textVideoToParents-mylesson{
+  float: left;
+  margin: 26px 0px 0px 140px;
+}
+.playVideoToParents-mylesson {
+  margin: 6px 0px 0px 288px;
+  width:60px;
+  height:60px;
+  background-image: url(../../../../../../../images/playVideoToParents.png);
+  background-color: transparent;
+  border: none;
+  float: left;
+}
+.pauseVideoToParents-mylesson {
+  margin: 6px 0px 0px 288px;
+  width:60px;
+  height:60px;
+  background-image: url(../../../../../../../images/pauseVideoToParents.png);
+  background-color: transparent;
+  border: none;
+  float: left;
+}
 input[type=range] {
   float: left;
   margin-top:10px;
@@ -210,8 +232,8 @@ input[type=range] {
   height: 3px;
   -webkit-appearance: none;
   border: 0 none;
-  background:blue;
-  color: #0069b4 ;
+  background: #7bb4d7;
+  color: #7bb4d7 ;
   overflow: visible;
 }
 input[type=range].volume-mylesson{
@@ -222,8 +244,8 @@ input[type=range].volume-mylesson{
   height: 3px;
   -webkit-appearance: none;
   border: 0 none;
-  background: #0069b4;
-  color: #0069b4;
+  background: #7bb4d7;
+  color: #7bb4d7;
   overflow: visible;
 }
 input[type=range]::-webkit-slider-thumb {
@@ -232,7 +254,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 20px;
   width: 10px;
   border-radius: 3px;
-  background: blue;
+  background: #7bb4d7;
   cursor: pointer;
   // margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */

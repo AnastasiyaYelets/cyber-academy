@@ -139,7 +139,7 @@ class CommentToForum extends Component {
            <select
              className='topic-options-mylesson'
              value={this.state.lessonId}
-             style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/topicField.jpg?alt=media&token=84c643f6-3ee8-477f-be50-60e9cdc218da)'}}
+             style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/topicField.jpg?alt=media&token=b4a9884f-7b19-4ac8-8657-f514aa314063)'}}
              onChange={(e) => this.setState({ lessonId: e.target.value })}>
              <option
                value=''
@@ -148,7 +148,7 @@ class CommentToForum extends Component {
           </select>
           ​<textarea
             className='question-input-mylesson'
-            style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/questionInput.jpg?alt=media&token=652f453e-b5fc-4f37-950b-b8e9fd92c745)'}}
+            style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/questionInput.jpg?alt=media&token=8f265c2b-e7d8-487e-88cf-6511ee3abfae)'}}
             cols='50'
             rows='4'
             value={this.state.comment}

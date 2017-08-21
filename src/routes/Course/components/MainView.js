@@ -215,7 +215,7 @@ class MainView extends Component {
         <div>Loading...</div>
       )
     }
-    const classNameButtonPause = stopVideo && showVideo
+    const classNameButtonPause = stopVideo
       ? 'pauseVideoToParents-course'
       : 'playVideoToParents-course'
     return (
@@ -238,8 +238,7 @@ class MainView extends Component {
                   }}>
                     <div className={classNameButtonPause} onClick={() => {
                       this.setState({
-                        stopVideo: !stopVideo,
-                        showVideo: true
+                        stopVideo: !stopVideo
                       })
                     }}></div>
                   </div>

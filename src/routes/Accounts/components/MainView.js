@@ -63,10 +63,10 @@ class MainView extends Component {
       <div className='container'>
         <div className='row'>
           <div className='col-sm-12 col-md-12 vip-header-account'
-               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/vipHeader.jpg?alt=media&token=a07d2f75-29a8-45dd-b4e4-090b5f429f8c)'}}
+               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/vipHeader.jpg?alt=media&token=91e2257d-cdd1-47b5-9929-84d717acb420)'}}
         ></div>
           <div className='col-sm-6 col-md-6 frame-account'
-               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/frame.jpg?alt=media&token=b83fd699-0290-4159-96ca-c3c50307285d)'}}
+               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/frame.jpg?alt=media&token=42025016-fdda-4f26-9567-59d53188d18f)'}}
           >
             <div className='frame-text-account '>
               <p style={{ paddingBottom: '10px' }}>СТАНДАРТНЫЙ АККАУНТ</p>
@@ -82,7 +82,7 @@ class MainView extends Component {
             </p>
           </div>
           <div className='col-sm-6 col-md-6 vip-frame-account'
-               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/vipFrame.jpg?alt=media&token=09b991ee-6581-499f-8e0a-31d0c380837f)'}}
+               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/vipFrame.jpg?alt=media&token=041c2a70-79c9-4810-a829-a8c772fd9880)'}}
           >
             <div className='frame-text-account '>
               <p style={{ paddingBottom: '10px' }}>VIP АККАУНТ</p>

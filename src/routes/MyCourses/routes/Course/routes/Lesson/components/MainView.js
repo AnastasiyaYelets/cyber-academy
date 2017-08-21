@@ -18,7 +18,8 @@ class MainView extends Component {
       buttonName: 'Show Comments',
       buttonTaskName: 'Show Practice Task',
       userCourses: [],
-      set: new Set()
+      set: new Set(),
+      stopVideo: false
     }
     this.addVideoId = this.addVideoId.bind(this)
   }
@@ -316,6 +317,7 @@ class MainView extends Component {
     const { course, courseLoaded, showComments, lesson, stopVideo, showTask } = this.state
     const { params } = this.props
     const practiceTask = lesson.task || ''
+    const classNameButtonPause = stopVideo ? 'pauseVideoToParents-mylesson' : 'playVideoToParents-mylesson'
     if (!courseLoaded) {
       return (<div>Loading...</div>)
     }
@@ -327,11 +329,11 @@ class MainView extends Component {
             <div className='col-xs-3 col-md-3'>
               <div className='button-lesson-name-mylesson'> {course.name}</div>
               <div className='section-list-mylesson'
-                   style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=f506d563-a013-4e53-950e-fcedf4f4aa69)'}}
+                   style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=e5c0dbeb-ed78-45e5-a6df-8912c30e9d2f)'}}
               >
                 <ul className='list-unstyled'>
                   {this.renderSectionsList()}
-                  {this.renderSectionsList()}
+                  {/* {this.renderSectionsList()} */}
                 </ul>
               </div>
               <div className='button-lesson-name-mylesson'> {course.name}</div>
@@ -341,16 +343,23 @@ class MainView extends Component {
 
             <div className='col-xs-9 col-md-9'>
               <div> {this.renderVideo()}</div>
-              <button
-                type='button'
+              <div
                 className='videoButton-mylesson'
-                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/videoButton.jpg?alt=media&token=2c68decc-51c3-47a0-b967-b4c84636d13b)'}}
+                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/videoButton.jpg?alt=media&token=aa32d832-e6a2-4e55-833a-c100b17ae49c)'}}
                 onClick={() => { this.setState({ stopVideo: !stopVideo }) }}
-                >{lesson.name}
-              </button>
+                >
+                  <div
+                    className={classNameButtonPause}
+                  >
+                  </div>
+                  <div className='textVideoToParents-mylesson'
+                    >{lesson.name}
+                  </div>
+
+              </div>
 
               <div className='questions-mylesson'
-                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=f506d563-a013-4e53-950e-fcedf4f4aa69)'}}
+                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=e5c0dbeb-ed78-45e5-a6df-8912c30e9d2f)'}}
 >
                 {this.renderShowCommentsButton()}
                 {showComments &&
@@ -360,7 +369,7 @@ class MainView extends Component {
               </div>
 
               <div className='task-mylesson'
-                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=f506d563-a013-4e53-950e-fcedf4f4aa69)'}}
+                style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=e5c0dbeb-ed78-45e5-a6df-8912c30e9d2f)'}}
 >
                 {this.renderShowTaskButton()}
                 {showTask && <div> Hello. I am your practice task: {practiceTask}

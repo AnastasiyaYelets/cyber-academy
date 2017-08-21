@@ -90,8 +90,8 @@
 }
 .textVideoToParents-home{
   float: left;
-margin-top: 23px;
-margin-left: 125px;
+  margin-top: 23px;
+  margin-left: 125px;
 }
 .playVideoToParents-home {
   padding:0px;
@@ -194,12 +194,12 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 
- input[type=range]::-moz-range-thumb {
-   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-   border: 1px solid #000000;
-   height: 36px;
-   width: 16px;
-   border-radius: 3px;
-   background: #ffffff;
-   cursor: pointer;
- }
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}

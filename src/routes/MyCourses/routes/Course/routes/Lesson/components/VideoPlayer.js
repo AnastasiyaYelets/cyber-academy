@@ -114,7 +114,7 @@ class VideoPlayer extends Component {
 
   render () {
     const { playing, volume, played, duration } = this.state
-    const classType = playing ? 'pause' : 'play'
+    const classType = playing ? 'pause-mylesson' : 'play-mylesson'
     return (
       <div className='player-mylesson'>
         {this.renderVideo()}

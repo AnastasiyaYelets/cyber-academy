@@ -165,7 +165,7 @@ class QuestionsToCoach extends Component {
     return (
       <div>
         <div className='chat-field-mylesson scroll-mylesson'
-             style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/chatField.jpg?alt=media&token=0a94429b-0fe2-4ed9-ab80-03678993e5f5)'}}
+             style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/chatField.jpg?alt=media&token=a05f5ace-3451-43fa-9ba5-fea5751b4c18)'}}
         >
           <Infinite containerHeight={225} elementHeight={20} className='scroll-mylesson' >
             <div>
@@ -180,7 +180,7 @@ class QuestionsToCoach extends Component {
             ​<textarea
               type='textarea'
               className='chat-input-mylesson'
-              style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/chatInput.jpg?alt=media&token=35f51e1b-e351-4e81-83d0-392256d47131)'}}
+              style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/chatInput.jpg?alt=media&token=de533b88-a6e2-436d-ba78-1813e3c6ed73)'}}
               value={this.state.message}
               cols='50'
               rows='3'

@@ -261,22 +261,22 @@ class MainView extends Component {
         {isCircle(i+1) && <div className='circle-mycourse' style={{width:`${widthPercent}%`, padding:`0px ${padding}px`}}>
           {this.isPassed(item.testsIds[0], 'test')[1] > 70 && this.isPassed(item.testsIds[0], 'test')[1] < 85 &&
             <div className='starFee-mycourse'
-                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFee.png?alt=media&token=8e02b85e-dcd5-4641-85ff-4bc7f0806d9b)'}}
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFee.png?alt=media&token=fc5b84d5-ddd1-44e6-a667-177bd78e6c9d)'}}
             >{i+1}</div>
           }
           {this.isPassed(item.testsIds[0], 'test')[1] >= 85 && this.isPassed(item.testsIds[0], 'test')[1] < 100 &&
             <div className='starFfe-mycourse'
-                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFfe.png?alt=media&token=d61b5256-4db2-47a4-8fce-ae82e121ea50)'}}
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFfe.png?alt=media&token=3cc91ba5-22fe-4557-b47b-af123181d430)'}}
             >{i+1}</div>
           }
           {this.isPassed(item.testsIds[0], 'test')[1] === 100 &&
             <div className='starFff-mycourse'
-                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFff.png?alt=media&token=03a86b77-b628-49de-b9a4-b4cbb6de5fa4)'}}
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFff.png?alt=media&token=f4a98476-dc0c-482f-8b32-a95fb4d1bf77)'}}
             >{i+1}</div>
           }
           {!this.isPassed(item.testsIds[0], 'test')[0] &&
             <div className='starEee-mycourse'
-              style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starEee.png?alt=media&token=8d5e9b72-0b2d-40d5-b134-d1063e022dc1)'}}
+              style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starEee.png?alt=media&token=96f46d6a-2263-491d-84f5-a5b27f418027)'}}
             >{i+1}</div>
           }
           </div>
@@ -310,7 +310,7 @@ class MainView extends Component {
           <div className='col-xs-3 col-md-3'>
             <div className='button-lesson-name-mycourse'> {course.name}</div>
             <div className='section-list-mycourse'
-                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=f506d563-a013-4e53-950e-fcedf4f4aa69)'}}
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/list.png?alt=media&token=e5c0dbeb-ed78-45e5-a6df-8912c30e9d2f)'}}
             >
               <ul className='list-unstyled'>
                 {this.renderSectionsList()}
@@ -326,7 +326,7 @@ class MainView extends Component {
           </div>
           <div className='col-xs-9 col-md-9'>
             <div className='hi-words-mycourse'
-                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/hiWordFromCoach.png?alt=media&token=a0ed890e-53dc-4a66-8d1e-52f2acdd0dd2)'}}
+                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/hiWordFromCoach.png?alt=media&token=e08dc905-a121-4674-b798-a2d5ec27d072)'}}
             >
               <p>Приветствие от коуча для вип студента</p>
               <p>Улучши свои навыки и контроль за игрой</p>

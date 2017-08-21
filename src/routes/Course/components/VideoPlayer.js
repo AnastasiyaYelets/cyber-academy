@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
+import React, {Component} from 'react'
+import {findDOMNode} from 'react-dom'
 import screenfull from 'screenfull'
 import ReactPlayer from 'react-player'
 import './course.scss'
 
 class VideoPlayer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       playing: true,
@@ -16,36 +16,44 @@ class VideoPlayer extends Component {
       playbackRate: 1.0
     }
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.props.stopVideo !== nextProps.stopVideo && this.playPause()
   }
 
-  renderVideoEnded () {
+  renderVideoEnded() {
     const isEnded = true
   }
-  renderVideoStarted () {
+  renderVideoStarted() {
     const isEnded = false
   }
   playPause = () => {
-    this.setState({ playing: !this.state.playing })
+    this.setState({
+      playing: !this.state.playing
+    })
   }
   stop = () => {
-    this.setState({ playing: false })
+    this.setState({playing: false})
   }
   setVolume = e => {
-    this.setState({ volume: parseFloat(e.target.value) })
+    this.setState({
+      volume: parseFloat(e.target.value)
+    })
   }
   setPlaybackRate = e => {
-    this.setState({ playbackRate: parseFloat(e.target.value) })
+    this.setState({
+      playbackRate: parseFloat(e.target.value)
+    })
   }
   onSeekMouseDown = e => {
-    this.setState({ seeking: true })
+    this.setState({seeking: true})
   }
   onSeekChange = e => {
-    this.setState({ played: parseFloat(e.target.value) })
+    this.setState({
+      played: parseFloat(e.target.value)
+    })
   }
   onSeekMouseUp = e => {
-    this.setState({ seeking: false })
+    this.setState({seeking: false})
     this.player.seekTo(parseFloat(e.target.value))
   }
   onProgress = state => {
@@ -57,7 +65,7 @@ class VideoPlayer extends Component {
     screenfull.request(findDOMNode(this.player))
   }
 
-  format (seconds) {
+  format(seconds) {
     const date = new Date(seconds * 1000)
     const hh = date.getUTCHours()
     const mm = date.getUTCMinutes()
@@ -68,12 +76,12 @@ class VideoPlayer extends Component {
     return `${mm}:${ss}`
   }
 
-  pad (string) {
+  pad(string) {
     return ('0' + string).slice(-2)
   }
 
-  renderVideo () {
-    const { url } = this.props
+  renderVideo() {
+    const {url} = this.props
     const {
       playing,
       volume,
@@ -86,75 +94,36 @@ class VideoPlayer extends Component {
 
     return (
       <div>
-        <ReactPlayer
-          width={1130}
-          height={600}
-          url={url}
-          ref={player => { this.player = player }}
-          className='react-player-course'
-          playing={playing}
-          playbackRate={playbackRate}
-          volume={volume}
-          soundcloudConfig={soundcloudConfig}
-          onStart={() => this.renderVideoStarted()}
-          onPlay={() => this.setState({ playing: true })}
-          onPause={() => this.setState({ playing: false })}
-          onEnded={() => {
-            this.renderVideoEnded()
-            this.setState({ playing: false })
-          }}
-          onError={e => console.log('onError', e)}
-          onProgress={this.onProgress}
-          onDuration={duration => this.setState({ duration })}
-        />
+        <ReactPlayer width={1130} height={600} url={url} ref={player => {
+          this.player = player
+        }} className='react-player-course' playing={playing} playbackRate={playbackRate} volume={volume} soundcloudConfig={soundcloudConfig} onStart={() => this.renderVideoStarted()} onPlay={() => this.setState({playing: true})} onPause={() => this.setState({playing: false})} onEnded={() => {
+          this.renderVideoEnded(),
+          this.setState({playing: false})
+        }} onError={e => console.log('onError', e)} onProgress={this.onProgress} onDuration={duration => this.setState({duration})}/>
       </div>
     )
   }
 
-  render () {
-    const { playing, volume, played, duration } = this.state
-    const { stopVideo } = this.props
-    const classType = playing ? 'pause' : 'play'
+  render() {
+    const {playing, volume, played, duration} = this.state
+    const {stopVideo} = this.props
+    const classType = playing
+      ? 'pause-course'
+      : 'play-course'
     return (
       <div className='player-course'>
         {this.renderVideo()}
         <div className='сontrols-course'>
-        <div
-          onClick={this.playPause}
-          className={classType}>
-        </div>
-          <time
-            dateTime={`P${Math.round(duration * played)}S`}
-            className='time-course'>
+          <div onClick={this.playPause} className={classType}></div>
+          <time dateTime={`P${Math.round(duration * played)}S`} className='time-course'>
             {this.format(duration * played)}
           </time>
-          <input
-            type='range'
-            min={0}
-            max={1}
-            step='any'
-            value={played}
-            onMouseDown={this.onSeekMouseDown}
-            onChange={this.onSeekChange}
-            onMouseUp={this.onSeekMouseUp}
-          />
-          <time
-            dateTime={`P${Math.round(duration * (1 - played))}S`}
-            className='time-course'>
+          <input className='time-input-course' type='range' min={0} max={1} step='any' value={played} onMouseDown={this.onSeekMouseDown} onChange={this.onSeekChange} onMouseUp={this.onSeekMouseUp}/>
+          <time dateTime={`P${Math.round(duration * (1 - played))}S`} className='time-course'>
             {this.format(duration * (1 - played))}
           </time>
-          <input
-            className='volume-course'
-            type='range'
-            min={0}
-            max={1}
-            step='any'
-            value={volume}
-            onChange={this.setVolume} />
-            <div
-              onClick={this.onClickFullscreen}
-              className='fullscreen-course'>
-            </div>
+          <input className='volume-course' type='range' min={0} max={1} step='any' value={volume} onChange={this.setVolume}/>
+          <div onClick={this.onClickFullscreen} className='fullscreen-course'></div>
         </div>
       </div>
     )

@@ -3,7 +3,7 @@
   padding-top: 30px;
   margin: auto;
   width:1140px;
-  height: inherit;
+  height: 662px;
   font-family: 'MICRADI';
   font-size: 14px;
   color: #e5d800;
@@ -49,13 +49,16 @@
   float:left;
 }
 .text-home {
-  width:263px;
+  margin:0px 30px 0px 30px;
+  width:215px;
   height:140px;
   color: #7bb4d7;
-  text-align: center;
-  padding-top: 155px;
+  text-align: left;
+  padding-top: 160px;
+  line-height: 1;
 }
 .btnStart-home {
+  cursor: pointer;
   padding-top: 22px;
   text-align: center;
   margin: 10px auto;
@@ -65,20 +68,52 @@
 .fourQuaters-home{
   padding: 42px 0px 10px 0px;
 }
-.btnStart-home:active {
+.btnStart-home:hover {
+  cursor: pointer;
   padding-top: 22px;
   text-align: center;
   margin: 10px auto;
   width:257px;
   height:60px;
-  background-image: url(../../../images/btnActStartEduc.png);
+  background-image: url(../../../images/btnActStartEduc.png) !important;
 }
 .videoToParents-home{
   border-width: 0px;
-  padding:0px;
+  padding:5px 0px 0px 290px;
   margin:0px;
   width:1140px;
   height:70px;
+  background-image: url(../../../images/videoToParents.jpg);
+  font-family: 'MICRADI';
+  font-size: 12px;
+  color: #7bb4d7;
+}
+.textVideoToParents-home{
+  float: left;
+margin-top: 23px;
+margin-left: 125px;
+}
+.playVideoToParents-home {
+  padding:0px;
+  margin:0px;
+  width:60px;
+  height:60px;
+  background-image: url(../../../images/playVideoToParents.png);
+  background-color: transparent;
+  border: none;
+  float: left;
+  margin-top: 0px;
+}
+.pauseVideoToParents-home {
+  padding:0px;
+  margin:0px;
+  width:60px;
+  height:60px;
+  background-image: url(../../../images/pauseVideoToParents.png);
+  background-color: transparent;
+  border: none;
+  float: left;
+  margin-top: 0px;
 }
 .player-home{
   padding-left:5px;
@@ -123,7 +158,7 @@
   padding:3px 12px 3px 12px;
   color: white;
 }
-input[type=range] {
+input[type=range].time-input-home {
   float: left;
   margin-top:10px;
   width: 870px;

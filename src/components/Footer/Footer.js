@@ -13,16 +13,16 @@ export const Footer = ({ user }) =>
       <a className='block-footer ' href='/terms'>TERMS</a>
       <a className='block-footer ' href='/coaches'>COACHES</a>
       <a href='http://facebook.com'><p className='fb-footer '
-        style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/sm-fb.png?alt=media&token=8a4c071b-e4a9-4c73-a4e1-3a4634726231)'}}
+        style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/sm-fb.png?alt=media&token=102f2bd1-7284-47fa-bb93-1a19044d6c31)'}}
         ></p></a>
       <a href='http://viber.com'><p className='viber-footer'
-        style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/sm-viber.png?alt=media&token=92eb863e-16fa-42fe-b6ea-b7f70222b74a)'}}
+        style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/sm-twitter.png?alt=media&token=7188ed23-a878-4b5a-92d4-4f950c0ddb95)'}}
         ></p></a>
       <a href='http://twitter.com'><p className='twitter-footer'
-        style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/sm-twitter.png?alt=media&token=b6fa68a8-17c9-4a30-8f69-73d49d73f462)'}}
+        style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/sm-viber.png?alt=media&token=e7178a41-5beb-407d-94e3-e268e15e488c)'}}
         ></p></a>
       <a href='http://vk.com' ><p className='vk-footer'
-        style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/sm-vk.png?alt=media&token=111601ae-1316-429c-9e19-9293ad59f78c)'}}
+        style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/sm-vk.png?alt=media&token=9bdf350e-808c-4f02-81a8-5f9ca8bf9d7c)'}}
         ></p></a>
     </div>
   </div>

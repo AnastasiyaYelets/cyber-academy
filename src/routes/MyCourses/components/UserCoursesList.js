@@ -96,7 +96,7 @@ class UserCoursesList extends Component {
     const { courses } = this.state
     const newCourses = [].concat(courses).concat(courses)
       return newCourses.map((course, i) => (
-        <div key={i} className='frame-course-mycourses' style={{ padding: '5px', margin: '15px 10px 10px 10px',
+        <div key={i} className='frame-course-mycourses' style={{ padding: '5px', margin: '15px 6px 10px 6px',
              backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/frameLesson.jpg?alt=media&token=c44421b6-9655-476b-b373-f8ee89bdb0c8)' }}>
           <img src={course.mainPhoto} width='352px' height='150px' alt='loading' />
           <div className='caption-mycourses' style={{ padding: '5px 10px 5px 10px' }}>

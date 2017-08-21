@@ -9,7 +9,7 @@ export const Header = ({ user }) =>
   <div>
     <a href='/' title='Return to the homepage'>
     <div className='logo'
-         style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/logo.png?alt=media&token=e5cf0db3-b3ce-4a08-9e1b-2113582a6847)'}}
+         style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/logo.png?alt=media&token=338a7d4a-1e8a-4b6a-87a0-0d9e2e9353dc)'}}
     ></div>
   </a>
 </div>

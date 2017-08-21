@@ -26,7 +26,18 @@
   width:201px;
   height:60px;
   background-image: url(../../images/btn1.png);
-
+  cursor: pointer;
+}
+.navbtn1:hover {
+  font-family: 'MICRADI';
+  padding-top:20px;
+  color: #e5d800;
+  margin:0px;
+  padding-top:20px;
+  width:201px;
+  height:60px;
+  background-image: url(../../images/btnAct1.png);
+  cursor: pointer;
 }
 .navbtn2 {
   font-family: 'MICRADI';
@@ -37,8 +48,9 @@
   height:60px;
   background-image: url(../../images/btn2.png);
   float: left;
+  cursor: pointer;
 }
-.navbtn2:active {
+.navbtn2:hover {
   color: #e5d800;
   padding-top:20px;
   margin:0px;
@@ -46,6 +58,7 @@
   height:60px;
   background-image: url(../../images/btnAct2.png);
   float: left;
+  cursor: pointer;
 }
 .navbtnLogin {
   color: #e5d800;
@@ -56,8 +69,9 @@
   height:60px;
   background-image: url(../../images/btnLogin.png);
   float: left;
+  cursor: pointer;
 }
-.navbtnLogin:active {
+.navbtnLogin:hover {
   color: #e5d800;
   padding-top:20px;
   margin:0px;
@@ -65,6 +79,7 @@
   height:60px;
   background-image: url(../../images/btnActLogin.png);
   float: left;
+  cursor: pointer;
 }
 
 .navbtn4{
@@ -76,6 +91,7 @@
   width:203px;
   height:63px;
   background-image: url(../../images/btn4.png);
+  cursor: pointer;
 }
 /* The container <div> - needed to position the dropdown content */
 .dropdown {

@@ -28,12 +28,17 @@ align-items:baseline;
 .buttonBuy-course{
 	padding-top: 20px;
 	margin-left: 100px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   width:326px;
   height:64px;
   background-image: url(../../../images/buttonBuy.png);
 }
 .buttonBuy-course:hover{
+  cursor: pointer;
 	padding-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 	margin-left: 100px;
   width:326px;
   height:64px;
@@ -98,6 +103,28 @@ align-items:baseline;
   height:70px;
   background-image: url(../../../images/videoButton.jpg);
 }
+.playVideoToParents-course {
+  padding:0px;
+  margin:0px;
+  width:60px;
+  height:60px;
+  background-image: url(../../../images/playVideoToParents.png);
+  background-color: transparent;
+  border: none;
+  float: left;
+  margin-top: 0px;
+}
+.pauseVideoToParents-course {
+  padding:0px;
+  margin:0px;
+  width:60px;
+  height:60px;
+  background-image: url(../../../images/pauseVideoToParents.png);
+  background-color: transparent;
+  border: none;
+  float: left;
+  margin-top: 0px;
+}
 .сontrols-course{
   margin:auto;
   width:1125px;
@@ -111,12 +138,14 @@ align-items:baseline;
   padding:10px 10px 0px 10px;
   background-image: url(../../../images/play.png);
   float: left;
+  color: #7bb4d7;
 }
 .pause-course{
   margin:0;
   width:21px;
   height:21px;
   padding:10px;
+  color: #7bb4d7;
   background-image: url(../../../images/pause.png);
   float: left;
 }
@@ -133,15 +162,15 @@ align-items:baseline;
   padding:3px 12px 3px 12px;
   color: white;
 }
-input[type=range] {
+input[type=range].time-input-course {
   float: left;
   margin-top:10px;
   width: 850px;
   height: 3px;
   -webkit-appearance: none;
   border: 0 none;
-  background:blue;
-  color: #0069b4 ;
+  background: #7bb4d7;
+  color: #7bb4d7;
   overflow: visible;
 }
 input[type=range].volume-course{
@@ -152,8 +181,8 @@ input[type=range].volume-course{
   height: 3px;
   -webkit-appearance: none;
   border: 0 none;
-  background: #0069b4;
-  color: #0069b4;
+  background: #7bb4d7;
+  color: #7bb4d7;
   overflow: visible;
 }
 input[type=range]::-webkit-slider-thumb {
@@ -162,7 +191,7 @@ input[type=range]::-webkit-slider-thumb {
   height: 20px;
   width: 10px;
   border-radius: 3px;
-  background: blue;
+  background: #7bb4d7;
   cursor: pointer;
   // margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */

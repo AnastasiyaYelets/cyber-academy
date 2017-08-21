@@ -9,12 +9,15 @@ class VideoPlayer extends Component {
     super(props)
     this.state = {
       playing: true,
-      volume: 0.0,
+      volume: 0.4,
       played: 0,
       loaded: 0,
       duration: 0,
       playbackRate: 1.0
     }
+  }
+  componentWillReceiveProps (nextProps) {
+    this.props.stopVideo !== nextProps.stopVideo && this.playPause()
   }
   renderVideoEnded () {
     const isEnded = true
@@ -109,7 +112,7 @@ class VideoPlayer extends Component {
 
   render () {
     const { playing, volume, played, duration } = this.state
-    const classType = playing ? 'pause' : 'play'
+    const classType = playing ? 'pause-home' : 'play-home'
     return (
       <div className='player-home'>
         {this.renderVideo()}
@@ -124,6 +127,7 @@ class VideoPlayer extends Component {
             {this.format(duration * played)}
           </time>
           <input
+            className='time-input-home'
             type='range'
             min={0}
             max={1}

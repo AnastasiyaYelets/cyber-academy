@@ -7,22 +7,28 @@
   color: #e5d800;
 }
 .third1-faculties{
+  cursor: pointer;
   padding:0px;
   margin:0px;
   width:360px;
   height:584px;
+  background-image: url(../../../images/bannerCSGOblue.jpg);
 }
 .third2-faculties{
+  cursor: pointer;
   padding:0px;
   margin:0px;
   width:360px;
   height:584px;
+  background-image: url(../../../images/bannerDota2blue.jpg);
 }
 .third3-faculties{
+  cursor: pointer;
   padding:0px;
   margin:0px;
   width:360px;
   height:584px;
+  background-image: url(../../../images/bannerLoLblue.jpg);
 }
 .textFrame-faculties {
   padding-top:10px;
@@ -38,4 +44,14 @@
   margin: 0 auto;
   width:250px;
   height:64px;
+}
+.btnEnterFacult-faculties:hover {
+  cursor: pointer;
+  font-size: 12px;
+  padding-top: 22px;
+  text-align: center;
+  margin: 0 auto;
+  width:250px;
+  height:64px;
+  background-image: url(../../../images/btnEnterFacultAct.png) !important;
 }

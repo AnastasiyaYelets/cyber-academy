@@ -66,6 +66,16 @@
   width:250px;
   height:64px;
 }
+.btn-start-faculty:hover {
+  cursor: pointer;
+  bottom: 35px;
+  padding:20px 5px 0px 45px;
+  position: relative;
+  left: calc((30%-120px)/2);
+  width:247px;
+  height:64px;
+  background-image: url(../../../images/btnActStartEduc.png) !important;
+}
 .text-course-faculty{
   padding:10px 20px 5px 10px;
   color: #7bb4d7;

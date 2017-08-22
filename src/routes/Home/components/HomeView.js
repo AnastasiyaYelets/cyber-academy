@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
-import './homeView.scss'
+import './HomeView.scss'
 import Slider from 'react-slick'
 import VideoPlayer from './VideoPlayer'
 

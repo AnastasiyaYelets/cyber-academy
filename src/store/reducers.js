@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import locationReducer from './location'
 import authReducer from './reducers/auth-reducer'
+import langReducer from './reducers/lang-reducer'
 import { reducer as form } from 'redux-form'
 import { reducer as modal } from 'redux-modal'
 
@@ -8,6 +9,7 @@ export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     location: locationReducer,
     auth: authReducer,
+    language: langReducer,
     form,
     modal,
     ...asyncReducers

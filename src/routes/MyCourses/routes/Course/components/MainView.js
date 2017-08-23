@@ -314,7 +314,7 @@ class MainView extends Component {
             >
               <ul className='list-unstyled'>
                 {this.renderSectionsList()}
-                {this.renderSectionsList()}
+                {/* {this.renderSectionsList()} */}
               </ul>
             </div>
             <div className='button-lesson-name-mycourse'> {course.name}</div>

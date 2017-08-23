@@ -9,12 +9,14 @@ class HomePage extends Component {
     super(props)
     this.state = {
       siteInfoLoaded: false,
-      quaterText1: '',
-      quaterText2: '',
-      quaterText3: '',
-      quaterText4: '',
-      linkVideoToParents: '',
-      buttonText: ''
+      quaterText1Ru: '',
+      quaterText2Ru: '',
+      quaterText3Ru: '',
+      quaterText4Ru: '',
+      linkVideoToParentsRu: '',
+      buttonTextRu: '',
+      videoButtonVideoToParentsRu: '',
+      videoButtonCoverVideoRu: ''
     }
   }
 
@@ -27,18 +29,30 @@ class HomePage extends Component {
       info: [],
       infoLoaded: false
     })
-    firebase.database().ref('siteInfo/' + 'russian')
+    firebase.database().ref('siteInfo/' + 'russian/' + 'homepage')
     .once('value')
     .then(snapshot => {
       const object = snapshot.val()
       if (object !== null) {
-        const { quaterText1, quaterText2, quaterText3, quaterText4, linkVideoToParents, buttonText } = object
-        this.setState({ quaterText1,
-          quaterText2,
-          quaterText3,
-          quaterText4,
-          linkVideoToParents,
-          buttonText,
+        const {
+          quaterText1Ru,
+          quaterText2Ru,
+          quaterText3Ru,
+          quaterText4Ru,
+          linkVideoToParentsRu,
+          buttonTextRu,
+          videoButtonVideoToParentsRu,
+          videoButtonCoverVideoRu
+        } = object
+        this.setState({
+          quaterText1Ru,
+          quaterText2Ru,
+          quaterText3Ru,
+          quaterText4Ru,
+          linkVideoToParentsRu,
+          buttonTextRu,
+          videoButtonVideoToParentsRu,
+          videoButtonCoverVideoRu,
           siteInfoLoaded: true })
       } else {
         this.setState({ siteInfoLoaded: true })
@@ -48,20 +62,47 @@ class HomePage extends Component {
   }
 
   editSiteInfo () {
-    const { quaterText1, quaterText2, quaterText3, quaterText4, linkVideoToParents, buttonText } = this.state
-    console.log(quaterText1, quaterText2, quaterText3, quaterText4, linkVideoToParents, buttonText)
-    const dateEdited = Date.now()
-    firebase.database().ref('siteInfo/'+ 'russian')
+    const {
+      quaterText1Ru,
+      quaterText2Ru,
+      quaterText3Ru,
+      quaterText4Ru,
+      linkVideoToParentsRu,
+      buttonTextRu,
+      videoButtonVideoToParentsRu,
+      videoButtonCoverVideoRu
+    } = this.state
+    console.log(quaterText1Ru, quaterText2Ru, quaterText3Ru, quaterText4Ru, linkVideoToParentsRu, buttonTextRu)
+    const dateEditedRu = Date.now()
+    firebase.database().ref('siteInfo/' + 'russian/' + 'homepage')
     .update({
-      quaterText1, quaterText2, quaterText3, quaterText4, linkVideoToParents, buttonText, dateEdited })
-      .then(() => {
-        toastr.success('Your siteInfo saved!')
-        browserHistory.push(`/admin/siteInfo`)
-      })
+      quaterText1Ru,
+      quaterText2Ru,
+      quaterText3Ru,
+      quaterText4Ru,
+      linkVideoToParentsRu,
+      buttonTextRu,
+      dateEditedRu,
+      videoButtonVideoToParentsRu,
+      videoButtonCoverVideoRu
+    })
+    .then(() => {
+      toastr.success('Your siteInfo saved!')
+      browserHistory.push(`/admin/siteInfo`)
+    })
   }
 
   renderCoursesList () {
-    const { quaterText1, quaterText2, quaterText3, quaterText4, linkVideoToParents, buttonText } = this.state
+    const {
+      quaterText1Ru,
+      quaterText2Ru,
+      quaterText3Ru,
+      quaterText4Ru,
+      linkVideoToParentsRu,
+      buttonTextRu,
+      videoButtonVideoToParentsRu,
+      videoButtonCoverVideoRu
+    } = this.state
     return (
       <div className='container'>
         <div className='row'>
@@ -70,49 +111,65 @@ class HomePage extends Component {
             <div className='form-group'>
               <label className='control-label'>quaterText1</label>
               <input
-                value={quaterText1}
+                value={quaterText1Ru}
                 type='text'
-                className='form-control s' onChange={(e) => this.setState({ quaterText1: e.target.value })} />
+                className='form-control s' onChange={(e) => this.setState({ quaterText1Ru: e.target.value })} />
             </div>
 
               <div className='form-group'>
                 <label className='control-label'>quaterText2</label>
                 <input
-                  value={quaterText2}
+                  value={quaterText2Ru}
                   type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText2: e.target.value })} />
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText2Ru: e.target.value })} />
               </div>
 
             <div className='form-group'>
               <label className='control-label'>quaterText3</label>
               <input
-                value={quaterText3}
+                value={quaterText3Ru}
                 type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText3: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText3Ru: e.target.value })} />
             </div>
 
             <div className='form-group'>
               <label className='control-label'>quaterText4</label>
               <input
-                value={quaterText4}
+                value={quaterText4Ru}
                 type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText4: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText4Ru: e.target.value })} />
             </div>
 
             <div className='form-group'>
               <label className='control-label'> Video link to parents</label>
                 <input
-                  value={linkVideoToParents}
+                  value={linkVideoToParentsRu}
                   type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ linkVideoToParents: e.target.value })} />
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ linkVideoToParentsRu: e.target.value })} />
             </div>
 
             <div className='form-group'>
               <label className='control-label'>Button text</label>
                 <input
-                  value={buttonText}
+                  value={buttonTextRu}
                   type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ buttonText: e.target.value })} />
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ buttonTextRu: e.target.value })} />
+            </div>
+
+            <div className='form-group'>
+              <label className='control-label'>Video Button Video To Parents</label>
+                <input
+                  value={videoButtonVideoToParentsRu}
+                  type='text'
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ videoButtonVideoToParentsRu: e.target.value })} />
+            </div>
+
+            <div className='form-group'>
+              <label className='control-label'>Video Button Cover Video</label>
+                <input
+                  value={videoButtonCoverVideoRu}
+                  type='text'
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ videoButtonCoverVideoRu: e.target.value })} />
             </div>
           </form>
 

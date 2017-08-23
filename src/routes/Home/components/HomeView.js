@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
-import './homeView.scss'
+import './HomeView.scss'
 import Slider from 'react-slick'
 import VideoPlayer from './VideoPlayer'
+import firebase from 'firebase'
 
 class HomeView extends Component {
   constructor (props) {
@@ -10,9 +11,51 @@ class HomeView extends Component {
     this.state = {
       showVideo: false,
       transactionToChange: {},
-      stopVideo:false
+      stopVideo:false,
+      siteInfoLoaded: false,
+      quaterText1Ru: '',
+      quaterText2Ru: '',
+      quaterText3Ru: '',
+      quaterText4Ru: '',
+      linkVideoToParentsRu: '',
+      buttonTextRu: '',
+      videoButtonVideoToParentsRu: '',
+      videoButtonCoverVideoRu: ''
     }
   }
+
+  componentWillMount () {
+    firebase.database().ref('siteInfo/' + 'russian/' + 'homepage')
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        const {
+          quaterText1Ru,
+          quaterText2Ru,
+          quaterText3Ru,
+          quaterText4Ru,
+          linkVideoToParentsRu,
+          buttonTextRu,
+          videoButtonVideoToParentsRu,
+          videoButtonCoverVideoRu
+        } = object
+        this.setState({
+          quaterText1Ru,
+          quaterText2Ru,
+          quaterText3Ru,
+          quaterText4Ru,
+          linkVideoToParentsRu,
+          buttonTextRu,
+          videoButtonVideoToParentsRu,
+          videoButtonCoverVideoRu,
+          siteInfoLoaded: true })
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    })
+  }
+
   render () {
     const { showVideo, stopVideo } = this.state
     const settings = {
@@ -28,8 +71,18 @@ class HomeView extends Component {
       slidesToShow: 1,
       slidesToScroll: 1
     }
+    const {
+      quaterText1Ru,
+      quaterText2Ru,
+      quaterText3Ru,
+      quaterText4Ru,
+      linkVideoToParentsRu,
+      buttonTextRu,
+      videoButtonVideoToParentsRu,
+      videoButtonCoverVideoRu
+    } = this.state
     const classNameButtonPause = stopVideo && showVideo ? 'pauseVideoToParents-home' : 'playVideoToParents-home'
-    const videoButtonName = showVideo ? 'СВЕРНУТЬ ВИДЕО' : 'ВИДЕООБРАЩЕНИЕ К РОДИТЕЛЯМ'
+    const videoButtonName = showVideo ? videoButtonCoverVideoRu : videoButtonVideoToParentsRu
     return (
       <div className='container'>
         <div className='row'>
@@ -50,8 +103,7 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/quater1.jpg?alt=media&token=bc601b6e-1b69-4577-9516-990632295b32)'}}
                       >
                         <div className='text-home'>
-                          Изучи механизм игры и взаимодействие с командой
-                          {/* {quaterText1} */}
+                          {quaterText1Ru}
                         </div>
                     </div>
 
@@ -59,8 +111,7 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/quater2.jpg?alt=media&token=81576f1b-f2db-47a5-ac13-47800638a1ea)'}}
                       >
                       <div className='text-home'>
-                        Улучши свои навыки и контроль за игрой
-                        {/* {quaterText2} */}
+                        {quaterText2Ru}
                       </div>
                     </div>
 
@@ -68,8 +119,7 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/quater3.jpg?alt=media&token=7465059e-d328-453d-8654-c6cb877ee9cf)'}}
                       >
                       <div className='text-home'>
-                        Изучи продвинутые техники профессиональных спортсменов и научись их применять
-                        {/* {quaterText3} */}
+                        {quaterText3Ru}
                       </div>
                     </div>
 
@@ -77,8 +127,7 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/quater4.jpg?alt=media&token=8b03c259-44ee-44cc-ab5f-f3bee55c99d1)'}}
                       >
                       <div className='text-home'>
-                        Каждый ученик получает право бесплатно попасть на турнир с 2000$ призовых
-                        {/* {quaterText4} */}
+                        {quaterText4Ru}
                       </div>
                     </div>
                   </div>
@@ -88,16 +137,14 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/btnStartEduc.png?alt=media&token=3699ba5c-b048-4656-914f-5b1c5b9afcb7)'}}
                       onClick={() => { browserHistory.push({ pathname: '/faculties' }) }}
                       >
-                        Начать обучение
-                        {/* {buttonText} */}
+                        {buttonTextRu}
                     </div>
                   </div>
                 </div>}
                 {!!showVideo && <div style={{ marginTop: '30px' }}>
                   <div>
                     <VideoPlayer
-                      url={`https://www.youtube.com/watch?v=fvySzEH85hk`}
-                      // url={`linkVideoToParents`}
+                      url={linkVideoToParentsRu}
                       stopVideo={stopVideo && showVideo}
                     />
                   </div>

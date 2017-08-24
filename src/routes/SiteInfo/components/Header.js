@@ -172,7 +172,7 @@ class Header extends Component {
     return (
       <div className='container'>
         <div className='row'>
-          <form className='form-horizontal col-md-4'>
+          <form className='form-horizontal col-md-6'>
 
             <div className='form-group'>
               <h2>Russian</h2>
@@ -227,7 +227,7 @@ class Header extends Component {
             </div>
           </form>
 
-          <form className='form-horizontal col-md-4 col-md-offset-4'>
+          <form className='form-horizontal col-md-6'>
 
             <div className='form-group'>
               <h2>English</h2>
@@ -286,7 +286,7 @@ class Header extends Component {
             <button
               type='button'
               className='btn btn-success lg'
-              style={{ width:'100%', margin: '15px' }}
+              style={{ width:'95%' }}
               onClick={() => this.editSiteInfo()}
               >Save changes
             </button>

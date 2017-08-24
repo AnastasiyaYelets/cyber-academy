@@ -113,16 +113,16 @@ class HomePage extends Component {
               <input
                 value={quaterText1Ru}
                 type='text'
-                className='form-control s' onChange={(e) => this.setState({ quaterText1Ru: e.target.value })} />
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText1Ru: e.target.value })} />
             </div>
 
-              <div className='form-group'>
-                <label className='control-label'>quaterText2</label>
-                <input
-                  value={quaterText2Ru}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText2Ru: e.target.value })} />
-              </div>
+            <div className='form-group'>
+              <label className='control-label'>quaterText2</label>
+              <input
+                value={quaterText2Ru}
+                type='text'
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText2Ru: e.target.value })} />
+            </div>
 
             <div className='form-group'>
               <label className='control-label'>quaterText3</label>

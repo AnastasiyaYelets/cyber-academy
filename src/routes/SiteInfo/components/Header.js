@@ -14,15 +14,22 @@ class Header extends Component {
       forumRu: '',
       myCoursesRu: '',
       statisticsRu: '',
-      logOutRu: ''
+      logOutRu: '',
+      facultiesEng: '',
+      tournamentsEng: '',
+      forumEng: '',
+      myCoursesEng: '',
+      statisticsEng: '',
+      logOutEng: ''
     }
   }
 
   componentWillMount () {
-    this.fetchSiteInfo()
+    this.fetchSiteInfoRu()
+    this.fetchSiteInfoEng()
   }
 
-  fetchSiteInfo () {
+  fetchSiteInfoRu () {
     this.setState({
       info: [],
       infoLoaded: false
@@ -55,7 +62,45 @@ class Header extends Component {
   )
   }
 
+  fetchSiteInfoEng () {
+    this.setState({
+      info: [],
+      infoLoaded: false
+    })
+    firebase.database().ref('siteInfo/' + 'header/' + 'english')
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        const {
+          facultiesEng,
+          tournamentsEng,
+          forumEng,
+          myCoursesEng,
+          statisticsEng,
+          logOutEng
+        } = object
+        this.setState({
+          facultiesEng,
+          tournamentsEng,
+          forumEng,
+          myCoursesEng,
+          statisticsEng,
+          logOutEng,
+          siteInfoLoaded: true })
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    }
+  )
+  }
+
   editSiteInfo () {
+    this.editSiteInfoRu()
+    this.editSiteInfoEng()
+  }
+
+  editSiteInfoRu () {
     const {
       facultiesRu,
       tournamentsRu,
@@ -82,6 +127,33 @@ class Header extends Component {
     })
   }
 
+  editSiteInfoEng () {
+    const {
+      facultiesEng,
+      tournamentsEng,
+      forumEng,
+      myCoursesEng,
+      statisticsEng,
+      logOutEng
+    } = this.state
+    console.log(facultiesEng, tournamentsEng, forumEng, myCoursesEng, statisticsEng, logOutEng)
+    const dateEdited = Date.now()
+    firebase.database().ref('siteInfo/' + 'header/' + 'english')
+    .update({
+      facultiesEng,
+      tournamentsEng,
+      forumEng,
+      myCoursesEng,
+      statisticsEng,
+      logOutEng,
+      dateEdited
+    })
+    .then(() => {
+      toastr.success('Your siteInfo saved!')
+      browserHistory.push(`/admin/siteInfo`)
+    })
+  }
+
   renderCoursesList () {
     const {
       facultiesRu,
@@ -89,12 +161,22 @@ class Header extends Component {
       forumRu,
       myCoursesRu,
       statisticsRu,
-      logOutRu
+      logOutRu,
+      facultiesEng,
+      tournamentsEng,
+      forumEng,
+      myCoursesEng,
+      statisticsEng,
+      logOutEng
     } = this.state
     return (
       <div className='container'>
         <div className='row'>
-          <form className='form-horizontal'>
+          <form className='form-horizontal col-md-4'>
+
+            <div className='form-group'>
+              <h2>Russian</h2>
+            </div>
 
             <div className='form-group'>
               <label className='control-label'>Faculties</label>
@@ -142,6 +224,61 @@ class Header extends Component {
                   value={logOutRu}
                   type='text'
                   className='form-control form-control-siteinfo' onChange={(e) => this.setState({ logOutRu: e.target.value })} />
+            </div>
+          </form>
+
+          <form className='form-horizontal col-md-4 col-md-offset-4'>
+
+            <div className='form-group'>
+              <h2>English</h2>
+            </div>
+
+            <div className='form-group'>
+              <label className='control-label'>Faculties</label>
+              <input
+                value={facultiesEng}
+                type='text'
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ facultiesEng: e.target.value })} />
+            </div>
+
+            <div className='form-group'>
+              <label className='control-label'>Tournaments</label>
+              <input
+                value={tournamentsEng}
+                type='text'
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ tournamentsEng: e.target.value })} />
+            </div>
+
+            <div className='form-group'>
+              <label className='control-label'>Forum</label>
+              <input
+                value={forumEng}
+                type='text'
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ forumEng: e.target.value })} />
+            </div>
+
+            <div className='form-group'>
+              <label className='control-label'>My Courses</label>
+              <input
+                value={myCoursesEng}
+                type='text'
+                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ myCoursesEng: e.target.value })} />
+            </div>
+
+            <div className='form-group'>
+              <label className='control-label'>Statistics</label>
+                <input
+                  value={statisticsEng}
+                  type='text'
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ statisticsEng: e.target.value })} />
+            </div>
+
+            <div className='form-group'>
+              <label className='control-label'>Log Out</label>
+                <input
+                  value={logOutEng}
+                  type='text'
+                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ logOutEng: e.target.value })} />
             </div>
           </form>
 

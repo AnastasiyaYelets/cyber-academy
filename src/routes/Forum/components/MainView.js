@@ -11,7 +11,7 @@ class MainView extends Component {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.fetchItems()
   }
 

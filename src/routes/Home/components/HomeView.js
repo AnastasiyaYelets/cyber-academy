@@ -58,6 +58,7 @@ class HomeView extends Component {
 
   render () {
     const { showVideo, stopVideo } = this.state
+    console.log(this.props)
     const settings = {
       accessibility: false,
       autoplay: true,

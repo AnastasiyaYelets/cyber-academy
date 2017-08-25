@@ -3,6 +3,7 @@ import { IndexLink, Link, browserHistory } from 'react-router'
 import './Footer.scss'
 
 export const Footer = ({ user }) =>
+<div className='container'>
 <div className='row'>
   <div className='footer-block-footer '>
     <div className='container d-flex align-items-start'>
@@ -26,6 +27,7 @@ export const Footer = ({ user }) =>
         ></p></a>
     </div>
   </div>
+</div>
 </div>
 Footer.propTypes = {
   user: PropTypes.object

@@ -42,7 +42,7 @@ class MainView extends Component {
   }
   countVoises(count) {
     if (count % 10 === 1) {
-      return ('голос')
+      return (' голос')
     } else {
       const isACount = (count % 10 === 2 || count % 10 === 3 || count % 10 === 4)
       const voises = isACount

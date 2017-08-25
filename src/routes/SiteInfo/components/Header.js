@@ -9,52 +9,27 @@ class Header extends Component {
     super(props)
     this.state = {
       siteInfoLoaded: false,
-      facultiesRu: '',
-      tournamentsRu: '',
-      forumRu: '',
-      myCoursesRu: '',
-      statisticsRu: '',
-      logOutRu: '',
-      facultiesEng: '',
-      tournamentsEng: '',
-      forumEng: '',
-      myCoursesEng: '',
-      statisticsEng: '',
-      logOutEng: ''
+      words: ['faculties', 'tournaments', 'forum', 'myCourses', 'statistics', 'logOut'],
+      wordsEng: {},
+      wordsRu: {}
     }
   }
 
   componentWillMount () {
-    this.fetchSiteInfoRu()
-    this.fetchSiteInfoEng()
+    this.fetchSiteInfo('header')
   }
 
-  fetchSiteInfoRu () {
+  fetchSiteInfo (page) {
     this.setState({
-      info: [],
       infoLoaded: false
     })
-    firebase.database().ref('siteInfo/' + 'header/' + 'russian')
+    firebase.database().ref('siteInfo/' + `${page}/`)
     .once('value')
     .then(snapshot => {
       const object = snapshot.val()
       if (object !== null) {
-        const {
-          facultiesRu,
-          tournamentsRu,
-          forumRu,
-          myCoursesRu,
-          statisticsRu,
-          logOutRu
-        } = object
-        this.setState({
-          facultiesRu,
-          tournamentsRu,
-          forumRu,
-          myCoursesRu,
-          statisticsRu,
-          logOutRu,
-          siteInfoLoaded: true })
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
       } else {
         this.setState({ siteInfoLoaded: true })
       }
@@ -62,64 +37,30 @@ class Header extends Component {
   )
   }
 
-  fetchSiteInfoEng () {
-    this.setState({
-      info: [],
-      infoLoaded: false
-    })
-    firebase.database().ref('siteInfo/' + 'header/' + 'english')
-    .once('value')
-    .then(snapshot => {
-      const object = snapshot.val()
-      if (object !== null) {
-        const {
-          facultiesEng,
-          tournamentsEng,
-          forumEng,
-          myCoursesEng,
-          statisticsEng,
-          logOutEng
-        } = object
-        this.setState({
-          facultiesEng,
-          tournamentsEng,
-          forumEng,
-          myCoursesEng,
-          statisticsEng,
-          logOutEng,
-          siteInfoLoaded: true })
-      } else {
-        this.setState({ siteInfoLoaded: true })
-      }
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
     }
-  )
   }
 
   editSiteInfo () {
-    this.editSiteInfoRu()
-    this.editSiteInfoEng()
-  }
-
-  editSiteInfoRu () {
-    const {
-      facultiesRu,
-      tournamentsRu,
-      forumRu,
-      myCoursesRu,
-      statisticsRu,
-      logOutRu
-    } = this.state
-    console.log(facultiesRu, tournamentsRu, forumRu, myCoursesRu, statisticsRu, logOutRu)
-    const dateEdited = Date.now()
-    firebase.database().ref('siteInfo/' + 'header/' + 'russian')
+    const { wordsEng, wordsRu } = this.state
+    firebase.database().ref('siteInfo/' + 'header/')
     .update({
-      facultiesRu,
-      tournamentsRu,
-      forumRu,
-      myCoursesRu,
-      statisticsRu,
-      logOutRu,
-      dateEdited
+      english: wordsEng,
+      russian: wordsRu
     })
     .then(() => {
       toastr.success('Your siteInfo saved!')
@@ -127,166 +68,59 @@ class Header extends Component {
     })
   }
 
-  editSiteInfoEng () {
-    const {
-      facultiesEng,
-      tournamentsEng,
-      forumEng,
-      myCoursesEng,
-      statisticsEng,
-      logOutEng
-    } = this.state
-    console.log(facultiesEng, tournamentsEng, forumEng, myCoursesEng, statisticsEng, logOutEng)
-    const dateEdited = Date.now()
-    firebase.database().ref('siteInfo/' + 'header/' + 'english')
-    .update({
-      facultiesEng,
-      tournamentsEng,
-      forumEng,
-      myCoursesEng,
-      statisticsEng,
-      logOutEng,
-      dateEdited
-    })
-    .then(() => {
-      toastr.success('Your siteInfo saved!')
-      browserHistory.push(`/admin/siteInfo`)
-    })
+  renderFields (suff) {
+    const { wordsEng, wordsRu } = this.state
+    const arrayFields = suff === 'Ru' ? wordsRu : wordsEng
+    return (
+      <div>
+        {Object.keys(arrayFields).map((item, i) =>
+          <div className='form-group' key={i}>
+            <label className='control-label'>{item}</label>
+            <input
+              value={arrayFields[`${item}`]}
+              type='text'
+              className='form-control form-control-siteinfo'
+              onChange={(e) => {
+                const newArray = arrayFields
+                newArray[`${item}`] = e.target.value
+                if (suff === 'Ru') {
+                  this.setState({ wordsRu: newArray })
+                } else if (suff === 'Eng') {
+                  this.setState({ wordsEng: newArray })
+                }
+              }
+            }
+            />
+          </div>
+          )
+        }
+      </div>
+    )
   }
 
   renderCoursesList () {
-    const {
-      facultiesRu,
-      tournamentsRu,
-      forumRu,
-      myCoursesRu,
-      statisticsRu,
-      logOutRu,
-      facultiesEng,
-      tournamentsEng,
-      forumEng,
-      myCoursesEng,
-      statisticsEng,
-      logOutEng
-    } = this.state
     return (
       <div className='container'>
         <div className='row'>
           <form className='form-horizontal col-md-6'>
-
             <div className='form-group'>
               <h2>Russian</h2>
             </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Faculties</label>
-              <input
-                value={facultiesRu}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ facultiesRu: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Tournaments</label>
-              <input
-                value={tournamentsRu}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ tournamentsRu: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Forum</label>
-              <input
-                value={forumRu}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ forumRu: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>My Courses</label>
-              <input
-                value={myCoursesRu}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ myCoursesRu: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Statistics</label>
-                <input
-                  value={statisticsRu}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ statisticsRu: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Log Out</label>
-                <input
-                  value={logOutRu}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ logOutRu: e.target.value })} />
-            </div>
+            {this.renderFields('Ru')}
           </form>
 
           <form className='form-horizontal col-md-6'>
-
             <div className='form-group'>
               <h2>English</h2>
             </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Faculties</label>
-              <input
-                value={facultiesEng}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ facultiesEng: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Tournaments</label>
-              <input
-                value={tournamentsEng}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ tournamentsEng: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Forum</label>
-              <input
-                value={forumEng}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ forumEng: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>My Courses</label>
-              <input
-                value={myCoursesEng}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ myCoursesEng: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Statistics</label>
-                <input
-                  value={statisticsEng}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ statisticsEng: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Log Out</label>
-                <input
-                  value={logOutEng}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ logOutEng: e.target.value })} />
-            </div>
+            {this.renderFields('Eng')}
           </form>
 
           <div className='col-xs-12 col-md-12'>
             <button
               type='button'
               className='btn btn-success lg'
-              style={{ width:'95%' }}
+              style={{ width:'30%' }}
               onClick={() => this.editSiteInfo()}
               >Save changes
             </button>

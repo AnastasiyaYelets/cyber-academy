@@ -4,6 +4,7 @@ import Faculties from './Faculties'
 import Faculty from './Faculty'
 import Course from './Course'
 import Footer from './Footer'
+import Header from './Header'
 import { Link } from 'react-router'
 
 const MainView = (props) => {
@@ -25,6 +26,10 @@ const MainView = (props) => {
           content = <Footer
             params={props.params} />
           break
+          case 'header':
+            content = <Header
+              params={props.params} />
+            break
     default:
       content = <HomePage />
   }
@@ -39,6 +44,8 @@ const MainView = (props) => {
       <Link to='/admin/siteInfo/course' activeClassName='route--active'>Course</Link>
       {' · '}
       <Link to='/admin/siteInfo/footer' activeClassName='route--active'>Footer</Link>
+      {' · '}
+      <Link to='/admin/siteInfo/header' activeClassName='route--active'>Header</Link>
       {content}
     </div>
   )

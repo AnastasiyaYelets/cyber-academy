@@ -10,14 +10,14 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
 
-      const MainView = require('./components/MainView').default
+      const MainViewContainer = require('./containers/MainViewContainer').default
       // const reducer = require('./modules/counter').default
 
       /*  Add the reducer to the store on key 'counter'  */
       // injectReducer(store, { key: 'counter', reducer })
 
       /*  Return getComponent   */
-      cb(null, MainView)
+      cb(null, MainViewContainer)
 
     /* Webpack named bundle   */
   }, 'faculties')

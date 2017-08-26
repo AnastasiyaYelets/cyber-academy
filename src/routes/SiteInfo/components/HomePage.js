@@ -9,51 +9,36 @@ class HomePage extends Component {
     super(props)
     this.state = {
       siteInfoLoaded: false,
-      quaterText1Ru: '',
-      quaterText2Ru: '',
-      quaterText3Ru: '',
-      quaterText4Ru: '',
-      linkVideoToParentsRu: '',
-      buttonTextRu: '',
-      videoButtonVideoToParentsRu: '',
-      videoButtonCoverVideoRu: ''
+      words: [
+        'quaterText1',
+        'quaterText2',
+        'quaterText3',
+        'quaterText4',
+        'linkVideoToParents',
+        'buttonText',
+        'videoButtonVideoToParents',
+        'videoButtonCoverVideo'
+      ],
+      wordsEng: {},
+      wordsRu: {}
     }
   }
 
   componentWillMount () {
-    this.fetchSiteInfo()
+    this.fetchSiteInfo('homepage')
   }
 
-  fetchSiteInfo () {
+  fetchSiteInfo (page) {
     this.setState({
-      info: [],
       infoLoaded: false
     })
-    firebase.database().ref('siteInfo/' + 'russian/' + 'homepage')
+    firebase.database().ref('siteInfo/' + `${page}/`)
     .once('value')
     .then(snapshot => {
       const object = snapshot.val()
       if (object !== null) {
-        const {
-          quaterText1Ru,
-          quaterText2Ru,
-          quaterText3Ru,
-          quaterText4Ru,
-          linkVideoToParentsRu,
-          buttonTextRu,
-          videoButtonVideoToParentsRu,
-          videoButtonCoverVideoRu
-        } = object
-        this.setState({
-          quaterText1Ru,
-          quaterText2Ru,
-          quaterText3Ru,
-          quaterText4Ru,
-          linkVideoToParentsRu,
-          buttonTextRu,
-          videoButtonVideoToParentsRu,
-          videoButtonCoverVideoRu,
-          siteInfoLoaded: true })
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
       } else {
         this.setState({ siteInfoLoaded: true })
       }
@@ -61,30 +46,30 @@ class HomePage extends Component {
   )
   }
 
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
   editSiteInfo () {
-    const {
-      quaterText1Ru,
-      quaterText2Ru,
-      quaterText3Ru,
-      quaterText4Ru,
-      linkVideoToParentsRu,
-      buttonTextRu,
-      videoButtonVideoToParentsRu,
-      videoButtonCoverVideoRu
-    } = this.state
-    console.log(quaterText1Ru, quaterText2Ru, quaterText3Ru, quaterText4Ru, linkVideoToParentsRu, buttonTextRu)
-    const dateEditedRu = Date.now()
-    firebase.database().ref('siteInfo/' + 'russian/' + 'homepage')
+    const { wordsEng, wordsRu } = this.state
+    firebase.database().ref('siteInfo/' + 'homepage/')
     .update({
-      quaterText1Ru,
-      quaterText2Ru,
-      quaterText3Ru,
-      quaterText4Ru,
-      linkVideoToParentsRu,
-      buttonTextRu,
-      dateEditedRu,
-      videoButtonVideoToParentsRu,
-      videoButtonCoverVideoRu
+      english: wordsEng,
+      russian: wordsRu
     })
     .then(() => {
       toastr.success('Your siteInfo saved!')
@@ -92,92 +77,59 @@ class HomePage extends Component {
     })
   }
 
+  renderFields (suff) {
+    const { wordsEng, wordsRu } = this.state
+    const arrayFields = suff === 'Ru' ? wordsRu : wordsEng
+    return (
+      <div>
+        {Object.keys(arrayFields).map((item, i) =>
+          <div className='form-group' key={i}>
+            <label className='control-label'>{item}</label>
+            <input
+              value={arrayFields[`${item}`]}
+              type='text'
+              className='form-control form-control-siteinfo'
+              onChange={(e) => {
+                const newArray = arrayFields
+                newArray[`${item}`] = e.target.value
+                if (suff === 'Ru') {
+                  this.setState({ wordsRu: newArray })
+                } else if (suff === 'Eng') {
+                  this.setState({ wordsEng: newArray })
+                }
+              }
+            }
+            />
+          </div>
+          )
+        }
+      </div>
+    )
+  }
+
   renderCoursesList () {
-    const {
-      quaterText1Ru,
-      quaterText2Ru,
-      quaterText3Ru,
-      quaterText4Ru,
-      linkVideoToParentsRu,
-      buttonTextRu,
-      videoButtonVideoToParentsRu,
-      videoButtonCoverVideoRu
-    } = this.state
     return (
       <div className='container'>
         <div className='row'>
-          <form className='form-horizontal'>
-
+          <form className='form-horizontal col-md-6'>
             <div className='form-group'>
-              <label className='control-label'>quaterText1</label>
-              <input
-                value={quaterText1Ru}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText1Ru: e.target.value })} />
+              <h2>Russian</h2>
             </div>
+            {this.renderFields('Ru')}
+          </form>
 
+          <form className='form-horizontal col-md-6'>
             <div className='form-group'>
-              <label className='control-label'>quaterText2</label>
-              <input
-                value={quaterText2Ru}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText2Ru: e.target.value })} />
+              <h2>English</h2>
             </div>
-
-            <div className='form-group'>
-              <label className='control-label'>quaterText3</label>
-              <input
-                value={quaterText3Ru}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText3Ru: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>quaterText4</label>
-              <input
-                value={quaterText4Ru}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ quaterText4Ru: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'> Video link to parents</label>
-                <input
-                  value={linkVideoToParentsRu}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ linkVideoToParentsRu: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Button text</label>
-                <input
-                  value={buttonTextRu}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ buttonTextRu: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Video Button Video To Parents</label>
-                <input
-                  value={videoButtonVideoToParentsRu}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ videoButtonVideoToParentsRu: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>Video Button Cover Video</label>
-                <input
-                  value={videoButtonCoverVideoRu}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ videoButtonCoverVideoRu: e.target.value })} />
-            </div>
+            {this.renderFields('Eng')}
           </form>
 
           <div className='col-xs-12 col-md-12'>
             <button
               type='button'
               className='btn btn-success lg'
-              style={{ width:'100%', margin: '15px' }}
+              style={{ width:'30%' }}
               onClick={() => this.editSiteInfo()}
               >Save changes
             </button>
@@ -186,6 +138,7 @@ class HomePage extends Component {
       </div>
     )
   }
+
   render () {
     return (
       <div className='container'>

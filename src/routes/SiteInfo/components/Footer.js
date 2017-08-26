@@ -4,47 +4,32 @@ import firebase from 'firebase'
 import toastr from 'toastr'
 import './siteInfo.scss'
 
-class Faculties extends Component {
+class Footer extends Component {
   constructor (props) {
     super(props)
     this.state = {
       siteInfoLoaded: false,
-      about:'',
-      becomeACoach:'',
-      faq:'',
-      support:'',
-      terms:'',
-      coaches:''
+      words: ['about', 'becomeACoach', 'support', 'terms', 'coaches', 'vipStandartAccount', 'vipVipAccount'],
+      wordsEng: {},
+      wordsRu: {}
     }
   }
 
   componentWillMount () {
-    this.fetchSiteInfo()
+    this.fetchSiteInfo('footer')
   }
 
-  fetchSiteInfo () {
+  fetchSiteInfo (page) {
     this.setState({
       infoLoaded: false
     })
-    firebase.database().ref('siteInfo/' + 'russian')
+    firebase.database().ref('siteInfo/' + `${page}/`)
     .once('value')
     .then(snapshot => {
       const object = snapshot.val()
       if (object !== null) {
-        const { about,
-                becomeACoach,
-                faq,
-                support,
-                terms,
-                coaches } = object
-        this.setState({
-          about,
-          becomeACoach,
-          faq,
-          support,
-          terms,
-          coaches,
-          siteInfoLoaded: true })
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
       } else {
         this.setState({ siteInfoLoaded: true })
       }
@@ -52,94 +37,90 @@ class Faculties extends Component {
   )
   }
 
-  editSiteInfo () {
-    const { about,
-      becomeACoach,
-      faq,
-      support,
-      terms,
-      coaches } = this.state
+  saveInfo (language, suff, object) {
+    const { words } = this.state
 
-    firebase.database().ref('siteInfo/' + 'russian')
-    .update({
-      about,
-      becomeACoach,
-      faq,
-      support,
-      terms,
-      coaches })
-      .then(() => {
-        toastr.success('Your siteInfo saved!')
-        browserHistory.push(`/admin/siteInfo`)
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
       })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  editSiteInfo () {
+    const { wordsEng, wordsRu } = this.state
+    firebase.database().ref('siteInfo/' + 'footer/')
+    .update({
+      english: wordsEng,
+      russian: wordsRu
+    })
+    .then(() => {
+      toastr.success('Your siteInfo saved!')
+      browserHistory.push(`/admin/siteInfo`)
+    })
+  }
+
+  renderFields (suff) {
+    const { wordsEng, wordsRu } = this.state
+    const arrayFields = suff === 'Ru' ? wordsRu : wordsEng
+    return (
+      <div>
+        {Object.keys(arrayFields).map((item, i) =>
+          <div className='form-group' key={i}>
+            <label className='control-label'>{item}</label>
+            <input
+              value={arrayFields[`${item}`]}
+              type='text'
+              className='form-control form-control-siteinfo'
+              onChange={(e) => {
+                const newArray = arrayFields
+                newArray[`${item}`] = e.target.value
+                if (suff === 'Ru') {
+                  this.setState({ wordsRu: newArray })
+                } else if (suff === 'Eng') {
+                  this.setState({ wordsEng: newArray })
+                }
+              }
+            }
+            />
+          </div>
+          )
+        }
+      </div>
+    )
   }
 
   renderCoursesList () {
-    const { about,
-      becomeACoach,
-      faq,
-      support,
-      terms,
-      coaches } = this.state
     return (
       <div className='container'>
         <div className='row'>
-          <form className='form-horizontal'>
-
+          <form className='form-horizontal col-md-6'>
             <div className='form-group'>
-              <label className='control-label'>about</label>
-              <input
-                value={about}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ about: e.target.value })} />
+              <h2>Russian</h2>
             </div>
+            {this.renderFields('Ru')}
+          </form>
 
+          <form className='form-horizontal col-md-6'>
             <div className='form-group'>
-              <label className='control-label'>becomeACoach</label>
-              <input
-                value={becomeACoach}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ becomeACoach: e.target.value })} />
+              <h2>English</h2>
             </div>
-
-            <div className='form-group'>
-              <label className='control-label'>faq</label>
-              <input
-                value={faq}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ faq: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>support</label>
-              <input
-                value={support}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ support: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>terms</label>
-              <input
-                value={terms}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ terms: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>coaches</label>
-              <input
-                value={coaches}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ coaches: e.target.value })} />
-            </div>
+            {this.renderFields('Eng')}
           </form>
 
           <div className='col-xs-12 col-md-12'>
             <button
               type='button'
               className='btn btn-success lg'
-              style={{ width:'100%', margin: '15px' }}
+              style={{ width:'30%' }}
               onClick={() => this.editSiteInfo()}
               >Save changes
             </button>
@@ -148,7 +129,6 @@ class Faculties extends Component {
       </div>
     )
   }
-
   render () {
     return (
       <div className='container'>
@@ -164,4 +144,4 @@ class Faculties extends Component {
   }
 }
 
-export default Faculties
+export default Footer

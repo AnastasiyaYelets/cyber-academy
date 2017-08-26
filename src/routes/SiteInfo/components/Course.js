@@ -9,25 +9,27 @@ class Course extends Component {
     super(props)
     this.state = {
       siteInfoLoaded: false,
-      duration:''
+      words: ['duration'],
+      wordsEng: {},
+      wordsRu: {}
     }
   }
 
   componentWillMount () {
-    this.fetchSiteInfo()
+    this.fetchSiteInfo('course')
   }
 
-  fetchSiteInfo () {
+  fetchSiteInfo (page) {
     this.setState({
       infoLoaded: false
     })
-    firebase.database().ref('siteInfo/' + 'russian')
+    firebase.database().ref('siteInfo/' + `${page}/`)
     .once('value')
     .then(snapshot => {
       const object = snapshot.val()
       if (object !== null) {
-        const { duration } = object
-        this.setState({ duration, siteInfoLoaded: true })
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
       } else {
         this.setState({ siteInfoLoaded: true })
       }
@@ -35,38 +37,90 @@ class Course extends Component {
   )
   }
 
-  editSiteInfo () {
-    const { duration } = this.state
+  saveInfo (language, suff, object) {
+    const { words } = this.state
 
-    firebase.database().ref('siteInfo/' + 'russian')
-    .update({ duration })
-      .then(() => {
-        toastr.success('Your siteInfo saved!')
-        browserHistory.push(`/admin/siteInfo`)
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
       })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  editSiteInfo () {
+    const { wordsEng, wordsRu } = this.state
+    firebase.database().ref('siteInfo/' + 'course/')
+    .update({
+      english: wordsEng,
+      russian: wordsRu
+    })
+    .then(() => {
+      toastr.success('Your siteInfo saved!')
+      browserHistory.push(`/admin/siteInfo`)
+    })
+  }
+
+  renderFields (suff) {
+    const { wordsEng, wordsRu } = this.state
+    const arrayFields = suff === 'Ru' ? wordsRu : wordsEng
+    return (
+      <div>
+        {Object.keys(arrayFields).map((item, i) =>
+          <div className='form-group' key={i}>
+            <label className='control-label'>{item}</label>
+            <input
+              value={arrayFields[`${item}`]}
+              type='text'
+              className='form-control form-control-siteinfo'
+              onChange={(e) => {
+                const newArray = arrayFields
+                newArray[`${item}`] = e.target.value
+                if (suff === 'Ru') {
+                  this.setState({ wordsRu: newArray })
+                } else if (suff === 'Eng') {
+                  this.setState({ wordsEng: newArray })
+                }
+              }
+            }
+            />
+          </div>
+          )
+        }
+      </div>
+    )
   }
 
   renderCoursesList () {
-    const { duration } = this.state
     return (
       <div className='container'>
         <div className='row'>
-          <form className='form-horizontal'>
-
+          <form className='form-horizontal col-md-6'>
             <div className='form-group'>
-              <label className='control-label'>duration</label>
-              <input
-                value={duration}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ duration: e.target.value })} />
+              <h2>Russian</h2>
             </div>
+            {this.renderFields('Ru')}
+          </form>
+
+          <form className='form-horizontal col-md-6'>
+            <div className='form-group'>
+              <h2>English</h2>
+            </div>
+            {this.renderFields('Eng')}
           </form>
 
           <div className='col-xs-12 col-md-12'>
             <button
               type='button'
               className='btn btn-success lg'
-              style={{ width:'100%', margin: '15px' }}
+              style={{ width:'30%' }}
               onClick={() => this.editSiteInfo()}
               >Save changes
             </button>
@@ -75,7 +129,6 @@ class Course extends Component {
       </div>
     )
   }
-
   render () {
     return (
       <div className='container'>
@@ -89,6 +142,6 @@ class Course extends Component {
       </div>
     )
   }
-}
+  }
 
 export default Course

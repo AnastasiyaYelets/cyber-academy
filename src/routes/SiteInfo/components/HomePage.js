@@ -138,7 +138,6 @@ class HomePage extends Component {
       </div>
     )
   }
-
   render () {
     return (
       <div className='container'>

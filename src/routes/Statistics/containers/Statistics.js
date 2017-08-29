@@ -62,7 +62,7 @@ class Statistics extends Component {
       console.log(data.length, set, Date.now())
       if (data.length !== 0) {
       data[data.length - 1].dayValue = data[data.length - 1].value
-    } 
+    }
       console.log(data, set, Date.now())
       return data
     } else {
@@ -222,6 +222,12 @@ class Statistics extends Component {
     return (
       <div>
         {this.renderData()}
+        <div>  </div>
+              <div>  </div>
+                    <div>  </div>
+                          <div>  </div>
+                                <div>  </div>
+                                      <div>  </div>
       </div>
     )
   }

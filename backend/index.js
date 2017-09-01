@@ -83,11 +83,84 @@ function generateToken (steamId) {
 }
 
 var job = new CronJob({
-  cronTime: '00 11 * * * 0-6',
+  cronTime: '00 54 * * * 0-6',
   onTick: function () {
     var time = Date.now()
     console.log('hello 31', time)
+    admin.database().ref('users/76561198410752203/').update({ statistics:
+      { chartStatistic : { kda: { field: 'kda',
+      name: 'KDA (kill, death, assists)',
+      values: [
+        { date:1499165762407, value:6, n: 453},
+        { date:1499175762407, value:2, n: 454},
+        { date:1499195762407, value:7, n: 455},
+        { date:1499205762407, value:4, n: 456},
 
+        { date:1499285762407, value:17, n: 457},
+        { date:1499285762407, value:6, n: 458},
+        { date:1499295762407, value:2, n: 459},
+        { date:1499295762407, value:7, n: 460},
+
+        { date:1499335762407, value:4, n: 461},
+        { date:1499345762407, value:17, n: 462},
+        { date:1499355762407, value:6, n: 463},
+
+        { date:1499335762407, value:4, n: 464},
+        { date:1499345762407, value:17, n: 465},
+        { date:1499355762407, value:6, n: 466},
+        { date:1499365762407, value:2, n: 467},
+
+        { date:1499375762407, value:7, n: 468},
+        { date:1499575762407, value:4, n: 469},
+        { date:1499875762407, value:17, n: 470},
+
+        { date:1500384125882, value:7, n: 471},
+        { date:1500384225882, value:4, n: 472},
+        { date:1500385225882, value:17, n: 473},
+
+        { date:1500491682932, value:7, n: 474},
+        { date:1500791682932, value:19, n: 475},
+        { date:1501091682932, value:5, n: 476},
+        { date:1501591682932, value:12, n: 477},
+
+        { date:1501591682932, value:4, n: 478},
+        { date:1501891682932, value:5, n: 479},
+        { date:1502192752932, value:16, n: 480},
+        { date:1502193782932, value:7, n: 481},
+
+        { date:1502591682932, value:4, n: 482},
+        { date:1502691682932, value:5, n: 483},
+        { date:1502792752932, value:16, n: 484},
+        { date:1502893782932, value:27, n: 485},
+        { date:1502952752932, value:16, n: 484},
+        { date:1502973782932, value:7, n: 485},
+
+        { date:1503091682932, value:4, n: 486},
+        { date:1503191682932, value:5, n: 487},
+        { date:1503292752932, value:16, n: 488},
+        { date:1503353782932, value:27, n: 489},
+        { date:1503362752932, value:16, n: 490},
+        { date:1503393782932, value:27, n: 491},
+        { date:1503552752932, value:16, n: 492},
+        { date:1503674711449, value:14, n: 496}
+      ]
+    }
+  },
+  gpm: {
+    field: 'gpm',
+    name: 'GPM (gold per minute)',
+    values: []
+  },
+  xpm: {
+    field: 'xpm',
+    name: 'XPM (experience per minute)',
+    values: []
+  },
+  lastHits:  {
+    field: 'lastHits',
+    name: 'Last hits',
+    values: []
+  }}} )
     admin.database().ref('users').once('value')
     .then(snapshot => {
       const object = snapshot.val()
@@ -310,6 +383,7 @@ var job = new CronJob({
   start: false,
   timeZone: 'Europe/Minsk'
 })
+
 job.start()
 
 app.post('/charge', (req, res) => {

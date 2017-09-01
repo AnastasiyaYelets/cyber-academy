@@ -15,7 +15,7 @@ const renderHeader = location => {
 }
 
 export const CoreLayout = ({ children, location }) => (
-  <div style={{ height: '100%' }} className= 'black-background'>
+  <div className= 'black-background'>
     <div className='container-header text-center'>
       {renderHeader(location)}
     </div>

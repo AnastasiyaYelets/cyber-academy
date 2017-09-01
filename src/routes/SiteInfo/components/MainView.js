@@ -9,6 +9,7 @@ import MyCourses from './MyCourses'
 import MyCourse from './MyCourse'
 import Lesson from './Lesson'
 import Statistics from './Statistics'
+import Test from './Test'
 import { Link } from 'react-router'
 
 const MainView = (props) => {
@@ -39,15 +40,19 @@ const MainView = (props) => {
         params={props.params} />
       break
     case 'mycourse':
-        content = <MyCourse
+      content = <MyCourse
         params={props.params} />
       break
     case 'lesson':
-        content = <Lesson
+      content = <Lesson
         params={props.params} />
       break
     case 'statistics':
-        content = <Statistics
+      content = <Statistics
+        params={props.params} />
+      break
+    case 'test':
+      content = <Test
         params={props.params} />
       break
     default:
@@ -74,6 +79,8 @@ const MainView = (props) => {
       <Link to='/admin/siteInfo/lesson' activeClassName='route--active'>Lesson</Link>
       {' · '}
       <Link to='/admin/siteInfo/statistics' activeClassName='route--active'>Statistics</Link>
+      {' · '}
+      <Link to='/admin/siteInfo/test' activeClassName='route--active'>Test</Link>
       {content}
     </div>
   )

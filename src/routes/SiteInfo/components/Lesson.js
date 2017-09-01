@@ -10,7 +10,6 @@ class Lesson extends Component {
     this.state = {
       siteInfoLoaded: false,
       words: [
-        'wayToTheTop',
         'chatWithCoach',
         'askQuestion',
         'showCommentsBtn',

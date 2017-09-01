@@ -10,8 +10,8 @@ class MyCourse extends Component {
     this.state = {
       siteInfoLoaded: false,
       words: [
-        'text',
-        'wayToTheTop',
+        'text1',
+        'text2',
         'chatWithCoach',
         'askQuestion',
         'startLessonBtn',

@@ -4,19 +4,19 @@ import firebase from 'firebase'
 import toastr from 'toastr'
 import './siteInfo.scss'
 
-class MyCourses extends Component {
+class Test extends Component {
   constructor (props) {
     super(props)
     this.state = {
       siteInfoLoaded: false,
-      words: ['leftHalfText', 'rightHalfText', 'moreDetailsBtn', 'myCourses', 'haventCourses'],
+      words: ['nameLabel', 'saveBtn'],
       wordsEng: {},
       wordsRu: {}
     }
   }
 
   componentWillMount () {
-    this.fetchSiteInfo('mycourses')
+    this.fetchSiteInfo('test')
   }
 
   fetchSiteInfo (page) {
@@ -57,7 +57,7 @@ class MyCourses extends Component {
 
   editSiteInfo () {
     const { wordsEng, wordsRu } = this.state
-    firebase.database().ref('siteInfo/' + 'mycourses/')
+    firebase.database().ref('siteInfo/' + 'test/')
     .update({
       english: wordsEng,
       russian: wordsRu
@@ -144,4 +144,4 @@ class MyCourses extends Component {
   }
   }
 
-export default MyCourses
+export default Test

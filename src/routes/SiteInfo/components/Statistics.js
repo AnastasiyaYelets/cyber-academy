@@ -10,15 +10,6 @@ class Statistics extends Component {
     this.state = {
       siteInfoLoaded: false,
       words: [
-        'deniesBtn',
-        'gpmBtn',
-        'heroDamageBtn',
-        'kdaBtn',
-        'lastHitsBtn',
-        'mmrBtn',
-        'towerDamageBtn',
-        'winRateBtn',
-        'xpmBtn',
         'statisticForDay',
         'statisticForWeek',
         'statisticForMounth',

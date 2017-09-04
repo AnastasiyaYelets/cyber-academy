@@ -49,7 +49,6 @@ class MainView extends Component {
 
   setLanguage (language) {
     const { strings } = this.state
-    console.log('set ', language)
     strings.setLanguage(language.language)
     this.setState({ strings })
   }

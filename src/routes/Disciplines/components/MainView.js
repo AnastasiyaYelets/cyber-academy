@@ -171,7 +171,7 @@ class MainView extends Component {
         <div className='col-sm-4 col-md-4'>
           <div className={`course${i % 3}-faculty`}>
             <div className='text-time-faculty'>
-              {course.duration}
+              {course.duration + ' ' +  strings.duration}
             </div>
             <div className='text-name-faculty'>
               {course.name}

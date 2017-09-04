@@ -4,60 +4,94 @@ import './HomeView.scss'
 import Slider from 'react-slick'
 import VideoPlayer from './VideoPlayer'
 import firebase from 'firebase'
+import LocalizedStrings from 'react-localization'
 
 class HomeView extends Component {
   constructor (props) {
     super(props)
     this.state = {
       showVideo: false,
-      transactionToChange: {},
       stopVideo:false,
       siteInfoLoaded: false,
-      quaterText1Ru: '',
-      quaterText2Ru: '',
-      quaterText3Ru: '',
-      quaterText4Ru: '',
-      linkVideoToParentsRu: '',
-      buttonTextRu: '',
-      videoButtonVideoToParentsRu: '',
-      videoButtonCoverVideoRu: ''
+      words: [
+        'quaterText1',
+        'quaterText2',
+        'quaterText3',
+        'quaterText4',
+        'linkVideoToParents',
+        'buttonText',
+        'videoButtonVideoToParents',
+        'videoButtonCoverVideo'
+      ],
+      wordsEng: {},
+      wordsRu: {},
+      strings: {}
     }
   }
 
-  componentWillMount () {
-    firebase.database().ref('siteInfo/' + 'russian/' + 'homepage')
+  componentDidMount () {
+    this.fetchText('homepage')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.props.language !== nextProps.language && this.setLanguage(nextProps.language)
+  }
+
+  setLanguage (language) {
+    const { strings } = this.state
+    strings.setLanguage(language.language)
+    this.setState({ strings })
+  }
+
+  fetchText (page) {
+    firebase.database().ref('siteInfo/' + `${page}/`)
     .once('value')
     .then(snapshot => {
       const object = snapshot.val()
       if (object !== null) {
-        const {
-          quaterText1Ru,
-          quaterText2Ru,
-          quaterText3Ru,
-          quaterText4Ru,
-          linkVideoToParentsRu,
-          buttonTextRu,
-          videoButtonVideoToParentsRu,
-          videoButtonCoverVideoRu
-        } = object
-        this.setState({
-          quaterText1Ru,
-          quaterText2Ru,
-          quaterText3Ru,
-          quaterText4Ru,
-          linkVideoToParentsRu,
-          buttonTextRu,
-          videoButtonVideoToParentsRu,
-          videoButtonCoverVideoRu,
-          siteInfoLoaded: true })
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
+        this.makeStrings()
       } else {
         this.setState({ siteInfoLoaded: true })
       }
     })
   }
 
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  makeStrings () {
+    const { words, wordsEng = {}, wordsRu = {} } = this.state
+    let rus = {}
+    let eng = {}
+    words.forEach(item => {
+      eng[`${item}`] = wordsEng !== {} ? wordsEng[`${item}Eng`] : 'no data'
+      rus[`${item}`] = wordsRu !== {} ? wordsRu[`${item}Ru`] : 'no data'
+    })
+    let strings = new LocalizedStrings({
+      rus: rus,
+      eng: eng
+    })
+    this.setState({ strings })
+  }
+
   render () {
-    const { showVideo, stopVideo } = this.state
+    const { showVideo, stopVideo, strings } = this.state
     console.log(this.props)
     const settings = {
       accessibility: false,
@@ -72,18 +106,8 @@ class HomeView extends Component {
       slidesToShow: 1,
       slidesToScroll: 1
     }
-    const {
-      quaterText1Ru,
-      quaterText2Ru,
-      quaterText3Ru,
-      quaterText4Ru,
-      linkVideoToParentsRu,
-      buttonTextRu,
-      videoButtonVideoToParentsRu,
-      videoButtonCoverVideoRu
-    } = this.state
     const classNameButtonPause = stopVideo && showVideo ? 'pauseVideoToParents-home' : 'playVideoToParents-home'
-    const videoButtonName = showVideo ? videoButtonCoverVideoRu : videoButtonVideoToParentsRu
+    const videoButtonName = showVideo ? strings.videoButtonCoverVideo : strings.videoButtonVideoToParents
     return (
       <div className='container'>
         <div className='row'>
@@ -104,7 +128,7 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/quater1.jpg?alt=media&token=bc601b6e-1b69-4577-9516-990632295b32)'}}
                       >
                         <div className='text-home'>
-                          {quaterText1Ru}
+                          {strings.quaterText1}
                         </div>
                     </div>
 
@@ -112,7 +136,7 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/quater2.jpg?alt=media&token=81576f1b-f2db-47a5-ac13-47800638a1ea)'}}
                       >
                       <div className='text-home'>
-                        {quaterText2Ru}
+                        {strings.quaterText2}
                       </div>
                     </div>
 
@@ -120,7 +144,7 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/quater3.jpg?alt=media&token=7465059e-d328-453d-8654-c6cb877ee9cf)'}}
                       >
                       <div className='text-home'>
-                        {quaterText3Ru}
+                        {strings.quaterText3}
                       </div>
                     </div>
 
@@ -128,7 +152,7 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/quater4.jpg?alt=media&token=8b03c259-44ee-44cc-ab5f-f3bee55c99d1)'}}
                       >
                       <div className='text-home'>
-                        {quaterText4Ru}
+                        {strings.quaterText4}
                       </div>
                     </div>
                   </div>
@@ -138,14 +162,14 @@ class HomeView extends Component {
                       style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/btnStartEduc.png?alt=media&token=3699ba5c-b048-4656-914f-5b1c5b9afcb7)'}}
                       onClick={() => { browserHistory.push({ pathname: '/faculties' }) }}
                       >
-                        {buttonTextRu}
+                        {strings.buttonText}
                     </div>
                   </div>
                 </div>}
                 {!!showVideo && <div style={{ marginTop: '30px' }}>
                   <div>
                     <VideoPlayer
-                      url={linkVideoToParentsRu}
+                      url={strings.linkVideoToParents}
                       stopVideo={stopVideo && showVideo}
                     />
                   </div>

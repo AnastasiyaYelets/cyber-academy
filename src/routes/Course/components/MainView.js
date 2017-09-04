@@ -7,6 +7,7 @@ import backend from '../../../apis'
 import VideoPlayer from './VideoPlayer'
 import Slider from 'react-slick'
 import './course.scss'
+import LocalizedStrings from 'react-localization'
 
 class MainView extends Component {
   constructor(props) {
@@ -21,7 +22,11 @@ class MainView extends Component {
       showComments: false,
       buttonName: 'Show Comments',
       lessonDescription: '',
-      stopVideo: false
+      stopVideo: false,
+      words: ['duration'],
+      wordsEng: {},
+      wordsRu: {},
+      strings: {}
     }
     this.renderSectionsList = this.renderSectionsList.bind(this)
     this.next = this.next.bind(this)
@@ -32,6 +37,68 @@ class MainView extends Component {
     const {params} = this.props
     this.setState()
     this.fetchItem(params.courseId)
+  }
+
+  componentDidMount () {
+    this.fetchText('course')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.props.language !== nextProps.language && this.setLanguage(nextProps.language)
+  }
+
+  setLanguage (language) {
+    const { strings } = this.state
+    console.log('set ', language)
+    strings.setLanguage(language.language)
+    this.setState({ strings })
+  }
+
+  fetchText (page) {
+    firebase.database().ref('siteInfo/' + `${page}/`)
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
+        this.makeStrings()
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    })
+  }
+
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  makeStrings () {
+    const { words, wordsEng = {}, wordsRu = {} } = this.state
+    let rus = {}
+    let eng = {}
+    words.forEach(item => {
+      eng[`${item}`] = wordsEng !== {} ? wordsEng[`${item}Eng`] : 'no data'
+      rus[`${item}`] = wordsRu !== {} ? wordsRu[`${item}Ru`] : 'no data'
+    })
+    let strings = new LocalizedStrings({
+      rus: rus,
+      eng: eng
+    })
+    this.setState({ strings })
   }
 
   fetchItem(id) {
@@ -192,7 +259,7 @@ class MainView extends Component {
   }
 
   render() {
-    const {course, showComments, sections, courseLoaded, stopVideo} = this.state
+    const { course, showComments, sections, courseLoaded, stopVideo, strings } = this.state
     const {params, user} = this.props
     const isBuyButtonShow = () => {
       if (user.userCourses) {
@@ -225,9 +292,9 @@ class MainView extends Component {
             <div className='content-course'>
               <div className='col-xs-12 col-md-12 course-name-course'>
                 {course.name}</div>
-              <div className='col-xs-12 col-md-12 course-duration-course'>(длительность курса {course.duration}
-                {/* {duration} */}
-                )</div>
+              <div className='col-xs-12 col-md-12 course-duration-course'>
+                {strings.duration + ' ' + course.duration}
+                </div>
               <div className='col-xs-12 col-md-12'>
                 {courseLoaded && <div>
                   <VideoPlayer url={sections[0].lessons[0].videoUrl} stopVideo={stopVideo}/>

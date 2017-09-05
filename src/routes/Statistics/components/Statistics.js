@@ -6,6 +6,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 import moment from 'moment'
 import firebase from 'firebase'
 import CustomTooltip from './CustomTooltip'
+import LocalizedStrings from 'react-localization'
+
 class Statistics extends Component {
   constructor (props) {
     super(props)
@@ -16,12 +18,74 @@ class Statistics extends Component {
       field: 'kda',
       period: 'allTime',
       periodDataChart: [],
-      daysArray: []
+      daysArray: [],
+      words: [ 'statisticForDay', 'statisticForWeek', 'statisticForMounth', 'allTimeStatistic' ],
+      wordsEng: {},
+      wordsRu: {},
+      strings: {}
     }
   }
 
   componentDidMount () {
     this.fetchData()
+    this.fetchText('statistics')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.props.language !== nextProps.language && this.setLanguage(nextProps.language)
+  }
+
+  setLanguage (language) {
+    const { strings } = this.state
+    strings.setLanguage(language.language)
+    this.setState({ strings })
+  }
+
+  fetchText (page) {
+    firebase.database().ref('siteInfo/' + `${page}/`)
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
+        this.makeStrings()
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    })
+  }
+
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  makeStrings () {
+    const { words, wordsEng = {}, wordsRu = {} } = this.state
+    let rus = {}
+    let eng = {}
+    words.forEach(item => {
+      eng[`${item}`] = wordsEng !== {} ? wordsEng[`${item}Eng`] : 'no data'
+      rus[`${item}`] = wordsRu !== {} ? wordsRu[`${item}Ru`] : 'no data'
+    })
+    let strings = new LocalizedStrings({
+      rus: rus,
+      eng: eng
+    })
+    this.setState({ strings })
   }
 
   fetchData () {
@@ -142,7 +206,7 @@ class Statistics extends Component {
   }
 
   renderData () {
-    const { userDataArray = [], fieldChartData, field } = this.state
+    const { userDataArray = [], fieldChartData, field, strings } = this.state
     if (!userDataArray) {
       return <div>Loading...</div>
     }
@@ -172,7 +236,7 @@ class Statistics extends Component {
                   }
                 }
                 >
-                  Statistic for day
+                  {strings.statisticForDay}
                 </button>
 
                 <button
@@ -184,7 +248,7 @@ class Statistics extends Component {
                   }
                 }
                 >
-                  Statistic for week
+                  {strings.statisticForWeek}
                 </button>
 
                 <button
@@ -196,7 +260,7 @@ class Statistics extends Component {
                   }
                 }
                 >
-                  Statistic for mounth
+                  {strings.statisticForMounth}
                 </button>
 
                 <button
@@ -208,7 +272,7 @@ class Statistics extends Component {
                   }
                 }
                 >
-                  All time statistic
+                  {strings.allTimeStatistic}
                 </button>
 
                 {this.renderChart(fieldChartData)}

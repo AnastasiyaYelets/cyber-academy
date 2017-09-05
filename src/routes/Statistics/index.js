@@ -8,7 +8,7 @@ export default () => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
 
-      const Statistics = require('./containers/Statistics').default
+      const Statistics = require('./containers/StatisticsContainer').default
       // const reducer = require('./modules/counter').default
 
       /*  Add the reducer to the store on key 'counter'  */

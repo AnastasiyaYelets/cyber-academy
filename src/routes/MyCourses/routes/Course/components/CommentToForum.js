@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import toastr from 'toastr'
 import './myCourse.scss'
+import LocalizedStrings from 'react-localization'
 
 class CommentToForum extends Component {
   constructor (props) {
@@ -12,7 +13,11 @@ class CommentToForum extends Component {
       courseLoaded: false,
       lessons: [],
       topicId:'',
-      comment: ''
+      comment: '',
+      words: ['pickTopicBtn', 'saveCommentBtn'],
+      wordsEng: {},
+      wordsRu: {},
+      strings: {}
     }
     this.saveComment = this.saveComment.bind(this)
     this.saveCommentClick = this.saveCommentClick.bind(this)
@@ -20,6 +25,68 @@ class CommentToForum extends Component {
   componentWillMount () {
     const { courseId } = this.props
     this.fetchItem(courseId)
+  }
+
+  componentDidMount () {
+    this.fetchText('mycourse')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.props.language !== nextProps.language && this.setLanguage(nextProps.language)
+  }
+
+  setLanguage (language) {
+    const { strings } = this.state
+    console.log('set ', language)
+    strings.setLanguage(language.language)
+    this.setState({ strings })
+  }
+
+  fetchText (page) {
+    firebase.database().ref('siteInfo/' + `${page}/`)
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
+        this.makeStrings()
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    })
+  }
+
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  makeStrings () {
+    const { words, wordsEng = {}, wordsRu = {} } = this.state
+    let rus = {}
+    let eng = {}
+    words.forEach(item => {
+      eng[`${item}`] = wordsEng !== {} ? wordsEng[`${item}Eng`] : 'no data'
+      rus[`${item}`] = wordsRu !== {} ? wordsRu[`${item}Ru`] : 'no data'
+    })
+    let strings = new LocalizedStrings({
+      rus: rus,
+      eng: eng
+    })
+    this.setState({ strings })
   }
 
   fetchItem (courseId) {
@@ -134,6 +201,7 @@ class CommentToForum extends Component {
     this.saveComment()
   }
   render () {
+    const { strings } = this.state
     return (
       <div>
         <form >
@@ -144,7 +212,7 @@ class CommentToForum extends Component {
              onChange={(e) => this.setState({ lessonId: e.target.value })}>
              <option
                value=''
-               className='options-lessons-mycourse'>Выбрать тему</option>
+               className='options-lessons-mycourse'>{strings.pickTopicBtn}</option>
                {this.renderLessonsNames()}
           </select>
         </form>
@@ -161,7 +229,7 @@ class CommentToForum extends Component {
           <div
             className='save-comment-button-mycourse'
             onClick={this.saveCommentClick}
-            >Save comment
+            >{strings.saveCommentBtn}
           </div>
         </form>
       </div>

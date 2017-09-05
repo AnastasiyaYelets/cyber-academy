@@ -5,6 +5,7 @@ import QuestionsToCoach from '../containers/QuestionsToCoachContainer'
 import { Link, browserHistory } from 'react-router'
 import { connect } from 'react-redux'
 import './myCourse.scss'
+import LocalizedStrings from 'react-localization'
 
 class MainView extends Component {
   constructor (props) {
@@ -19,6 +20,10 @@ class MainView extends Component {
       nextLessonId: '',
       firstLessonId: '',
       showSection: false,
+      words: ['text1', 'text2', 'chatWithCoach', 'startLessonBtn', 'continueLessonBtn'],
+      wordsEng: {},
+      wordsRu: {},
+      strings: {},
       set: new Set()
     }
   }
@@ -26,6 +31,68 @@ class MainView extends Component {
   componentWillMount () {
     const { params } = this.props
     this.fetchItem(params.courseId)
+  }
+
+  componentDidMount () {
+    this.fetchText('mycourse')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.props.language !== nextProps.language && this.setLanguage(nextProps.language)
+  }
+
+  setLanguage (language) {
+    const { strings } = this.state
+    console.log('set ', language)
+    strings.setLanguage(language.language)
+    this.setState({ strings })
+  }
+
+  fetchText (page) {
+    firebase.database().ref('siteInfo/' + `${page}/`)
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
+        this.makeStrings()
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    })
+  }
+
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  makeStrings () {
+    const { words, wordsEng = {}, wordsRu = {} } = this.state
+    let rus = {}
+    let eng = {}
+    words.forEach(item => {
+      eng[`${item}`] = wordsEng !== {} ? wordsEng[`${item}Eng`] : 'no data'
+      rus[`${item}`] = wordsRu !== {} ? wordsRu[`${item}Ru`] : 'no data'
+    })
+    let strings = new LocalizedStrings({
+      rus: rus,
+      eng: eng
+    })
+    this.setState({ strings })
   }
 
   fetchItem (id) {
@@ -225,11 +292,12 @@ class MainView extends Component {
   renderProgressBar () {
     const { location, params } = this.props
     const { userCourses } = this.props.auth.user
-    const { numberLessonsInCourse, firstLessonId } = this.state
+    const { numberLessonsInCourse, firstLessonId, strings } = this.state
     const courseFromUser = userCourses.find(item => item.courseId === params.courseId)
+    console.log(strings)
 
     const numberWatchedlessons = courseFromUser.uniqueWatchedLessonsIds ? courseFromUser.uniqueWatchedLessonsIds.length : 0
-    const buttonName = courseFromUser.uniqueWatchedLessonsIds ? 'Continue lesson' : 'Start first lesson'
+    const buttonName = courseFromUser.uniqueWatchedLessonsIds ? strings.continueLessonBtn : strings.startLessonBtn
     // if 0 watched take 1st lesson of first section else count watchLessonId``
     const watchLessonId = courseFromUser.uniqueWatchedLessonsIds ? this.countNewWatchLessonId(courseFromUser) :
     firstLessonId
@@ -299,7 +367,7 @@ class MainView extends Component {
   }
 
   render () {
-    const { course, courseLoaded } = this.state
+    const { course, courseLoaded, strings } = this.state
     const { params } = this.props
     if (!courseLoaded) {
       return (<div className='container'>Loading...</div>)
@@ -319,7 +387,7 @@ class MainView extends Component {
             </div>
             <div className='button-lesson-name-mycourse'> {course.name}</div>
             <div>{this.renderProgressBar()}</div>
-            <div className='button-coach-chat-mycourse'>Чат с тренером</div>
+            <div className='button-coach-chat-mycourse'>{strings.chatWithCoach}</div>
               <QuestionsToCoach
                 courseId={params.courseId}
               />
@@ -328,8 +396,8 @@ class MainView extends Component {
             <div className='hi-words-mycourse'
                  style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/hiWordFromCoach.png?alt=media&token=e08dc905-a121-4674-b798-a2d5ec27d072)'}}
             >
-              <p>Приветствие от коуча для вип студента</p>
-              <p>Улучши свои навыки и контроль за игрой</p>
+              <p>{strings.text1}</p>
+              <p>{strings.text2}</p>
             </div>
             <div className='progress-lesson-mycourse'>{this.renderProgressLesson()}</div>
             <div className='questions-mycourse'>

@@ -15,6 +15,7 @@ class MyCourse extends Component {
         'chatWithCoach',
         'askQuestion',
         'startLessonBtn',
+        'continueLessonBtn',
         'pickTopicBtn',
         'saveCommentBtn'
       ],

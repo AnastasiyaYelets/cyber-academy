@@ -3,7 +3,7 @@ import Header from '../../containers/Header'
 import AdminHeader from '../../components/Header/AdminHeader'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
-import Footer from '../../components/Footer/Footer'
+import Footer from '../../containers/Footer'
 
 const renderHeader = location => {
   const isAdmin = location.pathname.split('/')[1] === 'admin'

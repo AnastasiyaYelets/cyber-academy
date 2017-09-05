@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import userCoursesList from '../components/UserCoursesList'
+import Footer from '../components/Footer'
 
 const mapStateToProps = state => ({
   auth: state.auth,
   language: state.language
 })
 
-export default connect(mapStateToProps)(userCoursesList)
+export default connect(mapStateToProps)(Footer)

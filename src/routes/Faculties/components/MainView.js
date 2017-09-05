@@ -2,19 +2,85 @@ import React, {Component} from 'react'
 import firebase from 'firebase'
 import {browserHistory} from 'react-router'
 import './faculties.scss'
+import LocalizedStrings from 'react-localization'
+
 class MainView extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      courses: [],
-      coursesFetched: false
+      // courses: [],
+      // coursesFetched: false,
+      words: ['DotaButton', 'LoLButton', 'CSGOButton', 'DotaDescription', 'LoLDescription', 'CSGODescription'],
+      wordsEng: {},
+      wordsRu: {},
+      strings: {}
     }
   }
 
-  componentWillMount() {}
+  componentDidMount () {
+    this.fetchText('faculties')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.props.language !== nextProps.language && this.setLanguage(nextProps.language)
+  }
+
+  setLanguage (language) {
+    const { strings } = this.state
+    strings.setLanguage(language.language)
+    this.setState({ strings })
+  }
+
+  fetchText (page) {
+    firebase.database().ref('siteInfo/' + `${page}/`)
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
+        this.makeStrings()
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    })
+  }
+
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  makeStrings () {
+    const { words, wordsEng = {}, wordsRu = {} } = this.state
+    let rus = {}
+    let eng = {}
+    words.forEach(item => {
+      eng[`${item}`] = wordsEng !== {} ? wordsEng[`${item}Eng`] : 'no data'
+      rus[`${item}`] = wordsRu !== {} ? wordsRu[`${item}Ru`] : 'no data'
+    })
+    let strings = new LocalizedStrings({
+      rus: rus,
+      eng: eng
+    })
+    this.setState({ strings })
+  }
 
   render() {
+    const { strings } = this.state
     return (
       <div className='container'>
         <div className='content-faculties'>
@@ -28,12 +94,12 @@ class MainView extends Component {
               }} onClick={() => {
                 browserHistory.push({pathname: '/faculty/CS:GO'})
               }}>
-                Поступить на факультет {/* {CSGOButton} */}
+                {strings.CSGOButton}
               </div>
               <div className='textFrame-faculties' style={{
                 backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/textFrame.jpg?alt=media&token=fc8f06c4-b584-4303-9a81-e3ded24b2a10)'
               }}>
-                Получай заслуженные награды {/* {CSGODescription} */}
+                {strings.CSGODescription}
               </div>
             </div>
             <div className='col-sm-4 col-md-4'>
@@ -45,12 +111,12 @@ class MainView extends Component {
               }} onClick={() => {
                 browserHistory.push({pathname: '/faculty/Dota2'})
               }}>
-                Поступить на факультет {/* {DotaButton} */}
+                {strings.DotaButton}
               </div>
               <div className='textFrame-faculties' style={{
                 backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/textFrame.jpg?alt=media&token=fc8f06c4-b584-4303-9a81-e3ded24b2a10)'
               }}>
-                Получай заслуженные награды {/* {DotaDescription} */}
+                {strings.DotaDescription}
               </div>
             </div>
             <div className='col-sm-4 col-md-4'>
@@ -62,12 +128,12 @@ class MainView extends Component {
               }} onClick={() => {
                 browserHistory.push({pathname: '/faculty/LoL'})
               }}>
-                Поступить на факультет {/* {LoLButton} */}
+                {strings.LoLButton}
               </div>
               <div className='textFrame-faculties' style={{
                 backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/textFrame.jpg?alt=media&token=fc8f06c4-b584-4303-9a81-e3ded24b2a10)'
               }}>
-                Получай заслуженные награды {/* {LoLDescription} */}
+                {strings.LoLDescription}
               </div>
             </div>
           </div>

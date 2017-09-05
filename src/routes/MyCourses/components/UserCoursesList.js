@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import { browserHistory } from 'react-router'
 import './myCourses.scss'
+import LocalizedStrings from 'react-localization'
 
 class UserCoursesList extends Component {
   constructor (props) {
@@ -9,7 +10,11 @@ class UserCoursesList extends Component {
     this.state = {
       courses: [],
       coursesLoaded: false,
-      userCourses: []
+      userCourses: [],
+      words: ['leftHalfText', 'rightHalfText', 'moreDetailsBtn', 'myCourses', 'haventCourses'],
+      wordsEng: {},
+      wordsRu: {},
+      strings: {}
     }
   }
 
@@ -22,6 +27,67 @@ class UserCoursesList extends Component {
         coursesLoaded: true
       })
     }
+  }
+
+  componentDidMount () {
+    this.fetchText('mycourses')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.props.language !== nextProps.language && this.setLanguage(nextProps.language)
+  }
+
+  setLanguage (language) {
+    const { strings } = this.state
+    strings.setLanguage(language.language)
+    this.setState({ strings })
+  }
+
+  fetchText (page) {
+    firebase.database().ref('siteInfo/' + `${page}/`)
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
+        this.makeStrings()
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    })
+  }
+
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  makeStrings () {
+    const { words, wordsEng = {}, wordsRu = {} } = this.state
+    let rus = {}
+    let eng = {}
+    words.forEach(item => {
+      eng[`${item}`] = wordsEng !== {} ? wordsEng[`${item}Eng`] : 'no data'
+      rus[`${item}`] = wordsRu !== {} ? wordsRu[`${item}Ru`] : 'no data'
+    })
+    let strings = new LocalizedStrings({
+      rus: rus,
+      eng: eng
+    })
+    this.setState({ strings })
   }
 
   fetchCourses (userCourses) {
@@ -93,7 +159,7 @@ class UserCoursesList extends Component {
   }
 
   renderCourses () {
-    const { courses } = this.state
+    const { courses, strings } = this.state
     const newCourses = [].concat(courses).concat(courses)
       return newCourses.map((course, i) => (
         <div key={i} className='frame-course-mycourses' style={{ padding: '5px', margin: '15px 6px 10px 6px',
@@ -110,7 +176,7 @@ class UserCoursesList extends Component {
               className='button-details-mycourses'
               style={{  color: 'yellow', backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/buttonDetails.png?alt=media&token=081aad23-ce5c-4e1e-b34e-ec205ffb8bf9)'}}
               onClick={() => { browserHistory.push({ pathname: `/myCourses/course/${course.id}` }) }}
-              >More details
+              >{strings.moreDetailsBtn}
             </div>
           </div>
         </div>
@@ -118,11 +184,12 @@ class UserCoursesList extends Component {
   }
 
   render () {
-    const { coursesLoaded, courses } = this.state
+    const { coursesLoaded, courses, strings } = this.state
     console.log(this.props.auth.user)
     if (!coursesLoaded) {
       return (<div>Loading...</div>)
     }
+    console.log('HASFBGIFB', this.props)
     // const isSCount = (courses.length !== 1)
     // const coursesCount = isSCount ? 'courses' : 'course'
     return (
@@ -131,16 +198,16 @@ class UserCoursesList extends Component {
           <div className='col-xs-2 col-md-2 ikon-dragon-mycourses'
             style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/ikonDragon.jpg?alt=media&token=335de009-e821-41ba-8c22-eb766a15fa3c)'}}
           ></div>
-          <div className='col-xs-3 col-md-3 text-place-mycourses'>Улучши свои навыки и контроль за игрой</div>
+          <div className='col-xs-3 col-md-3 text-place-mycourses'>{strings.leftHalfText}</div>
           <div className='col-xs-7 col-md-7 text-frame-mycourses'
             style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/textFrameMyCourses.jpg?alt=media&token=ad349358-7811-419b-b95b-b7c777d0b667)'}}
-          > Изучи механизм игры и взаимодействие с командой</div>
+          >{strings.rightHalfText}</div>
         </div>
         <div className='col-xs-12 col-md-12 tab-mycourses' style={{ padding: '10px 0px 0px 0px',
           backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/tab.png?alt=media&token=8f2c7a2f-3cb8-4c9e-883e-eb720e85174a)' }}>
           <div>
-            <span className='my-courses-mycourses'>Мои курсы</span>
-            {!courses.length && <div className='no-courses-mycourses'> You havent any courses yet</div>}
+            <span className='my-courses-mycourses'>{strings.myCourses}</span>
+            {!courses.length && <div className='no-courses-mycourses'>{strings.haventCourses}</div>}
             {!!courses.length && <div className='div-scroll-mycourses scroll-horizontal-mycourses'>
               {this.renderCourses()}
             </div> }

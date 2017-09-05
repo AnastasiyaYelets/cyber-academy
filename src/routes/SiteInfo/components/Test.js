@@ -4,28 +4,19 @@ import firebase from 'firebase'
 import toastr from 'toastr'
 import './siteInfo.scss'
 
-class HomePage extends Component {
+class Test extends Component {
   constructor (props) {
     super(props)
     this.state = {
       siteInfoLoaded: false,
-      words: [
-        'quaterText1',
-        'quaterText2',
-        'quaterText3',
-        'quaterText4',
-        'linkVideoToParents',
-        'buttonText',
-        'videoButtonVideoToParents',
-        'videoButtonCoverVideo'
-      ],
+      words: ['nameLabel', 'saveBtn'],
       wordsEng: {},
       wordsRu: {}
     }
   }
 
   componentWillMount () {
-    this.fetchSiteInfo('homepage')
+    this.fetchSiteInfo('test')
   }
 
   fetchSiteInfo (page) {
@@ -66,7 +57,7 @@ class HomePage extends Component {
 
   editSiteInfo () {
     const { wordsEng, wordsRu } = this.state
-    firebase.database().ref('siteInfo/' + 'homepage/')
+    firebase.database().ref('siteInfo/' + 'test/')
     .update({
       english: wordsEng,
       russian: wordsRu
@@ -151,6 +142,6 @@ class HomePage extends Component {
       </div>
     )
   }
-}
+  }
 
-export default HomePage
+export default Test

@@ -5,6 +5,11 @@ import Faculty from './Faculty'
 import Course from './Course'
 import Footer from './Footer'
 import Header from './Header'
+import MyCourses from './MyCourses'
+import MyCourse from './MyCourse'
+import Lesson from './Lesson'
+import Statistics from './Statistics'
+import Test from './Test'
 import { Link } from 'react-router'
 
 const MainView = (props) => {
@@ -18,18 +23,38 @@ const MainView = (props) => {
       content = <Faculties
         params={props.params} />
       break
-      case 'course':
-        content = <Course
-          params={props.params} />
-        break
-        case 'footer':
-          content = <Footer
-            params={props.params} />
-          break
-          case 'header':
-            content = <Header
-              params={props.params} />
-            break
+    case 'course':
+      content = <Course
+        params={props.params} />
+      break
+    case 'footer':
+      content = <Footer
+        params={props.params} />
+      break
+    case 'header':
+      content = <Header
+        params={props.params} />
+      break
+    case 'mycourses':
+      content = <MyCourses
+        params={props.params} />
+      break
+    case 'mycourse':
+      content = <MyCourse
+        params={props.params} />
+      break
+    case 'lesson':
+      content = <Lesson
+        params={props.params} />
+      break
+    case 'statistics':
+      content = <Statistics
+        params={props.params} />
+      break
+    case 'test':
+      content = <Test
+        params={props.params} />
+      break
     default:
       content = <HomePage />
   }
@@ -46,6 +71,16 @@ const MainView = (props) => {
       <Link to='/admin/siteInfo/footer' activeClassName='route--active'>Footer</Link>
       {' · '}
       <Link to='/admin/siteInfo/header' activeClassName='route--active'>Header</Link>
+      {' · '}
+      <Link to='/admin/siteInfo/mycourses' activeClassName='route--active'>MyCourses</Link>
+      {' · '}
+      <Link to='/admin/siteInfo/mycourse' activeClassName='route--active'>MyCourse</Link>
+      {' · '}
+      <Link to='/admin/siteInfo/lesson' activeClassName='route--active'>Lesson</Link>
+      {' · '}
+      <Link to='/admin/siteInfo/statistics' activeClassName='route--active'>Statistics</Link>
+      {' · '}
+      <Link to='/admin/siteInfo/test' activeClassName='route--active'>Test</Link>
       {content}
     </div>
   )

@@ -9,165 +9,118 @@ class Faculty extends Component {
     super(props)
     this.state = {
       siteInfoLoaded: false,
-      hiWord:'',
-      startButton:'',
-      logoBannerDota:'',
-      logoBannerCSGO:'',
-      logoBannerLoL:'',
-      reviews:'',
-      duration:'',
-      reviewsImg:''
+      words: ['hiWord', 'startButton', 'reviews', 'duration'],
+      wordsEng: {},
+      wordsRu: {}
     }
   }
 
   componentWillMount () {
-    this.fetchSiteInfo()
+    this.fetchSiteInfo('faculty')
   }
 
-  fetchSiteInfo () {
+  fetchSiteInfo (page) {
     this.setState({
       infoLoaded: false
     })
-    firebase.database().ref('siteInfo/' + 'russian')
+    firebase.database().ref('siteInfo/' + `${page}/`)
     .once('value')
     .then(snapshot => {
       const object = snapshot.val()
       if (object !== null) {
-        const { hiWord,
-          startButton,
-          logoBannerDota,
-          logoBannerCSGO,
-          logoBannerLoL,
-          reviews,
-          reviewsImg,
-          duration } = object
-        this.setState({
-          hiWord,
-          startButton,
-          logoBannerDota,
-          logoBannerCSGO,
-          logoBannerLoL,
-          reviews,
-          reviewsImg,
-          duration,
-          siteInfoLoaded: true })
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
       } else {
         this.setState({ siteInfoLoaded: true })
       }
     }
-    )
+  )
+  }
+
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
   }
 
   editSiteInfo () {
-    const { hiWord,
-      startButton,
-      logoBannerDota,
-      logoBannerCSGO,
-      logoBannerLoL,
-      reviews,
-      duration,
-      reviewsImg } = this.state
+    const { wordsEng, wordsRu } = this.state
+    firebase.database().ref('siteInfo/' + 'faculty/')
+    .update({
+      english: wordsEng,
+      russian: wordsRu
+    })
+    .then(() => {
+      toastr.success('Your siteInfo saved!')
+      browserHistory.push(`/admin/siteInfo`)
+    })
+  }
 
-    firebase.database().ref('siteInfo/' + 'russian')
-      .update({
-        hiWord,
-        startButton,
-        logoBannerDota,
-        logoBannerCSGO,
-        logoBannerLoL,
-        reviews,
-        duration,
-        reviewsImg })
-        .then(() => {
-          toastr.success('Your siteInfo saved!')
-          browserHistory.push(`/admin/siteInfo`)
-        })
+  renderFields (suff) {
+    const { wordsEng, wordsRu } = this.state
+    const arrayFields = suff === 'Ru' ? wordsRu : wordsEng
+    return (
+      <div>
+        {Object.keys(arrayFields).map((item, i) =>
+          <div className='form-group' key={i}>
+            <label className='control-label'>{item}</label>
+            <input
+              value={arrayFields[`${item}`]}
+              type='text'
+              className='form-control form-control-siteinfo'
+              onChange={(e) => {
+                const newArray = arrayFields
+                newArray[`${item}`] = e.target.value
+                if (suff === 'Ru') {
+                  this.setState({ wordsRu: newArray })
+                } else if (suff === 'Eng') {
+                  this.setState({ wordsEng: newArray })
+                }
+              }
+            }
+            />
+          </div>
+          )
+        }
+      </div>
+    )
   }
 
   renderCoursesList () {
-    const { hiWord,
-      startButton,
-      logoBannerDota,
-      logoBannerCSGO,
-      logoBannerLoL,
-      reviews,
-      duration,
-      reviewsImg } = this.state
     return (
       <div className='container'>
         <div className='row'>
-          <form className='form-horizontal'>
-
+          <form className='form-horizontal col-md-6'>
             <div className='form-group'>
-              <label className='control-label'>hiWord</label>
-              <input
-                  value={hiWord}
-                  type='text'
-                  className='form-control form-control-siteinfo' onChange={(e) => this.setState({ hiWord: e.target.value })} />
+              <h2>Russian</h2>
             </div>
+            {this.renderFields('Ru')}
+          </form>
 
+          <form className='form-horizontal col-md-6'>
             <div className='form-group'>
-              <label className='control-label'>startButton</label>
-              <input
-                value={startButton}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ startButton: e.target.value })} />
+              <h2>English</h2>
             </div>
-
-            <div className='form-group'>
-              <label className='control-label'>logoBannerDota(link)</label>
-              <input
-                value={logoBannerDota}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ logoBannerDota: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>logoBannerCSGO(link)</label>
-              <input
-                value={logoBannerCSGO}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ logoBannerCSGO: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'> logoBannerLoL(link)</label>
-              <input
-                value={logoBannerLoL}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ logoBannerLoL: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>reviews</label>
-              <input
-                value={reviews}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ reviews: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>reviewsImg(link)</label>
-              <input
-                value={reviewsImg}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ reviewsImg: e.target.value })} />
-            </div>
-
-            <div className='form-group'>
-              <label className='control-label'>duration</label>
-              <input
-                value={duration}
-                type='text'
-                className='form-control form-control-siteinfo' onChange={(e) => this.setState({ duration: e.target.value })} />
-            </div>
+            {this.renderFields('Eng')}
           </form>
 
           <div className='col-xs-12 col-md-12'>
             <button
               type='button'
               className='btn btn-success lg'
-              style={{ width:'100%', margin: '15px' }}
+              style={{ width:'30%' }}
               onClick={() => this.editSiteInfo()}
               >Save changes
             </button>
@@ -176,7 +129,6 @@ class Faculty extends Component {
       </div>
     )
   }
-
   render () {
     return (
       <div className='container'>

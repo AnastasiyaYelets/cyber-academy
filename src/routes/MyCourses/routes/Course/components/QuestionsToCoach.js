@@ -4,6 +4,7 @@ import toastr from 'toastr'
 import Infinite from 'react-infinite'
 import moment from 'moment'
 import './myCourse.scss'
+import LocalizedStrings from 'react-localization'
 
 class QuestionsToCoach extends Component {
   constructor (props) {
@@ -22,8 +23,11 @@ class QuestionsToCoach extends Component {
       chat: {},
       chatLoaded: false,
       messages: [],
-      message: ''
-
+      message: '',
+      words: ['askQuestion'],
+      wordsEng: {},
+      wordsRu: {},
+      strings: {}
     }
     this.renderCommentList = this.renderCommentList.bind(this)
   }
@@ -35,6 +39,68 @@ class QuestionsToCoach extends Component {
     this.fetchCourse(courseId)
     this.chatListener()
 
+  }
+
+  componentDidMount () {
+    this.fetchText('mycourse')
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.props.language !== nextProps.language && this.setLanguage(nextProps.language)
+  }
+
+  setLanguage (language) {
+    const { strings } = this.state
+    console.log('set ', language)
+    strings.setLanguage(language.language)
+    this.setState({ strings })
+  }
+
+  fetchText (page) {
+    firebase.database().ref('siteInfo/' + `${page}/`)
+    .once('value')
+    .then(snapshot => {
+      const object = snapshot.val()
+      if (object !== null) {
+        this.saveInfo('russian', 'Ru', object)
+        this.saveInfo('english', 'Eng', object)
+        this.makeStrings()
+      } else {
+        this.setState({ siteInfoLoaded: true })
+      }
+    })
+  }
+
+  saveInfo (language, suff, object) {
+    const { words } = this.state
+    if (suff === 'Ru') {
+      let wordsRu = {}
+      words.forEach(item => {
+        wordsRu[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsRu, siteInfoLoaded: true })
+    } else if (suff === 'Eng') {
+      let wordsEng = {}
+      words.forEach(item => {
+        wordsEng[`${item}${suff}`] = object[`${language}`][`${item}${suff}`]
+      })
+      this.setState({ wordsEng, siteInfoLoaded: true })
+    }
+  }
+
+  makeStrings () {
+    const { words, wordsEng = {}, wordsRu = {} } = this.state
+    let rus = {}
+    let eng = {}
+    words.forEach(item => {
+      eng[`${item}`] = wordsEng !== {} ? wordsEng[`${item}Eng`] : 'no data'
+      rus[`${item}`] = wordsRu !== {} ? wordsRu[`${item}Ru`] : 'no data'
+    })
+    let strings = new LocalizedStrings({
+      rus: rus,
+      eng: eng
+    })
+    this.setState({ strings })
   }
 
   fetchCourse (courseId) {
@@ -160,7 +226,7 @@ class QuestionsToCoach extends Component {
   }
 
   render () {
-    const { disciplineLoaded, chatLoaded } = this.state
+    const { disciplineLoaded, chatLoaded, strings } = this.state
     return (
       <div>
         <div className='chat-field-mycourse'
@@ -190,7 +256,7 @@ class QuestionsToCoach extends Component {
         <div
           className='chat-button-mycourse'
           onClick={this.saveCommentClick}
-          >Ask question
+          >{strings.askQuestion}
         </div>
       </div>
     )

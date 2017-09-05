@@ -77,7 +77,6 @@ class Footer extends Component {
   }
 
   render () {
-    console.log("qweqwe", this.props)
     const { strings } = this.state
     return (
       <div className='container'>

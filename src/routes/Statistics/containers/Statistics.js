@@ -174,7 +174,6 @@ class Statistics extends Component {
                 >
                   Statistic for day
                 </button>
-
                 <button
                   type='button'
                   className='btn btn-success lg'

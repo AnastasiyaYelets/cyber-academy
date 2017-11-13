@@ -3,7 +3,7 @@ import AdminLogin from '../../../forms/AdminLogin'
 
 const Login = ({ onLoginSubmit }) => (
   <div>
-    <h3>Login</h3>
+    <h3>Login </h3>
     <AdminLogin onSubmit={credentials => onLoginSubmit(credentials)} />
   </div>
 )

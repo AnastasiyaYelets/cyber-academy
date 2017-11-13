@@ -14,7 +14,7 @@ class MainView extends Component {
     return (
       <div className='row'>
         <div className='col-sm-12 col-md-12 container'>
-          <h4>Coaches</h4>
+          <h4>Our coaches</h4>
         </div>
       </div>
     )

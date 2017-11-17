@@ -109,7 +109,7 @@ class MainView extends Component {
         }}></div>
         <Slider ref={c => this.slider = c} {...settings}>
           {newLessons.map((item, i) => <div key={i} className='lessonButton-course' onClick={() => {
-            this.setState({lessonDescription: item.description})
+            this.setState({ lessonDescription: item.description })
           }}>{item.name}
           </div>)}
         </Slider>
@@ -121,7 +121,7 @@ class MainView extends Component {
   }
 
   renderDescripton() {
-    const {lessonDescription} = this.state
+    const { lessonDescription } = this.state
     return (
       <div>
         {lessonDescription}
@@ -130,7 +130,7 @@ class MainView extends Component {
   }
 
   buttonClick() {
-    const {showComments, buttonName} = this.state
+    const { showComments, buttonName } = this.state
     const newButtonName = (buttonName === 'Show Comments')
       ? 'Hide Comments'
       : 'Show Comments'

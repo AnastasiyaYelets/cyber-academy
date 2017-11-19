@@ -5,7 +5,7 @@ export const AuthLayout = ({ children, }) =>
     <div className="container-fluid">
       <div className="row">
         <div className="flex-row flex-hc">
-          <h3>Here will be our cool logo</h3>
+          <h3>Our cool logo</h3>
           {/*<img src={logoImage} height="150" style={{ width: '12rem' }} />*/}
         </div>
       </div>

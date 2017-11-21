@@ -101,45 +101,44 @@ class LessonsList extends Component {
         {lessons.map((item, i) =>
           <li key={i}>
             <div style={{ padding: '15px' }} >
-            <div className='col-md-12'>
-              <label className='col-md-3'>Name:</label>
-              <div className='col-md-6'> {item.name}</div>
-            </div>
-            { !!isNewLesson && <div>
-                <div className='col-md-12'>
-                <label className='col-md-3'>Description:</label>
-                <div className='col-md-6'> {item.description}</div>
-              </div>
-                <div className='col-md-12'>
-                <label className='col-md-3'>Length:</label>
-                <div className='col-md-6'> {item.length}</div>
-              </div>
-                <div className='col-md-12'>
-                <label className='col-md-3'>VideoUrl:</label>
-                <div className='col-md-6'> {item.videoUrl}</div>
-              </div>
               <div className='col-md-12'>
-                <label className='col-md-3'>IsFree:</label>
-                <div className='col-md-6'> {item.isFree}</div>
+                <label className='col-md-3'>Name:</label>
+                <div className='col-md-6'> {item.name}</div>
               </div>
-              <div className='col-md-12'>
-                <label className='col-md-3'>isBonus:</label>
-                <div className='col-md-3'> {item.isBonus}</div>
-              </div>
-              <div className='col-md-12'>
-                <label className='col-md-3'>TestId:</label>
-                <div className='col-md-6'> {item.testId}</div>
-              </div>
-              <div className='col-md-12'>
-                <label className='col-md-3'>Task:</label>
-                <div className='col-md-6'> {item.task}</div>
-              </div>
-            </div>}
+              { !!isNewLesson && <div>
                 <div className='col-md-12'>
-                  <label className='col-md-3'>ImageUrl:</label>
-                  <img className='col-md-6' src={item.imageUrl} width='300px' height='200px' alt='Loading' />
+                  <label className='col-md-3'>Description:</label>
+                  <div className='col-md-6'> {item.description}</div>
                 </div>
-
+                <div className='col-md-12'>
+                  <label className='col-md-3'>Length:</label>
+                  <div className='col-md-6'> {item.length}</div>
+                </div>
+                <div className='col-md-12'>
+                  <label className='col-md-3'>VideoUrl:</label>
+                  <div className='col-md-6'> {item.videoUrl}</div>
+                </div>
+                <div className='col-md-12'>
+                  <label className='col-md-3'>IsFree:</label>
+                  <div className='col-md-6'> {item.isFree}</div>
+                </div>
+                <div className='col-md-12'>
+                  <label className='col-md-3'>isBonus:</label>
+                  <div className='col-md-3'> {item.isBonus}</div>
+                </div>
+                <div className='col-md-12'>
+                  <label className='col-md-3'>TestId:</label>
+                  <div className='col-md-6'> {item.testId}</div>
+                </div>
+                <div className='col-md-12'>
+                  <label className='col-md-3'>Task:</label>
+                  <div className='col-md-6'> {item.task}</div>
+                </div>
+              </div>}
+              <div className='col-md-12'>
+                <label className='col-md-3'>ImageUrl:</label>
+                <img className='col-md-6' src={item.imageUrl} width='300px' height='200px' alt='Loading' />
+              </div>
               { !isNewLesson && <div className='col-xs-12 col-md-4'>
                 <button
                   type='button'
@@ -161,10 +160,10 @@ class LessonsList extends Component {
                   saveLesson={this.editLesson}
                 />
               </div>
-             }
+            }
             </div>
           </li>
-        )}
+      )}
         {isEditSection && <div className='col-xs-12 col-md-4'>
           <button
             type='button'
@@ -180,7 +179,7 @@ class LessonsList extends Component {
         </div> }
 
         <DeletePopupComponent
-            deleteItem={this.deleteItem}
+          deleteItem={this.deleteItem}
         />
       </div>
     )
@@ -207,9 +206,7 @@ LessonsList.propTypes = {
   isEditSection: React.PropTypes.bool,
   hideModal: React.PropTypes.func,
   saveLesson: React.PropTypes.func,
-  deleteItemId: React.PropTypes.func,
-
-
+  deleteItemId: React.PropTypes.func
 }
 
 const mapDispatchToProps = {

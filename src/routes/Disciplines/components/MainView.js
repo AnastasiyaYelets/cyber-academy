@@ -14,18 +14,18 @@ class MainView extends Component {
     }
   }
 
-  componentWillMount() {
-    const {params} = this.props
+  componentWillMount () {
+    const { params } = this.props
     this.fetchCourses(params.discipline)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (this.props.params.discipline !== nextProps.params.discipline) {
       this.fetchCourses(nextProps.params.discipline)
     }
   }
 
-  fetchCourses(discipline) {
+  fetchCourses (discipline) {
     firebase.database().ref('courses').orderByChild('discipline').equalTo(discipline).once('value').then(snapshot => {
       const object = snapshot.val()
 
@@ -34,13 +34,13 @@ class MainView extends Component {
           ...object[id],
           id
         }))
-        this.setState({courses, coursesFetched: true})
+        this.setState({ courses, coursesFetched: true })
       } else {
-        this.setState({coursesFetched: true})
+        this.setState({ coursesFetched: true })
       }
     })
   }
-  countVoises(count) {
+  countVoises (count) {
     if (count % 10 === 1) {
       return (' голос')
     } else {
@@ -52,29 +52,29 @@ class MainView extends Component {
     }
   }
 
-  isFull(number, mark) {
+  isFull (number, mark) {
     if (mark * 2 >= number) {
       return true
     } else {
       return false
     }
   }
-  starEmpty() {
+  starEmpty () {
     return <div className='starEmpty-faculty' style={{
       backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starEmpty.png?alt=media&token=ed75e31f-f32d-45f2-a818-e2dd2b73f717)'
     }}></div>
   }
-  starHalf() {
+  starHalf () {
     return <div className='starHalf-faculty' style={{
       backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starHalf.png?alt=media&token=f7c5b1fc-908c-4b68-800f-859c77d2c485)'
     }}></div>
   }
-  starFull() {
+  starFull () {
     return <div className='starFull-faculty' style={{
       backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFull.png?alt=media&token=9df71fb7-fc2c-44ba-b3a0-c8f641fec3cb)'
     }}></div>
   }
-  countStars(mark) {
+  countStars (mark) {
     const arrayMarkDouble = _.range((mark * 2) + 1)
     return (
       <div className='stars-faculty'>
@@ -101,8 +101,8 @@ class MainView extends Component {
       </div>
     )
   }
-  rederCourses() {
-    const {courses} = this.state
+  rederCourses () {
+    const { courses } = this.state
     return courses.map((course, i) => (
       <div key={i}>
         <div className='col-sm-4 col-md-4'>
@@ -127,7 +127,7 @@ class MainView extends Component {
           <div className='btn-start-faculty' style={{
             backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/btnStartEduc.png?alt=media&token=3699ba5c-b048-4656-914f-5b1c5b9afcb7)'
           }} onClick={() => {
-            browserHistory.push({pathname: `/faculty/${course.discipline}/course/${course.id}`})
+            browserHistory.push({ pathname: `/faculty/${course.discipline}/course/${course.id}`})
           }}>Начать обучение {/* {startButton} */}
           </div>
         </div>
@@ -135,9 +135,9 @@ class MainView extends Component {
       </div>
     ))
   }
-  render() {
-    const {coursesFetched, courses} = this.state
-    const {params} = this.props
+  render () {
+    const { coursesFetched, courses } = this.state
+    const { params } = this.props
     if (!coursesFetched) {
       return (
         <div>Loading...</div>

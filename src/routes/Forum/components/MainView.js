@@ -63,50 +63,50 @@ class MainView extends Component {
   renderSectionsList (filteredForumSections) {
     const { location } = this.props
     return filteredForumSections.map((item, i) =>
-    <tr key={i}>
-      <td className='text-left'>
-        <Link to={{ pathname: `${location.pathname}/section/${item.id}` }}>{item.name}</Link>
-      </td>
-    </tr>
+      <tr key={i}>
+        <td className='text-left'>
+          <Link to={{ pathname: `${location.pathname}/section/${item.id}` }}>{item.name}</Link>
+        </td>
+      </tr>
   )
-}
+  }
 
-renderTable (discipline) {
-  const { forumSections = [] } = this.state
-  const filteredForumSections = forumSections.filter((item) =>
-  item.discipline === discipline)
-  return <div>
-    {!!filteredForumSections.length &&
-      <table className='table'>
-        <thead>
-          <tr>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.renderSectionsList(filteredForumSections)}
-        </tbody>
-      </table>
-    }
-    {/* {!filteredForumSections.length && <div className='text-left'> No sections </div>} */}
-  </div>
-}
-
-render () {
-  return (
-    <div className='container'>
-      <div className='row'>
-        <label className='control-label col-xs-2 col-md-3' style={{ padding: '15px' }}>Sections</label>
-        <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>Dota 2</label>
-        {this.renderTable('Dota2')}
-        <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>CS:GO</label>
-        {this.renderTable('CS:GO')}
-        <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>League of Legends</label>
-        {this.renderTable('LoL')}
-      </div>
+  renderTable (discipline) {
+    const { forumSections = [] } = this.state
+    const filteredForumSections = forumSections.filter((item) =>
+    item.discipline === discipline)
+    return <div>
+      {!!filteredForumSections.length &&
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderSectionsList(filteredForumSections)}
+          </tbody>
+        </table>
+      }
+      {/* {!filteredForumSections.length && <div className='text-left'> No sections </div>} */}
     </div>
-  )
-}
+  }
+
+  render () {
+    return (
+      <div className='container'>
+        <div className='row'>
+          <label className='control-label col-xs-2 col-md-3' style={{ padding: '15px' }}>Sections</label>
+          <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>Dota 2</label>
+          {this.renderTable('Dota2')}
+          <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>CS:GO</label>
+          {this.renderTable('CS:GO')}
+          <label className='control-label col-xs-2 col-md-12' style={{ padding: '30px' }}>League of Legends</label>
+          {this.renderTable('LoL')}
+        </div>
+      </div>
+    )
+  }
 }
 
 MainView.propTypes = {

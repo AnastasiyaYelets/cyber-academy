@@ -225,7 +225,6 @@ CommentList.propTypes = {
   lessonId:  React.PropTypes.string,
   hideModal: React.PropTypes.func,
   user: React.PropTypes.object,
-  auth: React.PropTypes.object,
   courseId: React.PropTypes.string
 }
 

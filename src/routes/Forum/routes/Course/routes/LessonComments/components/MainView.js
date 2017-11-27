@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import firebase from 'firebase'
 import CommentList from './CommentList'
-import { show, hide } from 'redux-modal'
-import { connect } from 'react-redux'
 
 class MainView extends Component {
   constructor (props) {

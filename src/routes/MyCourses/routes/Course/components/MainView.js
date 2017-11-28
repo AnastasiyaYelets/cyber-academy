@@ -118,8 +118,16 @@ class MainView extends Component {
 
     return lessons.map((item, i) =>
     <div key={i}>
-      {!isBonusLesson(item) && <Link className='link-mycourse' to={{ pathname: `${location.pathname}/lesson/${item.id}`}}>{item.name}</Link>}
-      {isBonusLesson(item) && <Link className='bonus-link-mycourse' to={{ pathname: `${location.pathname}/lesson/${item.id}`}}>{item.name}</Link>}
+      {!isBonusLesson(item) &&
+        <Link
+          className='link-mycourse'
+          to={{ pathname: `${location.pathname}/lesson/${item.id}` }}>{item.name}
+        </Link>}
+      {isBonusLesson(item) &&
+        <Link
+          className='bonus-link-mycourse'
+          to={{ pathname: `${location.pathname}/lesson/${item.id}` }}>{item.name}
+        </Link>}
       {this.isPassed(item.id, 'lesson')[0] && <div className='checkbox-mycourse'> </div> }
     </div>
   )
@@ -128,8 +136,12 @@ class MainView extends Component {
   renderTestsList (tests = []) {
     const { location } = this.props
     return tests.map((item, i) =>
-    <div key={i} >
-        <Link className='link-mycourse' to={{ pathname: `${location.pathname}/test/${item.id}`}}>{item.name}</Link>
+      <div key={i} >
+        <Link
+          className='link-mycourse'
+          to={{ pathname: `${location.pathname}/test/${item.id}` }}>
+          {item.name}
+        </Link>
         {this.isPassed(item.id, 'test')[0] && <div className='checkbox'> </div> }
       </div>
   )
@@ -247,8 +259,8 @@ class MainView extends Component {
   )
   }
   renderCircles (sections, fromN, toN) {
-    const widthPercent = 100/(toN-fromN+1)
-    const padding = (807/(toN-fromN+1)-79)/2
+    const widthPercent = 100 / (toN - fromN + 1)
+    const padding = (807 / (toN - fromN + 1) - 79) / 2
     const isCircle = (n) => {
       if ((n >= fromN) && (n <= toN)) {
         return true
@@ -258,26 +270,26 @@ class MainView extends Component {
     }
     return sections.map((item, i) =>
       <div key={i}>
-        {isCircle(i+1) && <div className='circle-mycourse' style={{width:`${widthPercent}%`, padding:`0px ${padding}px`}}>
+        {isCircle(i + 1) && <div className='circle-mycourse' style={{width:`${widthPercent}%`, padding:`0px ${padding}px`}}>
           {this.isPassed(item.testsIds[0], 'test')[1] > 70 && this.isPassed(item.testsIds[0], 'test')[1] < 85 &&
             <div className='starFee-mycourse'
                  style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFee.png?alt=media&token=fc5b84d5-ddd1-44e6-a667-177bd78e6c9d)'}}
-            >{i+1}</div>
+            >{i + 1}</div>
           }
           {this.isPassed(item.testsIds[0], 'test')[1] >= 85 && this.isPassed(item.testsIds[0], 'test')[1] < 100 &&
             <div className='starFfe-mycourse'
                  style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFfe.png?alt=media&token=3cc91ba5-22fe-4557-b47b-af123181d430)'}}
-            >{i+1}</div>
+            >{i + 1}</div>
           }
           {this.isPassed(item.testsIds[0], 'test')[1] === 100 &&
             <div className='starFff-mycourse'
                  style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starFff.png?alt=media&token=f4a98476-dc0c-482f-8b32-a95fb4d1bf77)'}}
-            >{i+1}</div>
+            >{i + 1}</div>
           }
           {!this.isPassed(item.testsIds[0], 'test')[0] &&
             <div className='starEee-mycourse'
               style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/starEee.png?alt=media&token=96f46d6a-2263-491d-84f5-a5b27f418027)'}}
-            >{i+1}</div>
+            >{i + 1}</div>
           }
           </div>
         }
@@ -289,11 +301,15 @@ class MainView extends Component {
     const newSections = sections.filter((item) => item.sectionNumber !== 0)
     const oneElem = newSections[0]
     const newEtsections = newSections.concat(newSections).concat(newSections).concat(newSections).concat(oneElem)
-    const toN = (newEtsections.length % 2 === 0) ? (newEtsections.length / 2) : Math.round(newEtsections.length/2)
+    const toN = (newEtsections.length % 2 === 0) ? (newEtsections.length / 2) : Math.round(newEtsections.length / 2)
     return (
       <div>
         <div className='starRow-mycourse' style={{ width:'100%' }}>{this.renderCircles(newEtsections, 1, toN)}</div>
-        <div className='starRow-mycourse' style={{ width:'100%' }}>{this.renderCircles(newEtsections, toN + 1, newEtsections.length)}</div>
+        <div
+          className='starRow-mycourse'
+          style={{ width:'100%' }}>
+          {this.renderCircles(newEtsections, toN + 1, newEtsections.length)}
+        </div>
       </div>
     )
   }
@@ -320,9 +336,9 @@ class MainView extends Component {
             <div className='button-lesson-name-mycourse'> {course.name}</div>
             <div>{this.renderProgressBar()}</div>
             <div className='button-coach-chat-mycourse'>Чат с тренером</div>
-              <QuestionsToCoach
-                courseId={params.courseId}
-              />
+            <QuestionsToCoach
+              courseId={params.courseId}
+            />
           </div>
           <div className='col-xs-9 col-md-9'>
             <div className='hi-words-mycourse'

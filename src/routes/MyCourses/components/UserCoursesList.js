@@ -82,44 +82,49 @@ class UserCoursesList extends Component {
   isVip (course) {
     const { userVipCourses } = this.props.auth.user
     if (!!userVipCourses) {
-    const vipCourseFromUser = userVipCourses.find((item, i) => item.courseId === course.id)
-    return (
-      <div>
-        {!!vipCourseFromUser && <div className='vip-course-mycourses'> VipCourse</div> }
-        {!vipCourseFromUser && <div className='vip-course-mycourses'></div> }
-      </div>
-    )
-  }
+      const vipCourseFromUser = userVipCourses.find((item, i) => item.courseId === course.id)
+      return (
+        <div>
+          {!!vipCourseFromUser && <div className='vip-course-mycourses'> VipCourse</div> }
+          {!vipCourseFromUser && <div className='vip-course-mycourses'></div> }
+        </div>
+      )
+    }
   }
 
   renderCourses () {
     const { courses } = this.state
     const newCourses = [].concat(courses).concat(courses)
-      return newCourses.map((course, i) => (
-        <div key={i} className='frame-course-mycourses' style={{ padding: '5px', margin: '15px 6px 10px 6px',
-             backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/frameLesson.jpg?alt=media&token=563e1028-8c78-40a7-a305-6a4767d2be1f)' }}>
-          <img src={course.mainPhoto} width='352px' height='150px' alt='loading' />
-          <div className='caption-mycourses' style={{ padding: '5px 10px 5px 10px' }}>
-            <h5 className='frame-name-mycourses'>{course.name} </h5>
-            <h5 className='frame-description-mycourses'>{course.description}</h5>
-            <div>
-              {this.renderProgressBar(course)}
-            </div>
-            {this.isVip(course)}
-            <div
-              className='button-details-mycourses'
-              style={{  color: 'yellow', backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/buttonDetails.png?alt=media&token=081aad23-ce5c-4e1e-b34e-ec205ffb8bf9)'}}
-              onClick={() => { browserHistory.push({ pathname: `/myCourses/course/${course.id}` }) }}
-              >More details
-            </div>
+    return newCourses.map((course, i) => (
+      <div key={i} className='frame-course-mycourses' style={{
+        padding: '5px',
+        margin: '15px 6px 10px 6px',
+        backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/frameLesson.jpg?alt=media&token=563e1028-8c78-40a7-a305-6a4767d2be1f)'
+      }}>
+        <img src={course.mainPhoto} width='352px' height='150px' alt='loading' />
+        <div className='caption-mycourses' style={{ padding: '5px 10px 5px 10px' }}>
+          <h5 className='frame-name-mycourses'>{course.name} </h5>
+          <h5 className='frame-description-mycourses'>{course.description}</h5>
+          <div>
+            {this.renderProgressBar(course)}
+          </div>
+          {this.isVip(course)}
+          <div
+            className='button-details-mycourses'
+            style={{
+              color: 'yellow',
+              backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/buttonDetails.png?alt=media&token=081aad23-ce5c-4e1e-b34e-ec205ffb8bf9)'
+            }}
+            onClick={() => { browserHistory.push({ pathname: `/myCourses/course/${course.id}` }) }}
+            >More details
           </div>
         </div>
-      ))
+      </div>
+    ))
   }
 
   render () {
     const { coursesLoaded, courses } = this.state
-    console.log(this.props.auth.user)
     if (!coursesLoaded) {
       return (<div>Loading...</div>)
     }

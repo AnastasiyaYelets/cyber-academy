@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { Component, PropTypes } from 'react'
 import { browserHistory } from 'react-router'
 import firebase from 'firebase'
 import toastr from 'toastr'

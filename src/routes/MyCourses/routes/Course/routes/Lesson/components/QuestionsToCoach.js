@@ -34,7 +34,6 @@ class QuestionsToCoach extends Component {
     this.fetchItems(courseId, user)
     this.fetchCourse(courseId)
     this.chatListener()
-
   }
 
   fetchCourse (courseId) {
@@ -124,7 +123,7 @@ class QuestionsToCoach extends Component {
     this.setState({ messages: newMessages })
     const newChat = { ...chat }
     newChat[`${newDiscipline}`].messages = newMessages
-    this.setState({ message: ''})
+    this.setState({ message: '' })
     firebase.database().ref('chats/' + user.uid).update({ chat: newChat })
     .then(() => {
       toastr.success('Your message saved!')
@@ -169,9 +168,9 @@ class QuestionsToCoach extends Component {
         >
           <Infinite containerHeight={225} elementHeight={20} className='scroll-mylesson' >
             <div>
-            <ul className='list-unstyled'>
-              {chatLoaded && disciplineLoaded && this.renderCommentList()}
-            </ul>
+              <ul className='list-unstyled'>
+                {chatLoaded && disciplineLoaded && this.renderCommentList()}
+              </ul>
             <div id='box'
               ref={(el) => { this.messagesEnd = el }} ></div>
             </div>

@@ -136,30 +136,30 @@ class CommentToForum extends Component {
   render () {
     return (
       <div>
-           <select
-             className='topic-options-mylesson'
-             value={this.state.lessonId}
-             style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/topicField.jpg?alt=media&token=b4a9884f-7b19-4ac8-8657-f514aa314063)'}}
-             onChange={(e) => this.setState({ lessonId: e.target.value })}>
-             <option
-               value=''
-               className='options-lessons-mylesson'>Выбрать тему</option>
-               {this.renderLessonsName()}
-          </select>
-          ​<textarea
-            className='question-input-mylesson'
-            style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/questionInput.jpg?alt=media&token=8f265c2b-e7d8-487e-88cf-6511ee3abfae)'}}
-            cols='50'
-            rows='4'
-            value={this.state.comment}
-            onChange={(e) => this.setState({ comment: e.target.value })}
+        <select
+          className='topic-options-mylesson'
+          value={this.state.lessonId}
+          style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/topicField.jpg?alt=media&token=b4a9884f-7b19-4ac8-8657-f514aa314063)'}}
+          onChange={(e) => this.setState({ lessonId: e.target.value })}>
+          <option
+            value=''
+            className='options-lessons-mylesson'>Выбрать тему</option>
+          {this.renderLessonsName()}
+        </select>
+        ​<textarea
+          className='question-input-mylesson'
+          style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/questionInput.jpg?alt=media&token=8f265c2b-e7d8-487e-88cf-6511ee3abfae)'}}
+          cols='50'
+          rows='4'
+          value={this.state.comment}
+          onChange={(e) => this.setState({ comment: e.target.value })}
           >
-          </textarea>
-          <div
-            className='save-comment-button-mylesson'
-            onClick={this.saveCommentClick}
-            >Save comment
-          </div>
+        </textarea>
+        <div
+          className='save-comment-button-mylesson'
+          onClick={this.saveCommentClick}
+          >Save comment
+        </div>
       </div>
     )
   }

@@ -135,31 +135,31 @@ class MainView extends Component {
     }
     const newPath = `${location.pathname.substring(0, location.pathname.length - 20)}`
     return lessons.map((item, i) =>
-    <div key={i}>
-      {!isBonusLesson(item) && <Link
-        className='link-mylesson' to={{ pathname: `${newPath}${item.id}`}}
-        onClick={() => { this.fetchLesson(item.id) }}>
-        {item.name} </Link>}
-      {isBonusLesson(item) && <Link
-        className='bonus-link-mylesson' to={{ pathname: `${newPath}${item.id}` }}
-        onClick={() => { this.fetchLesson(item.id) }}>
-        {item.name}</Link>}
-      {this.isPassed(item.id, 'lesson')[0] && <div className='checkbox-mylesson'> </div> }
-    </div>
+      <div key={i}>
+        {!isBonusLesson(item) && <Link
+          className='link-mylesson' to={{ pathname: `${newPath}${item.id}`}}
+          onClick={() => { this.fetchLesson(item.id) }}>
+          {item.name} </Link>}
+        {isBonusLesson(item) && <Link
+          className='bonus-link-mylesson' to={{ pathname: `${newPath}${item.id}` }}
+          onClick={() => { this.fetchLesson(item.id) }}>
+          {item.name}</Link>}
+        {this.isPassed(item.id, 'lesson')[0] && <div className='checkbox-mylesson'> </div>}
+      </div>
   )
-}
+ }
 
   renderTestsList (tests = []) {
     const { location } = this.props
     return tests.map((item, i) =>
-    <div key={i} >
-      <Link className='link-mylesson' to={{
-        pathname: `${location.pathname.substring(0, location.pathname.length - 27)}test/${item.id}` }}>{item.name}
-      </Link>
-      {this.isPassed(item.id, 'test')[0] && <div className='checkbox-mylesson'> </div> }
-    </div>
+      <div key={i} >
+        <Link className='link-mylesson' to={{
+          pathname: `${location.pathname.substring(0, location.pathname.length - 27)}test/${item.id}` }}>{item.name}
+        </Link>
+        {this.isPassed(item.id, 'test')[0] && <div className='checkbox-mylesson'> </div> }
+      </div>
   )
-}
+  }
 
   renderSectionsList () {
     const { sections = [], set } = this.state
@@ -348,13 +348,11 @@ class MainView extends Component {
                 style={{ backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/cyber-academy.appspot.com/o/videoButton.jpg?alt=media&token=aa32d832-e6a2-4e55-833a-c100b17ae49c)'}}
                 onClick={() => { this.setState({ stopVideo: !stopVideo }) }}
                 >
-                  <div
-                    className={classNameButtonPause}
-                  >
-                  </div>
-                  <div className='textVideoToParents-mylesson'
-                    >{lesson.name}
-                  </div>
+                <div className={classNameButtonPause} >
+                </div>
+                <div className='textVideoToParents-mylesson'>
+                  {lesson.name}
+                </div>
 
               </div>
 
